@@ -1,0 +1,103 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><title>
+	York Payment Broker
+</title><meta http-equiv="CACHE-CONTROL" content="NO-CACHE" /><meta http-equiv="EXPIRES" content="0" /><title>York University Centralized Payment Gateway</title><!--********************************* Template link ****************************************--><meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><!-- Bootstrap --><link href="https://vanansi.uit.yorku.ca/YpbPaymentApp/ReferencedTemplate/css/bootstrap.min.css" rel="stylesheet" /><!-- javascript --><script type="text/javascript" src="https://vanansi.uit.yorku.ca/YpbPaymentApp/ReferencedTemplate/js/jquery.min.js"></script><script type="text/javascript" src="https://vanansi.uit.yorku.ca/YpbPaymentApp/ReferencedTemplate/js/bootstrap.min.js"></script><link href="https://vanansi.uit.yorku.ca/YpbPaymentApp/ReferencedTemplate/fonts/font-awesome/css/font-awesome.min.css" rel="stylesheet" /><!--********************************* End ****************************************--><style>
+      tr {
+      border: 0px solid;
+      }
+      hr {
+      border-top: 1px solid #000000;
+      }
+      .roundedPanel{background-color:#939393; color:white; font-weight:bold; margin-left:2px;}
+      .panel{background-color:White;color:Black;}
+      .sectionHdr{font-size:12px;font-weight:bold;}
+      .sectionDtl{font-size:11px;font-weight:normal;}
+      .tblShipping{width:100%;vertical-align:top;border:1,solid,#939393}
+      .tcShipping{width:50%; background-color:#E3E3E3;}
+      .ccframe{margin-left:0px; text-align:left;}
+      .collapsePanelHeader{height:20px;cursor:pointer;margin-left:5px;margin-right:20px;margin-top:5px;margin-bottom:5px;vertical-align:middle;font-size:12px;}
+      .arrowImg{float:right;vertical-align:middle;}
+
+      .trItems{font-size:11px;text-align:center;width:100%}
+
+      .tcItemIDH{font-size:11px; text-align:left; width:200px; background-color:#E3E3E3;}
+      .tcDescriptionH{font-size:11px; text-align:left; width:450px; background-color:#E3E3E3;}
+      .tcQuantityH{font-size:11px; text-align:Right; width:100px; background-color:#E3E3E3;}
+      .tcPriceH{font-size:11px; text-align:Right; width:120px; background-color:#E3E3E3;}
+
+      .tcItemID{font-size:10px; text-align:left; width:200px;font-weight:normal;}
+      .tcDescription{font-size:10px; text-align:left; width:450px;font-weight:normal;}
+      .tcQuantity{font-size:10px; text-align:Right; width:100px;font-weight:normal;}
+      .tcPrice{font-size:10px; text-align:Right; width:120px;font-weight:normal;}
+
+      .tblTotal{background-color:#E3E3E3; border: 1,solid,#939393;;width:100%}
+      .tcTotalDescription{font-size:11px; text-align:right; font-weight:bold; padding-right:10px; color:Black; width:100px;}
+      .tcTotalAmount{font-size:11px; text-align:right; margin-right:10px; color:Black; width:120px;}
+      .tcTotalBlank{width:650px;}
+    </style>
+    <style>
+        td {
+            padding: 2px 5px;
+        }
+        th {
+            padding: 2px 5px;
+        }
+    </style>
+</head>
+<body>
+    <form name="aspnetForm" method="post" action="./Receipt.aspx?tokenid=j7pxxpr7PtVhmDQl6YjTEB8z_1FT1qDkfOocotuveY-1g9VRZk_O-A2" id="aspnetForm">
+<div>
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="" />
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" />
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwULLTE3NzQyMjUyODAPZBYCZg9kFgQCAQ9kFgQCAw8WAh4EVGV4dAW4Bzx0aXRsZT5Zb3JrIFVuaXZlcnNpdHkgQ2VudHJhbGl6ZWQgUGF5bWVudCBHYXRld2F5PC90aXRsZT48IS0tKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqIFRlbXBsYXRlIGxpbmsgKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKi0tPjxtZXRhIGh0dHAtZXF1aXY9IkNvbnRlbnQtVHlwZSIgY29udGVudD0idGV4dC9odG1sOyBjaGFyc2V0PWlzby04ODU5LTEiIC8+PG1ldGEgY2hhcnNldD0idXRmLTgiIC8+PG1ldGEgbmFtZT0idmlld3BvcnQiIGNvbnRlbnQ9IndpZHRoPWRldmljZS13aWR0aCwgaW5pdGlhbC1zY2FsZT0xLjAiIC8+PCEtLSBCb290c3RyYXAgLS0+PGxpbmsgaHJlZj0iaHR0cHM6Ly92YW5hbnNpLnVpdC55b3JrdS5jYS9ZcGJQYXltZW50QXBwL1JlZmVyZW5jZWRUZW1wbGF0ZS9jc3MvYm9vdHN0cmFwLm1pbi5jc3MiIHJlbD0ic3R5bGVzaGVldCIgLz48IS0tIGphdmFzY3JpcHQgLS0+PHNjcmlwdCB0eXBlPSJ0ZXh0L2phdmFzY3JpcHQiIHNyYz0iaHR0cHM6Ly92YW5hbnNpLnVpdC55b3JrdS5jYS9ZcGJQYXltZW50QXBwL1JlZmVyZW5jZWRUZW1wbGF0ZS9qcy9qcXVlcnkubWluLmpzIj48L3NjcmlwdD48c2NyaXB0IHR5cGU9InRleHQvamF2YXNjcmlwdCIgc3JjPSJodHRwczovL3ZhbmFuc2kudWl0Lnlvcmt1LmNhL1lwYlBheW1lbnRBcHAvUmVmZXJlbmNlZFRlbXBsYXRlL2pzL2Jvb3RzdHJhcC5taW4uanMiPjwvc2NyaXB0PjxsaW5rIGhyZWY9Imh0dHBzOi8vdmFuYW5zaS51aXQueW9ya3UuY2EvWXBiUGF5bWVudEFwcC9SZWZlcmVuY2VkVGVtcGxhdGUvZm9udHMvZm9udC1hd2Vzb21lL2Nzcy9mb250LWF3ZXNvbWUubWluLmNzcyIgcmVsPSJzdHlsZXNoZWV0IiAvPjwhLS0qKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKiogRW5kICoqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKiotLT5kAgQPFgIfAAXuDjxzdHlsZT4NCiAgICAgIHRyIHsNCiAgICAgIGJvcmRlcjogMHB4IHNvbGlkOw0KICAgICAgfQ0KICAgICAgaHIgew0KICAgICAgYm9yZGVyLXRvcDogMXB4IHNvbGlkICMwMDAwMDA7DQogICAgICB9DQogICAgICAucm91bmRlZFBhbmVse2JhY2tncm91bmQtY29sb3I6IzkzOTM5MzsgY29sb3I6d2hpdGU7IGZvbnQtd2VpZ2h0OmJvbGQ7IG1hcmdpbi1sZWZ0OjJweDt9DQogICAgICAucGFuZWx7YmFja2dyb3VuZC1jb2xvcjpXaGl0ZTtjb2xvcjpCbGFjazt9DQogICAgICAuc2VjdGlvbkhkcntmb250LXNpemU6MTJweDtmb250LXdlaWdodDpib2xkO30NCiAgICAgIC5zZWN0aW9uRHRse2ZvbnQtc2l6ZToxMXB4O2ZvbnQtd2VpZ2h0Om5vcm1hbDt9DQogICAgICAudGJsU2hpcHBpbmd7d2lkdGg6MTAwJTt2ZXJ0aWNhbC1hbGlnbjp0b3A7Ym9yZGVyOjEsc29saWQsIzkzOTM5M30NCiAgICAgIC50Y1NoaXBwaW5ne3dpZHRoOjUwJTsgYmFja2dyb3VuZC1jb2xvcjojRTNFM0UzO30NCiAgICAgIC5jY2ZyYW1le21hcmdpbi1sZWZ0OjBweDsgdGV4dC1hbGlnbjpsZWZ0O30NCiAgICAgIC5jb2xsYXBzZVBhbmVsSGVhZGVye2hlaWdodDoyMHB4O2N1cnNvcjpwb2ludGVyO21hcmdpbi1sZWZ0OjVweDttYXJnaW4tcmlnaHQ6MjBweDttYXJnaW4tdG9wOjVweDttYXJnaW4tYm90dG9tOjVweDt2ZXJ0aWNhbC1hbGlnbjptaWRkbGU7Zm9udC1zaXplOjEycHg7fQ0KICAgICAgLmFycm93SW1ne2Zsb2F0OnJpZ2h0O3ZlcnRpY2FsLWFsaWduOm1pZGRsZTt9DQoNCiAgICAgIC50ckl0ZW1ze2ZvbnQtc2l6ZToxMXB4O3RleHQtYWxpZ246Y2VudGVyO3dpZHRoOjEwMCV9DQoNCiAgICAgIC50Y0l0ZW1JREh7Zm9udC1zaXplOjExcHg7IHRleHQtYWxpZ246bGVmdDsgd2lkdGg6MjAwcHg7IGJhY2tncm91bmQtY29sb3I6I0UzRTNFMzt9DQogICAgICAudGNEZXNjcmlwdGlvbkh7Zm9udC1zaXplOjExcHg7IHRleHQtYWxpZ246bGVmdDsgd2lkdGg6NDUwcHg7IGJhY2tncm91bmQtY29sb3I6I0UzRTNFMzt9DQogICAgICAudGNRdWFudGl0eUh7Zm9udC1zaXplOjExcHg7IHRleHQtYWxpZ246UmlnaHQ7IHdpZHRoOjEwMHB4OyBiYWNrZ3JvdW5kLWNvbG9yOiNFM0UzRTM7fQ0KICAgICAgLnRjUHJpY2VIe2ZvbnQtc2l6ZToxMXB4OyB0ZXh0LWFsaWduOlJpZ2h0OyB3aWR0aDoxMjBweDsgYmFja2dyb3VuZC1jb2xvcjojRTNFM0UzO30NCg0KICAgICAgLnRjSXRlbUlEe2ZvbnQtc2l6ZToxMHB4OyB0ZXh0LWFsaWduOmxlZnQ7IHdpZHRoOjIwMHB4O2ZvbnQtd2VpZ2h0Om5vcm1hbDt9DQogICAgICAudGNEZXNjcmlwdGlvbntmb250LXNpemU6MTBweDsgdGV4dC1hbGlnbjpsZWZ0OyB3aWR0aDo0NTBweDtmb250LXdlaWdodDpub3JtYWw7fQ0KICAgICAgLnRjUXVhbnRpdHl7Zm9udC1zaXplOjEwcHg7IHRleHQtYWxpZ246UmlnaHQ7IHdpZHRoOjEwMHB4O2ZvbnQtd2VpZ2h0Om5vcm1hbDt9DQogICAgICAudGNQcmljZXtmb250LXNpemU6MTBweDsgdGV4dC1hbGlnbjpSaWdodDsgd2lkdGg6MTIwcHg7Zm9udC13ZWlnaHQ6bm9ybWFsO30NCg0KICAgICAgLnRibFRvdGFse2JhY2tncm91bmQtY29sb3I6I0UzRTNFMzsgYm9yZGVyOiAxLHNvbGlkLCM5MzkzOTM7O3dpZHRoOjEwMCV9DQogICAgICAudGNUb3RhbERlc2NyaXB0aW9ue2ZvbnQtc2l6ZToxMXB4OyB0ZXh0LWFsaWduOnJpZ2h0OyBmb250LXdlaWdodDpib2xkOyBwYWRkaW5nLXJpZ2h0OjEwcHg7IGNvbG9yOkJsYWNrOyB3aWR0aDoxMDBweDt9DQogICAgICAudGNUb3RhbEFtb3VudHtmb250LXNpemU6MTFweDsgdGV4dC1hbGlnbjpyaWdodDsgbWFyZ2luLXJpZ2h0OjEwcHg7IGNvbG9yOkJsYWNrOyB3aWR0aDoxMjBweDt9DQogICAgICAudGNUb3RhbEJsYW5re3dpZHRoOjY1MHB4O30NCiAgICA8L3N0eWxlPmQCAw9kFgYCAw8WAh8ABdIDPGRpdiBpZD0ieWFwcC1vdXRlciI+PGRpdiBjbGFzcz0ieWFwcC1sb2dvLWNvbnRhaW5lciBjb250YWluZXIiIGlkPSJ5YXBwLWxvZ28tY29udGFpbmVyIj48aW1nIGlkPSJ5b3JrLWxvZ28iIHNyYz0iaHR0cHM6Ly95b3JrdS5jYS95b3Jrd2ViL2RlbW9zL2otcXVlcnktdWktdGhlbWUvaW1nL3lvcmt1LWxvZ28tamFuMTMuanBnIiBib3JkZXI9IjAiIGFsdD0iWW9yayBVbml2ZXJzaXR5IiAvPjwvZGl2PjwvZGl2PjxkaXYgY2xhc3M9ImFwcC10aXRsZS1iYXIgbm8tbWVudS10aXRsZS1iYXIiPjxkaXYgY2xhc3M9ImNvbnRhaW5lciI+PGgxPllvcmsgVW5pdmVyc2l0eSBMaWJyYXJpZXMgRmluZXMgUGF5bWVudDwvaDE+PGg1PlBheSBmaW5lcyB0byBZb3JrIFVuaXZlcnNpdHkgTGlicmFyaWVzPC9oNT48L2Rpdj48L2Rpdj48ZGl2IGNsYXNzPSJjb250YWluZXIgcGFnZS1jb250ZW50IiByb2xlPSJtYWluIj4NCiAgICAgIGQCBQ9kFgICAQ8WAh8ABZUXPGRpdiBjbGFzcz0iY29udGFpbmVyIHJvdyI+PGxlZ2VuZD48aDMgc3R5bGU9ImNvbG9yOkdyZWVuOyI+VFJBTlNBQ1RJT04gQVBQUk9WRUQ8L2gzPjwvbGVnZW5kPjxwPlBsZWFzZSBwcmludCB0aGlzIHBhZ2UgYW5kIGtlZXAgaXQgYXMgeW91ciB0cmFuc2FjdGlvbiByZWNlaXB0PC9wPjwvZGl2PjxsZWdlbmQ+UGF5bWVudCBEZXRhaWxzPC9sZWdlbmQ+PGRpdiBjbGFzcz0iY29udGFpbmVyIHJvdyI+PGRpdiBjbGFzcz0iY29sLXNtLTQgZm9ybS1ncm91cCI+PGg0PlRyYW5zYWN0aW9uIEFtb3VudDo8L2g0PjxoNiBzdHlsZT0id2lkdGg6MTAwJTsgd29yZC13cmFwOmJyZWFrLXdvcmQ7Ij4xLjAwPC9oNj48L2Rpdj48ZGl2IGNsYXNzPSJjb2wtc20tNCBmb3JtLWdyb3VwIj48aDQ+WVBCIE9yZGVyIElkOjwvaDQ+PGg2IHN0eWxlPSJ3aWR0aDoxMDAlOyB3b3JkLXdyYXA6YnJlYWstd29yZDsiPjE1LTE1Njk1ODc4NTkwMDAwMDAwMDAwMDAwMDAxODczODwvaDY+PC9kaXY+PGRpdiBjbGFzcz0iY29sLXNtLTQgZm9ybS1ncm91cCI+PGg0PkNsaWVudCBPcmRlciBJZDo8L2g0PjxoNiBzdHlsZT0id2lkdGg6MTAwJTsgd29yZC13cmFwOmJyZWFrLXdvcmQ7Ij4xNS0xNTY5NTg3ODU5wqANCiAgICAgICAgICAgIDwvaDY+PC9kaXY+PC9kaXY+PGRpdiBjbGFzcz0iY29udGFpbmVyIHJvdyI+PGRpdiBjbGFzcz0iY29sLXNtLTQgZm9ybS1ncm91cCI+PGg0PkNhcmQgSG9sZGVyOjwvaDQ+PGg2IHN0eWxlPSJ3aWR0aDoxMDAlOyB3b3JkLXdyYXA6YnJlYWstd29yZDsiPjQyPC9oNj48L2Rpdj48ZGl2IGNsYXNzPSJjb2wtc20tNCBmb3JtLWdyb3VwIj48aDQ+Q2FyZCBOdW1iZXI6PC9oND48aDYgc3R5bGU9IndpZHRoOjEwMCU7IHdvcmQtd3JhcDpicmVhay13b3JkOyI+NDI0MioqKjQyNDI8L2g2PjwvZGl2PjxkaXYgY2xhc3M9ImNvbC1zbS00IGZvcm0tZ3JvdXAiPjxoND5DYXJkIFR5cGU6PC9oND48aDYgc3R5bGU9IndpZHRoOjEwMCU7IHdvcmQtd3JhcDpicmVhay13b3JkOyI+VjwvaDY+PC9kaXY+PC9kaXY+PGRpdiBjbGFzcz0iY29udGFpbmVyIHJvdyI+PGRpdiBjbGFzcz0iY29sLXNtLTQgZm9ybS1ncm91cCI+PGg0PlJlc3BvbnNlIENvZGU6PC9oND48aDYgc3R5bGU9IndpZHRoOjEwMCU7IHdvcmQtd3JhcDpicmVhay13b3JkOyI+Mjc8L2g2PjwvZGl2PjxkaXYgY2xhc3M9ImNvbC1zbS00IGZvcm0tZ3JvdXAiPjxoND5NZXNzYWdlOjwvaDQ+PGg2IHN0eWxlPSJ3aWR0aDoxMDAlOyB3b3JkLXdyYXA6YnJlYWstd29yZDsiPkFQUFJPVkVEICAgICAgICAgICAqICAgICAgICAgICAgICAgICAgICA9PC9oNj48L2Rpdj48ZGl2IGNsYXNzPSJjb2wtc20tNCBmb3JtLWdyb3VwIj48aDQ+QXV0aCBDb2RlOjwvaDQ+PGg2IHN0eWxlPSJ3aWR0aDoxMDAlOyB3b3JkLXdyYXA6YnJlYWstd29yZDsiPjk2NzE0NzwvaDY+PC9kaXY+PC9kaXY+PGRpdiBjbGFzcz0iY29udGFpbmVyIHJvdyI+PGRpdiBjbGFzcz0iY29sLXNtLTQgZm9ybS1ncm91cCI+PGg0PlJlZmVyZW5jZSBOdW1iZXI6PC9oND48aDYgc3R5bGU9IndpZHRoOjEwMCU7IHdvcmQtd3JhcDpicmVhay13b3JkOyI+NjYwMTQ4NDIwMDE0OTIxMzcwPC9oNj48L2Rpdj48ZGl2IGNsYXNzPSJjb2wtc20tNCBmb3JtLWdyb3VwIj48aDQ+VHJhbnNhY3Rpb24gRGF0ZS9UaW1lOjwvaDQ+PGg2IHN0eWxlPSJ3aWR0aDoxMDAlOyB3b3JkLXdyYXA6YnJlYWstd29yZDsiPjxzZW50ZW5jZSB4bWw6c3BhY2U9InByZXNlcnZlIj4NCiAgICAgICAgICAgICAgICAgIDIwMTktMDktMjcgMDg6Mzg6NDANCiAgICAgICAgICAgICAgICA8L3NlbnRlbmNlPjwvaDY+PC9kaXY+PC9kaXY+PGxlZ2VuZD5DdXN0b21lciBEZXRhaWxzPC9sZWdlbmQ+PGRpdiBjbGFzcz0iY29udGFpbmVyIHJvdyI+PGRpdiBjbGFzcz0iY29sLXNtLTQgZm9ybS1ncm91cCI+PGg0PkVtYWlsIFJlY2VpcHQ6IDwvaDQ+PGg2IHN0eWxlPSJ3aWR0aDoxMDAlOyB3b3JkLXdyYXA6YnJlYWstd29yZDsiPmZhbHNlPC9oNj48L2Rpdj48ZGl2IGNsYXNzPSJjb2wtc20tNCBmb3JtLWdyb3VwIj48aDQ+RW1haWwgQWRkcmVzczogPC9oND48aDYgc3R5bGU9IndpZHRoOjEwMCU7IHdvcmQtd3JhcDpicmVhay13b3JkOyIgLz48L2Rpdj48ZGl2IGNsYXNzPSJjb2wtc20tNCBmb3JtLWdyb3VwIj48aDQ+Tm90ZTo8L2g0PjxoNiBzdHlsZT0id2lkdGg6MTAwJTsgd29yZC13cmFwOmJyZWFrLXdvcmQ7Ij5GaW5lcyBQYXltZW50PC9oNj48L2Rpdj48L2Rpdj48bGVnZW5kPkl0ZW0gRGV0YWlsczwvbGVnZW5kPjx0YWJsZSBzdHlsZT0id2lkdGg6MTAwJTsgZm9udC1zaXplOjEycHg7Ij48dHIgYmdjb2xvcj0iI0EzQTNBMyI+PHRoIGFsaWduPSJsZWZ0Ij5JRDwvdGg+PHRoIGFsaWduPSJsZWZ0Ij5Db2RlPC90aD48dGggYWxpZ249ImxlZnQiPkRlc2NyaXB0aW9uPC90aD48dGggYWxpZ249InJpZ2h0Ij5RdWFudGl0eTwvdGg+PHRoIGFsaWduPSJyaWdodCI+UHJpY2UoQ0FEKTwvdGg+PC90cj48dHI+PHRkPjIyPC90ZD48dGQ+MTIxMTQ2NDAwMDAwNTE2NDwvdGQ+PHRkPlByaW5jaXBsZXMgb2YgbmV1cmFsIHNjaWVuY2UgLyBlZGl0ZWQgYnkgRXJpYyBSLiBLYW5kZWwsIEphbWVzIEguIFNjaHdhcnR6LCBUaG9tYXMgTS4gSmVzc2VsbCA7IGFydCBkaXJlY3Rpb24gYnkgU2FyYWggTWFjayBhbmQgSmFuZSBEb2RkLiAtLSBJRDogMzkwMDcwNDcwMTY4NjA8L3RkPjx0ZCBhbGlnbj0icmlnaHQiPjE8L3RkPjx0ZCBhbGlnbj0icmlnaHQiPjEuMDwvdGQ+PC90cj48dHIgYmdjb2xvcj0iI0UzRTNFMyI+PHRkIGNvbHNwYW49IjMiIC8+PHRoIGFsaWduPSJyaWdodCI+SXRlbSBUb3RhbDwvdGg+PHRkIGFsaWduPSJyaWdodCI+MS4wMDwvdGQ+PC90cj48dHIgYmdjb2xvcj0iI0UzRTNFMyI+PHRkIGNvbHNwYW49IjMiIC8+PHRoIGFsaWduPSJyaWdodCI+VG90YWwgQ2hhcmdlZDwvdGg+PHRkIGFsaWduPSJyaWdodCI+MS4wMDwvdGQ+PC90cj48L3RhYmxlPmQCBw8WAh8ABQwNCiAgICA8L2Rpdj5kZGUpDaos6wU6NAqDLgPBBUVCp/RSoDehyc0XweUFlG4C" />
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['aspnetForm'];
+if (!theForm) {
+    theForm = document.aspnetForm;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+<script src="/YPBPaymentApp/WebResource.axd?d=7JpNtbUi8V6bG9GKkKiz78nxrV0BfUFbXqvBqS5ZgS4wClaipD7tUWR3BON26hwv8VUyzaeo9JT0htrxJVKWnEOKmf7-Zrn09JQyhk5Af0I1&amp;t=636934634580000000" type="text/javascript"></script>
+
+
+<script src="/YPBPaymentApp/ScriptResource.axd?d=uPXhRJDnS4rGFlxBJ7OKVqyF1NI3467eKGZB9NkRKpNWSuQS-TuZmYCTuQb-h9EuPt-Uz6yYCXnvwodd5Sj91uaepudMwzlMZND-MYWLBj6vnfwqlN7GlTz-C_4A9uuI0&amp;t=27117261" type="text/javascript"></script>
+<script src="/YPBPaymentApp/ScriptResource.axd?d=UfJ5OB2ZiunX0VDjvRUjNQAh1E5vypDIHDXf3l6ZBPivtLicFyGC-dLZN9MYpFKLSV06eCPRwJDoXNtNslJFurkA_YewBfTc567xOb9Ji-ZMLbWFcvedGfo0XyIAB6VSMHZtLb9ABfHZGioWnYxBMA2&amp;t=27117261" type="text/javascript"></script>
+<div>
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="ABC7DB33" />
+</div>
+        <script type="text/javascript">
+//<![CDATA[
+Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'aspnetForm', [], [], [], 90, 'ctl00');
+//]]>
+</script>
+
+        <div id="yapp-outer"><div class="yapp-logo-container container" id="yapp-logo-container"><img id="york-logo" src="https://yorku.ca/yorkweb/demos/j-query-ui-theme/img/yorku-logo-jan13.jpg" border="0" alt="York University" /></div></div><div class="app-title-bar no-menu-title-bar"><div class="container"><h1>York University Libraries Fines Payment</h1><h5>Pay fines to York University Libraries</h5></div></div><div class="container page-content" role="main">
+
+
+<div class="container row"><legend><h3 style="color:Green;">TRANSACTION APPROVED</h3></legend><p>Please print this page and keep it as your transaction receipt</p></div><legend>Payment Details</legend><div class="container row"><div class="col-sm-4 form-group"><h4>Transaction Amount:</h4><h6 style="width:100%; word-wrap:break-word;">1.01</h6></div><div class="col-sm-4 form-group"><h4>YPB Order Id:</h4><h6 style="width:100%; word-wrap:break-word;">15-156958785900000000000000018738</h6></div><div class="col-sm-4 form-group"><h4>Client Order Id:</h4><h6 style="width:100%; word-wrap:break-word;">15-1569587859 
+</h6></div></div><div class="container row"><div class="col-sm-4 form-group"><h4>Card Holder:</h4><h6 style="width:100%; word-wrap:break-word;">John Smith</h6></div><div class="col-sm-4 form-group"><h4>Card Number:</h4><h6 style="width:100%; word-wrap:break-word;">4242***4242</h6></div><div class="col-sm-4 form-group"><h4>Card Type:</h4><h6 style="width:100%; word-wrap:break-word;">V</h6></div></div><div class="container row"><div class="col-sm-4 form-group"><h4>Response Code:</h4><h6 style="width:100%; word-wrap:break-word;">27</h6></div><div class="col-sm-4 form-group"><h4>Message:</h4><h6 style="width:100%; word-wrap:break-word;">APPROVED           *                    =</h6></div><div class="col-sm-4 form-group"><h4>Auth Code:</h4><h6 style="width:100%; word-wrap:break-word;">967147</h6></div></div><div class="container row"><div class="col-sm-4 form-group"><h4>Reference Number:</h4><h6 style="width:100%; word-wrap:break-word;">660148420014921370</h6></div><div class="col-sm-4 form-group"><h4>Transaction Date/Time:</h4><h6 style="width:100%; word-wrap:break-word;"><sentence xml:space="preserve">
+                  2019-09-27 08:38:40
+                </sentence></h6></div></div><legend>Customer Details</legend><div class="container row"><div class="col-sm-4 form-group"><h4>Email Receipt: </h4><h6 style="width:100%; word-wrap:break-word;">false</h6></div><div class="col-sm-4 form-group"><h4>Email Address: </h4><h6 style="width:100%; word-wrap:break-word;" /></div><div class="col-sm-4 form-group"><h4>Note:</h4><h6 style="width:100%; word-wrap:break-word;">Fines Payment</h6></div></div><legend>Item Details</legend><table style="width:100%; font-size:12px;"><tr bgcolor="#A3A3A3"><th align="left">ID</th><th align="left">Code</th><th align="left">Description</th><th align="right">Quantity</th><th align="right">Price(CAD)</th></tr><tr><td>22</td><td>1211464000005164</td><td>Principles of neural science / edited by Eric R. Kandel, James H. Schwartz, Thomas M. Jessell ; art direction by Sarah Mack and Jane Dodd. -- ID: 39007047016860</td><td align="right">1</td><td align="right">1.0</td></tr><tr bgcolor="#E3E3E3"><td colspan="3" /><th align="right">Item Total</th><td align="right">1.00</td></tr><tr bgcolor="#E3E3E3"><td colspan="3" /><th align="right">Total Charged</th><td align="right">1.00</td></tr></table>
+
+
+
+    </div>
+    </form>
+</body>
+</html>

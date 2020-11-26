@@ -1,0 +1,39 @@
+<div class="row mb-4">
+  <div class="col-12 col-md-2 text-center pb-2 ">
+    <span class="text-muted text-sm">Date</span><br/>
+    <%= format_date transaction.created_at %>
+
+  </div>
+
+  <div class="col-6 col-md-2 text-center">
+    <span class="text-muted text-sm">User ID</span><br/>
+    <%= transaction.yorku_id %>
+  </div>
+
+  <div class="col-6 col-md-2 text-center">
+    <span class="text-muted text-sm">Amount</span><br/>
+    <span class="h4">
+      <%= number_to_currency transaction.total_amount_fees %></span>
+  </div>
+  <div class="col-6 col-md-2 text-center">
+    <span class="text-muted text-sm">Status</span><br/>
+    <%= transaction.status %>
+  </div>
+
+
+  <div class="col-12 col-md-2  pb-2  text-center">
+    <span class="text-muted text-sm">Receipt</span><br/>
+    <span class="h5 font-weight-light">
+      <% if transaction.uid != nil %>
+        <%= link_to "View Receipt", "#{Settings.ypb.receipt_page_url}?tokenid=#{transaction.uid}" %>
+      <% else %>
+        <%= transaction.order_id %>
+      <% end %>
+    </span>
+  </div>
+
+  <div class="col-12 col-md-2 pb-2  text-center">
+    <span class="text-muted text-sm">Transaction Log</span><br/>
+    <a href="<%= report_transaction_log_url(transaction) %>">See Log</a>
+  </div>
+</div>

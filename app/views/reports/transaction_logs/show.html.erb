@@ -1,0 +1,21 @@
+<p class="text-center mb-4">
+  <a href="<%= report_transaction_path(@transaction) %>">
+    Back To Transaction Report
+  </a>
+</p>
+
+<h4 class="text-center  mt-4 mb-4">Full Transaction Log - Transaction ID: <%= @transaction.id %></h4>
+
+<ul class="list-group list-group-flush">
+  <% @logs.each do |log| %>
+    <li class="list-group-item">
+      <div class="d-flex w-100 justify-content-between">
+        <h6 class="mb-1"><%= log.logged_at.in_time_zone("Eastern Time (US & Canada)").strftime("%A, %b %d %I:%M:%S %p") %></h6>
+        <small class="text-muted"><%= log.process_name.upcase %></small>
+      </div>
+      <p class="mb-1"><%= log.message %></p>
+      <small class="text-muted">User ID: <%= log.yorku_id %> </small>
+      <span class="badge badge-primary badge-pill"><%= log.alma_fee_id %></span>
+    </li>
+  <% end %>
+</ul>

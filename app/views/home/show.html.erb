@@ -1,0 +1,64 @@
+<% page_header "My Fees", page_title: true %>
+
+<% if @active_fees.size > 0 %>
+  <h5  class="text-center text-lg">York University Libraries Fees</h5>
+  <% @other_fees.each do |fee| %>
+    <%= render "fee_listing", fee: fee %>
+  <% end %>
+
+  <p class="text-center">
+    <%= link_to "Pay YUL Fees", new_process_payment_path, class: 'btn btn-primary' %>
+  </p>
+
+  <% if @osgoode_fees.size > 0 %>
+    <hr class="mt-5"/>
+    <h5 class="text-center text-lg">Osgoode Hall Law Library Fees</h5>
+    <% @osgoode_fees.each do |fee| %>
+      <%= render "fee_listing", fee: fee %>
+    <% end %>
+
+
+    <p class="text-center">
+      <%= link_to "Pay Osgoode Hall Law Library Fees", new_process_payment_path(osgoode: true), class: 'btn btn-primary' %>
+    </p>
+  <% end %>
+
+
+<% else %>
+  <p class="text-center">You have no outstanding fees.</p>
+<% end %>
+
+<% if @processing_fees.count > 0 %>
+  <hr class="mt-5"/>
+  <h5 class="mt-5">Processing Fees</h5>
+  <% @processing_fees.each do |fee| %>
+  <div class="row mb-4">
+    <div class="col-12 col-md-2 text-center pb-2 ">
+      <span class="text-muted text-sm">Fee Date</span><br/>
+      <span class="text-monospace text-sm text-muted"><%= format_date fee.creation_time %></span>
+      <div class="badge badge-secondary badge-pill d-block"><%= fee.fee_description %></div>
+      PROCESSING
+    </div>
+    <div class="col-12 col-md-6  pb-2">
+      <span class="text-muted text-sm">Item</span><br/>
+      <span class="h6 font-weight-light"><%= fee.item_title %></span>
+    </div>
+    <div class="col-6 col-md-2 text-center">
+      <span class="text-muted text-sm">Balance</span><br/>
+      <span class="h4"><%= number_to_currency fee.balance %></span>
+    </div>
+
+    <div class="col-6 col-md-2 text-center">
+      <span class="text-muted text-sm">Owner</span><br/>
+      <%= fee.owner_description %>
+    </div>
+  </div>
+  <% end %>
+<% end %>
+
+<% if Rails.env.development? %>
+  <p class="mt-5">
+    <%= link_to "Reload Fees", load_alma_fees_path, data: { disable_with: "Loading Fees, Please wait..." }%>
+  </p>
+  <p>Fees Loaded: <%= session[:alma_fees_loaded]  %></p>
+<% end %>

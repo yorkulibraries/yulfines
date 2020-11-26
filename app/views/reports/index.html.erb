@@ -1,0 +1,95 @@
+<% page_header "Reports", page_title: true %>
+
+<%= simple_form_for :report, url: reports_path, method: :get do |f| %>
+  <div class="row">
+    <div class="col m3">
+      <%= f.input :library, required: false,
+        collection: library_list,
+        selected: @library %>
+    </div>
+    <div class="col m3">
+      <%= f.input :status,  required: false, allow_blank: true,
+        collection: ["ALL"] + PaymentTransaction::STATUSES, selected: @status %>
+    </div>
+    <div class="col m2">
+      <%= f.input :from, required: false, input_html: { value: @from } %>
+    </div>
+    <div class="col m2">
+      <%= f.input :to, required: false, input_html: { value: @to } %>
+    </div>
+    <div class="col m2">
+      <label class="string required d-block" for="report_to">&nbsp;</label>
+      <%= f.submit "Generate", class: "btn btn-secondary" %>
+    </div>
+  </div>
+<% end %>
+
+<div class="d-none">
+<%= @transactions.to_sql %>
+</div>
+
+<div class="border py-3 px-2 mt-4">
+
+    <p>There were <%= @transactions.size %> payments
+        <% if  !@from.blank? && !@to.blank? %>
+        from <%= format_date Date.parse(@from) %> to <%= format_date Date.parse(@to) %>
+        <% end %>
+    </p>
+
+  <% @grouped_transactions.each do |status, transactions| %>
+
+    <% amount = transactions.select(&:total_amount_fees).inject(0){ |sum,x| sum + x.total_amount_fees.to_f} %>
+
+    <p>Total <%= status %> transaction amount is: <strong><%= number_to_currency amount %></strong></p>
+  <% end %>
+</div>
+
+<p class="mt-3">To view the receipt, click on the View Receipt Link</p>
+<table class="table xtable-striped table-hover mt-3">
+  <tr>
+    <th>id</th>
+    <th>Date</th>
+    <th>Amount</th>
+    <th>User ID</th>
+    <th>Library</th>
+    <th>Status</th>
+    <th>YPB Order ID</th>
+  </tr>
+  <% @transactions.order(created_at: :desc).each do |t| %>
+  <tr style="transform: rotate(0);">
+    <td><%= link_to t.id, report_transaction_path(t.id), class: "stretched-link" %>
+    <td><%= format_date t.created_at %></td>
+    <td><%= number_to_currency (t.amount == nil ? t.total_amount_fees : t.amount) %></td>
+    <td><%=  t.yorku_id %></td>
+    <td><%= library_name t.library_id %></td>
+    <td><%= t.status %></td>
+    <td>
+      <% if t.uid != nil %>
+        <%= link_to "View Receipt", "#{Settings.ypb.receipt_page_url}?tokenid=#{t.uid}" %>
+        <small class="d-block"><%= t.order_id %></small>
+      <% else %>
+        <%= t.order_id %>
+      <% end %>
+
+    </td>
+  </tr>
+  <% end %>
+</table>
+Total: <%= @transactions.size %>
+
+<script type="text/javascript">
+  var picker = new Lightpick({
+    field: document.getElementById('report_from'),
+    format: "YYYY-MM-DD",
+    //minDate: new Date(),
+    orientation: "bottom right",
+  })
+
+  var picker = new Lightpick({
+    field: document.getElementById('report_to'),
+    format: "YYYY-MM-DD",
+    //minDate: new Date(),
+    orientation: "bottom right",
+  })
+
+</script>

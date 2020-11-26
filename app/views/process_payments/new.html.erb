@@ -1,0 +1,44 @@
+<% page_header "Pay Fees - #{@which}", page_title: true %>
+
+<%= simple_form_for :records, url: process_payments_path do |f| %>
+
+
+  <% @records.each do |record| %>
+    <%= f.fields_for "payment_record[#{record.fee_id}]" do |fr| %>
+
+      <div class="row  mb-4">
+        <div class="col-12 col-md-6 pb-2">
+          <span class="text-muted text-sm">Fee Details -  <%= record.fee.owner_description %></span><br/>
+          <%= record.fee.item_title %>
+          <div class="xtext-sm text-muted">
+            <%= record.fee.fee_description %>
+          </div>
+        </div>
+        <div class="col-5 col-md-3 text-center">
+          <span class="text-muted text-sm">Balance</span>
+          <div class="h6 px-1 py-2"><%= number_to_currency record.fee.balance %></div>
+        </div>
+
+        <div class="col-6 col-md-3">
+          <span class="text-muted text-sm">Pay Fee</span><br/>
+          <div class="custom-control custom-switch">
+            <input type="checkbox" name="records[payment_record[<%= record.fee_id %>]][amount]"
+                class="custom-control-input" checked="checked"
+              id="records_payment_record_<%= record.fee_id %>__amount">
+            <% fr.check_box :amount, class: "custom-control-input" %>
+            <label class="custom-control-label cursor-pointer"
+                  for="records_payment_record_<%= record.fee_id %>__amount">
+              Pay This Fee
+            </label>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+  <div class="row">
+    <div class="col-12 offset-md-9 col-md-3">
+      <%= f.button :submit, "Pay Fees", class: 'btn btn-primary', data: { confirm: "Are you sure?" } %>
+    </div>
+  </div>
+
+<% end %>

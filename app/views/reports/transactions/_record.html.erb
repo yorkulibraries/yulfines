@@ -1,0 +1,8 @@
+<table class="table table-condensed">
+  <% record.attribute_names.each do |a|   %>
+    <tr>
+      <td class="font-weight-light"><%= a.humanize %> </td>
+      <td><%= record[a] %></td>
+    <tr/>
+  <% end %>
+</table>

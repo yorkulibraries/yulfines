@@ -1,0 +1,42 @@
+<div class="row mb-4">
+  <div class="col-12 col-md-3 text-center pb-2 ">
+    <span class="text-muted text-sm">Date</span><br/>
+    <span class="text-monospace text-muted">
+      <%= format_date transaction.created_at %></span>
+
+  </div>
+  <div class="col-6 col-md-3 text-center">
+    <span class="text-muted text-sm">Amount</span><br/>
+    <span class="h4">
+      <%= number_to_currency transaction.amount %></span>
+  </div>
+  <div class="col-6 col-md-3 text-center">
+    <span class="text-muted text-sm">Status</span><br/>
+    <%= transaction.status %>
+  </div>
+
+  <div class="col-12 col-md-3  pb-2">
+    <span class="text-muted text-sm">Receipt</span><br/>
+    <span class="h5 font-weight-light">
+      <% if transaction.uid != nil %>
+        <%= link_to "View Receipt", "#{Settings.ypb.receipt_page_url}?tokenid=#{transaction.uid}" %>
+      <% else %>
+        <%= transaction.order_id %>
+      <% end %>
+
+    </span>
+  </div>
+
+  <div class="col-12 col-md-12 pb-2">
+    <span class="text-muted text-sm">Items</span><br/>
+    <span class="h5 font-weight-light">
+      <% transaction.records.each do |record| %>
+        <p><%= record.fee_item_title rescue "n/a" %></p>
+      <% end %>
+
+    </span>
+  </div>
+
+
+
+</div>

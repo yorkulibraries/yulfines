@@ -1,0 +1,6 @@
+  <% page_header "Transaction: #{@transaction.status}", page_title: true %>
+  <%= render "transaction", transaction: @transaction %>
+
+  <div class="mt-4 border-top pt-2 text-center">
+    <%= link_to "See Full Payment History", transactions_path,  class: 'text-muted' %>
+  </div>

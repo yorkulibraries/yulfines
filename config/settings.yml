@@ -1,0 +1,36 @@
+app:
+  name: "YULFines"
+  url: "http://locahost:3000"
+  email_host_name: "localhost:3000"
+  auth:
+    cas_header: "CAS_HEADER"
+error_notifier:
+  subject_prefix: "[YULFINES ERROR]"
+  from_email: "errors@your.institution"
+  from_name: "ERROR Notifier"
+  recipients: "list_of@people.com, separted@by_commas.net"
+alma:
+  api_key: "define this in settings.local.yml, it will be overriden in production"
+  region: "define this in settings.local.yml, it will be overriden in production"
+  api:
+    item_url: "https://api-na.hosted.exlibrisgroup.com/almaws/v1/items?item_barcode={{barcode}}"
+    user_url: "https://api-na.hosted.exlibrisgroup.com/almaws/v1/users/{{user_primary_id}}"
+    fee_url: "https://api-na.hosted.exlibrisgroup.com/almaws/v1/users/{{user_primary_id}}/fees/{{fee_id}}"
+ypb:
+  wsdl_url: https://vanansi.uit.yorku.ca/ypbpaymentservice/?wsdl
+  payment_page_url: https://vanansi.uit.yorku.ca/ypbpaymentapp/Payment.aspx
+  receipt_page_url: https://vanansi.uit.yorku.ca/ypbpaymentapp/Receipt.aspx
+  application_name: yulfines
+  application_id: QATEST
+  application_password:
+  application_law_name: Osgoode Fines
+  application_law_id:
+  application_law_password:
+  application_language: enUS
+  transaction_types:
+    purchase: CC-PURCHASE
+    preauth: CC-PREAUTH
+  transaction_statuses:
+    approved: APPROVED
+    declined: DECLINED
+    cancelled: CANCELLED

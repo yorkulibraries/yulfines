@@ -1,0 +1,47 @@
+<% page_header "Transaction: #{@transaction.status}", page_title: true %>
+<%= render "transaction", transaction: @transaction %>
+
+Paid with - <%= @transaction.cardtype %>
+<hr/>
+
+<div class="col-12 col-md-12 pb-2">
+  <h4 class="text-center  mt-4 mb-4">Full Payment Record Details</h4>
+
+
+    <table class="table table-striped">
+      <% @transaction.records.each do |record| %>
+      <tr>
+        <td>
+          <label>Alma Fee ID</label></br>
+          <%= record.alma_fee_id %>
+        </td>
+        <td>
+          <label>Item Description / Title</label></br>
+          <%= record.fee_item_title %>
+        </td>
+        <td>
+          <label>Status</label></br>
+          <% badge_color = record.status == PaymentRecord::STATUS_PAID ? "success" : "info" %>
+          <h3 class="badge badge-<%= badge_color %>">
+            <%= record.status.upcase %>
+          </h3>
+          <div class="text-danger" style="cursor: pointer;" onclick="$('#details_<%= record.id %>').toggleClass('d-none'); return false;">Full Details</div>
+        </td>
+      </tr>
+      <tr id="details_<%= record.id %>" class="d-none">
+        <td colspan='3'>
+          <div class="row">
+            <div class="col-md-6">
+              <span class="text-muted text-sm">Full Payment Record Details</span>
+              <%= render "record", record: record rescue "n/a" %>
+            </div>
+            <div class="col-md-6">
+              <span class="text-muted text-sm">Full Fee Details</span>
+              <%= render "fee", fee: record.fee rescue "n/a" %>
+            </div>
+          </div>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+</div>

@@ -1,0 +1,26 @@
+<div class="row mb-4">
+  <div class="col-12 col-md-3 text-center pb-2 ">
+      <span class="text-muted text-sm">Date</span><br/>
+    <span class="text-muted">
+      <%= format_date fee.creation_time %>
+    </span>
+  <span class="badge badge-pill d-block">  <%= fee.fee_status %></span>
+  </div>
+  <div class="col-12 col-md-6  pb-2">
+    <span class="text-muted text-sm">Item</span><br/>
+    <span class="h6 font-weight-light"><%= fee.item_title %></span>
+    <div class="xtext-sm text-muted">
+      <%= fee.fee_description %>
+    </div>
+  </div>
+  <div class="col-6 col-md-3 text-center">
+    <span class="text-muted text-sm">Balance</span><br/>
+    <span class="h4"><%= number_to_currency fee.balance %></span>
+  </div>
+
+  <!-- <div class="col-6 col-md-2 text-center">
+    <span class="text-muted text-sm">Owner</span><br/>
+    <% fee.owner_description %>
+    <span class="text-sm text-white d-block"><% fee.owner_id %></span>
+  </div> -->
+</div>

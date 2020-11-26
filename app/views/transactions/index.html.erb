@@ -1,0 +1,50 @@
+<% page_header "Payment History", page_title: true %>
+
+<% if @total_transactions == 0 %>
+  <p class="mb-0 text-center">You have no payment history yet.</p>
+<% end %>
+<% if @approved_transactions.size > 0 %>
+  <h4>Approved</h4>
+  <p>We have successfully received your payment and are processing it in our system.</p>
+  <% @approved_transactions.each do |t| %>
+    <%= render "transaction", transaction: t %>
+  <% end %>
+  <hr/>
+<% end %>
+
+<% if @paid_transactions.size > 0 %>
+  <h4>Fully Processed</h4>
+  <p>We have processed these payments successfully.</p>
+  <% @paid_transactions.each do |t| %>
+    <%= render "transaction", transaction: t %>
+  <% end %>
+  <hr/>
+<% end %>
+
+<% if @processing_transactions.size > 0 %>
+  <h4>Processing</h4>
+  <p>We are processing these payments. Please check back this page again in a little while.</p>
+  <% @processing_transactions.each do |t| %>
+    <%= render "transaction", transaction: t %>
+  <% end %>
+  <hr/>
+<% end %>
+
+<% if @declined_transactions.size > 0 %>
+  <h4>Declined</h4>
+  <p>The following transaction payments have been declined by our payment processor.</p>
+  <% @declined_transactions.each do |t| %>
+    <%= render "transaction", transaction: t %>
+  <% end %>
+  <hr/>
+<% end %>
+
+<% if @cancelled_transactions.size > 0 %>
+  <h4>Cancelled</h4>
+  <p>The following transaction payments have been cancelled by you.</p>
+  <% @cancelled_transactions.each do |t| %>
+    <%= render "transaction", transaction: t %>
+  <% end %>
+  <hr/>
+
+<% end %>
