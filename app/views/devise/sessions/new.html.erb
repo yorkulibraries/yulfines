@@ -10,10 +10,16 @@
       <%= f.input :username, label: false,
                   required: false,
                   autofocus: true,
-                  input_html: { class: "form-control username", autocomplete: false, placeholder: "Library Barcode" } %>
+                  input_html: {
+                    class: "form-control username", autocomplete: false, placeholder: "Library Barcode",
+                    aria: { label: "username"}
+                  } %>
       <%= f.input :password, label: false,
                   required: false,
-                  input_html: { class: "form-control password", autocomplete: "current-password", placeholder: "Password" } %>
+                  input_html: {
+                    class: "form-control password", autocomplete: "current-password", placeholder: "Password",
+                    aria: { label: "password"}  
+                  } %>
 
       <div class="checkbox mb-3">
         <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>

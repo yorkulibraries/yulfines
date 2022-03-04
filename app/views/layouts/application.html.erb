@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-CA">
   <head>
     <title><%= content_for?(:page_title) ? yield(:page_title) : "YUL Fines" %></title>
     <%= csrf_meta_tags %>
@@ -23,7 +23,7 @@
         <div class="col-lg-12">
           <% if current_user %>
             <p class="text-center mt-3 text-muted">
-              <%= "Admin -" if current_user.admin? %> 
+              <%= "Admin -" if current_user.admin? %>
               <%= current_user.name %> -
               <%= current_user.yorku_id %>
             </p>
@@ -37,7 +37,7 @@
           <% end %>
 
 
-          <div class="mt-4 card shadow-sm">
+          <div class="mt-4 card shadow">
             <div class="card-body"><%= yield %></div>
           </div>
         </div>
