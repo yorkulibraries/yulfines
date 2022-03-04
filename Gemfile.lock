@@ -257,7 +257,6 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
     public_suffix (3.1.1)
-    puma (3.12.1)
     rack (2.0.7)
     rack-accept (0.4.5)
       rack (>= 0.4)
@@ -453,7 +452,6 @@ DEPENDENCIES
   lolsoap
   mysql2 (< 0.5)
   populator!
-  puma (~> 3.11)
   rails (~> 6.0.0)
   sass-rails (~> 5)
   savon
