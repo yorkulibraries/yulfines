@@ -4,6 +4,9 @@ require 'rails/test_help'
 
 
 class ActiveSupport::TestCase
+
+  WebMock.allow_net_connect!
+  
   # Run tests in parallel with specified workers
   parallelize(workers: :number_of_processors)
 
