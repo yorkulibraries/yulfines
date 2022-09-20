@@ -20,7 +20,7 @@ class LogJobTest < ActiveJob::TestCase
     assert_equal "test", last.message
     assert_equal "123", last.yorku_id
     assert_equal "123", last.alma_fee_id
-    assert_equal logged_time, last.logged_at
+    assert_equal logged_time.to_i, last.logged_at.to_i
     assert_equal 1, last.transaction_id
     assert_equal "ypb_2", last.ypb_transaction_id
     assert_equal TransactionLog::PROCESS_OTHER, last.process_name
