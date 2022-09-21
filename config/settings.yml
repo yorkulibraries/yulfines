@@ -1,5 +1,6 @@
 app:
   name: "YULFines"
+  hostname: "localhost"
   url: "http://locahost:3000"
   email_host_name: "localhost:3000"
   auth:

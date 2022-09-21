@@ -25,7 +25,10 @@ module YulFines
     # Using sucker punch to proccess logs and emails later
     config.active_job.queue_adapter = :sucker_punch
 
-    # SET TImezone
+    # SET Timezone
     config.time_zone = 'Eastern Time (US & Canada)'
+
+    # DNS rebinding attack whitelist
+    config.hosts << Settings.app.hostname
   end
 end
