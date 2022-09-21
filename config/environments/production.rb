@@ -120,4 +120,7 @@ Rails.application.configure do
   # set delivery method to :smtp, :sendmail or :test
   config.action_mailer.delivery_method = :sendmail
   config.action_mailer.default_url_options = { host: Settings.app.email_host_name }
+
+  # DNS rebinding attack whitelist
+  config.hosts << Settings.app.hostname
 end

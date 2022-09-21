@@ -27,8 +27,5 @@ module YulFines
 
     # SET Timezone
     config.time_zone = 'Eastern Time (US & Canada)'
-
-    # DNS rebinding attack whitelist
-    config.hosts << Settings.app.hostname
   end
 end
