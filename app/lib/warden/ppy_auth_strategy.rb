@@ -13,8 +13,10 @@ class Warden::PpyAuthStrategy < Warden::Strategies::Base
       univ_id = ::User.get_univ_id_from_alma_user(user)
 
       # The PPY CYIN *MUST* match the UNIV_ID in Alma to be authenticated
-      fail!("User not found in Alma") if univ_id != user_id
-      return false
+      if univ_id != user_id
+        fail!("User not found in Alma") 
+        return false
+      end
 
       local_user = ::User.find_by_yorku_id user_id
 
