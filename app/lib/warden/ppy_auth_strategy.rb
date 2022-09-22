@@ -2,7 +2,12 @@ class Warden::PpyAuthStrategy < Warden::Strategies::Base
   def authenticate!
 
     if ppy_present?
-      user = Alma::User.find user_id
+      user = nil
+      begin
+        user = Alma::User.find user_id
+      rescue
+        fail!("User not found in Alma")
+      end
 
       univ_id = ::User.get_univ_id_from_alma_user(user)
 
