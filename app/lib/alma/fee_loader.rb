@@ -22,13 +22,13 @@ class Alma::FeeLoader
     json_fees.each do |fee|
       alma_fee = parse_alma_fee(fee, yorku_id)
       fee_ids << alma_fee.fee_id
-      update_existing_or_create_new(alma_fee)
+      update_existing_or_create_new(alma_fee, yorku_id)
     end
 
   end
 
 
-  def self.update_existing_or_create_new(fresh_alma_fee)
+  def self.update_existing_or_create_new(fresh_alma_fee, yorku_id)
     existing = Alma::Fee.find_by_fee_id(fresh_alma_fee.fee_id)
 
     if existing
@@ -42,6 +42,9 @@ class Alma::FeeLoader
 
       #  existing.original_amount = fresh_alma_fee.original_amount
       #  existing.original_vat_amount = fresh_alma_fee.original_vat_amount
+
+      existing.user_primary_id = fresh_alma_fee.user_primary_id
+      existing.yorku_id = yorku_id
 
       existing.save
       return existing

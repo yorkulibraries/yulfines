@@ -45,6 +45,16 @@ class User < ApplicationRecord
     update became_admin_at: nil
   end
 
+  def self.get_univ_id_from_alma_user(alma_user)
+    alma_user.user_identifier.each do |i|
+      puts i['id_type']['value']
+      if i['id_type']['value'] == 'UNIV_ID'
+        return i['value']
+      end
+    end
+    return nil
+  end
+
   private
   ## CUSTOM VALIDATION
   def email_uniqueness

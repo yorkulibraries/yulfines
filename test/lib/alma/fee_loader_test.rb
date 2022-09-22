@@ -51,7 +51,7 @@ class Alma::FeeLoaderTest < ActiveSupport::TestCase
   should "create a brand new fee since it doesn't exist" do
     assert_difference "Alma::Fee.count" do
       alma_fee = Alma::FeeLoader.parse_alma_fee FEE_SAMPLE, 101010
-      Alma::FeeLoader.update_existing_or_create_new alma_fee
+      Alma::FeeLoader.update_existing_or_create_new alma_fee, 101010
     end
 
     assert_equal 1, Alma::Fee.active.size, "Ensure that there is one active fee"
@@ -60,7 +60,7 @@ class Alma::FeeLoaderTest < ActiveSupport::TestCase
   should "update existing fee, if it exists" do
     yorku_id = 101010
     alma_fee = Alma::FeeLoader.parse_alma_fee FEE_SAMPLE, yorku_id
-    updated = Alma::FeeLoader.update_existing_or_create_new alma_fee
+    updated = Alma::FeeLoader.update_existing_or_create_new alma_fee, yorku_id
 
     changed_fee = FEE_SAMPLE.clone
     changed_fee["balance"] = 10.0
@@ -69,7 +69,7 @@ class Alma::FeeLoaderTest < ActiveSupport::TestCase
 
     assert_no_difference "Alma::Fee.count" do
       alma_fee2 = Alma::FeeLoader.parse_alma_fee changed_fee, yorku_id
-      new_one = Alma::FeeLoader.update_existing_or_create_new alma_fee2
+      new_one = Alma::FeeLoader.update_existing_or_create_new alma_fee2, yorku_id
 
       assert new_one.balance == changed_fee["balance"]
     end
@@ -80,7 +80,7 @@ class Alma::FeeLoaderTest < ActiveSupport::TestCase
   should "only change predefined fees" do
     yorku_id = 101010
     alma_fee = Alma::FeeLoader.parse_alma_fee FEE_SAMPLE, yorku_id
-    updated = Alma::FeeLoader.update_existing_or_create_new alma_fee
+    updated = Alma::FeeLoader.update_existing_or_create_new alma_fee, yorku_id
 
     changed_fee = FEE_SAMPLE.clone
     changed_fee["balance"] = 10.0
@@ -96,7 +96,7 @@ class Alma::FeeLoaderTest < ActiveSupport::TestCase
     assert updated.original_amount == FEE_SAMPLE["original_amount"]
 
     alma_fee2 = Alma::FeeLoader.parse_alma_fee changed_fee, yorku_id
-    new_one = Alma::FeeLoader.update_existing_or_create_new alma_fee2
+    new_one = Alma::FeeLoader.update_existing_or_create_new alma_fee2, yorku_id
 
     assert_equal 1, Alma::Fee.active.size, "Ensure that there is one active fee"
 
