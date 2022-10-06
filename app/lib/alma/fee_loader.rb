@@ -5,7 +5,12 @@ class Alma::FeeLoader
   end
 
   def self.load_fees(yorku_id)
-    user = Alma::User.find yorku_id
+    user = nil
+    begin
+      user = Alma::User.find yorku_id
+    rescue
+      return nil
+    end
     user.fines.response["fee"]
   end
 
