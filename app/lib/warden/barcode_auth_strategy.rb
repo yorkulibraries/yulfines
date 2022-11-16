@@ -2,11 +2,11 @@
 class Warden::BarcodeAuthStrategy < Warden::Strategies::Base
 
   def user_id
-    params[:user][:username]
+    params[:user][:username].strip
   end
 
   def password
-    params[:user][:password]
+    params[:user][:password].strip
   end
 
   def valid?
