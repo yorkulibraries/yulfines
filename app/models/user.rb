@@ -7,7 +7,7 @@ class User < ApplicationRecord
 
   ## VALIDATIONS ##
   validates_presence_of :yorku_id
-  validates_format_of :email, allow_blank: true, :with => /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/ #:with => Devise::email_regexp
+  validates_format_of :email, allow_blank: true, :with => Devise::email_regexp
 
   #validates_uniqueness_of :email, allow_blank: true,  message: "The email address is already in use."
   validates_uniqueness_of :yorku_id, message: "The YorkU ID is already in use."
