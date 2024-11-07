@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 2020_05_21_225958) do
 
-  create_table "alma_fees", force: :cascade do |t|
+  create_table "alma_fees", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "fee_id"
     t.string "fee_type"
     t.string "fee_description"
@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 2020_05_21_225958) do
     t.index ["fee_id"], name: "index_alma_fees_on_fee_id", unique: true
   end
 
-  create_table "payment_records", force: :cascade do |t|
+  create_table "payment_records", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "fee_id"
     t.integer "user_id"
     t.integer "transaction_id"
@@ -57,7 +57,7 @@ ActiveRecord::Schema.define(version: 2020_05_21_225958) do
     t.string "fee_item_barcode"
   end
 
-  create_table "payment_transactions", force: :cascade do |t|
+  create_table "payment_transactions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "uid"
     t.integer "user_id"
     t.string "yorku_id"
@@ -80,7 +80,7 @@ ActiveRecord::Schema.define(version: 2020_05_21_225958) do
     t.string "library_id"
   end
 
-  create_table "transaction_logs", force: :cascade do |t|
+  create_table "transaction_logs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "yorku_id"
     t.string "alma_fee_id"
     t.integer "transaction_id"
@@ -95,7 +95,7 @@ ActiveRecord::Schema.define(version: 2020_05_21_225958) do
     t.index ["yorku_id"], name: "index_transaction_logs_on_yorku_id"
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
     t.string "email"
