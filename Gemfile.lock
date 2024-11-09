@@ -1,9 +1,3 @@
-GIT
-  remote: https://github.com/norikt/populator.git
-  revision: 382910804c537e8819b6f76d6eae5ef86f0ed368
-  specs:
-    populator (1.0.0)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -93,11 +87,7 @@ GEM
       rack-test (>= 0.6.3)
       regexp_parser (>= 1.5, < 3.0)
       xpath (~> 3.2)
-    capybara-selenium (0.0.6)
-      capybara
-      selenium-webdriver
     chronic (0.10.2)
-    coderay (1.1.3)
     concurrent-ruby (1.3.4)
     config (5.5.2)
       deep_merge (~> 1.2, >= 1.2.1)
@@ -107,9 +97,6 @@ GEM
       rexml
     crass (1.0.6)
     csv (3.3.0)
-    cuprite (0.15.1)
-      capybara (~> 3.0)
-      ferrum (~> 0.15.0)
     database_cleaner (1.7.0)
     date (3.4.0)
     deep_merge (1.2.2)
@@ -119,7 +106,6 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
-    equatable (0.7.0)
     erubi (1.13.0)
     exception_notification (4.5.0)
       actionmailer (>= 5.2, < 8)
@@ -133,40 +119,11 @@ GEM
     factory_bot_rails (5.0.2)
       factory_bot (~> 5.0.2)
       railties (>= 4.2.0)
-    faker (1.9.4)
-      i18n (>= 0.7)
-      pastel (~> 0.7.2)
-      thor (~> 0.20.0)
-      tty-pager (~> 0.12.0)
-      tty-screen (~> 0.6.5)
-      tty-tree (~> 0.3.0)
-    ferrum (0.15)
-      addressable (~> 2.5)
-      concurrent-ruby (~> 1.1)
-      webrick (~> 1.7)
-      websocket-driver (~> 0.7)
     ffi (1.17.0)
     font-awesome-sass (5.6.1)
       sassc (>= 1.11)
-    formatador (1.1.0)
     globalid (1.1.0)
       activesupport (>= 5.0)
-    guard (2.15.0)
-      formatador (>= 0.2.4)
-      listen (>= 2.7, < 4.0)
-      lumberjack (>= 1.0.12, < 2.0)
-      nenv (~> 0.1)
-      notiffany (~> 0.0)
-      pry (>= 0.9.12)
-      shellany (~> 0.0)
-      thor (>= 0.18.1)
-    guard-compat (1.2.1)
-    guard-minitest (2.4.6)
-      guard-compat (~> 1.2)
-      minitest (>= 3.0)
-    guard-rails (0.8.1)
-      guard (~> 2.11)
-      guard-compat (~> 1.0)
     gyoku (1.4.0)
       builder (>= 2.1.2)
       rexml (~> 3.0)
@@ -193,7 +150,6 @@ GEM
     loofah (2.23.1)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
-    lumberjack (1.2.10)
     mail (2.8.1)
       mini_mime (>= 0.1.1)
       net-imap
@@ -202,7 +158,7 @@ GEM
     marcel (1.0.4)
     matrix (0.4.2)
     method_source (1.1.0)
-    mimemagic (0.3.10)
+    mimemagic (0.4.3)
       nokogiri (~> 1)
       rake
     mini_mime (1.1.5)
@@ -212,7 +168,6 @@ GEM
     mustermann (3.0.3)
       ruby2_keywords (~> 0.0.1)
     mysql2 (0.5.6)
-    nenv (0.3.0)
     net-imap (0.4.18)
       date
       net-protocol
@@ -226,18 +181,9 @@ GEM
     nokogiri (1.15.6-x86_64-linux)
       racc (~> 1.4)
     nori (2.6.0)
-    notiffany (0.1.3)
-      nenv (~> 0.1)
-      shellany (~> 0.0)
     orm_adapter (0.5.0)
     ostruct (0.6.1)
-    pastel (0.7.4)
-      equatable (~> 0.6)
-      tty-color (~> 0.5)
     popper_js (1.16.1)
-    pry (0.14.2)
-      coderay (~> 1.1)
-      method_source (~> 1.0)
     public_suffix (5.1.1)
     puma (6.4.3)
       nio4r (~> 2.0)
@@ -324,7 +270,6 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
-    shellany (0.0.1)
     shoulda (3.6.0)
       shoulda-context (~> 1.0, >= 1.0.1)
       shoulda-matchers (~> 3.0)
@@ -353,25 +298,12 @@ GEM
       sprockets (>= 3.0.0)
     sqlite3 (1.7.3)
       mini_portile2 (~> 2.8.0)
-    strings (0.1.8)
-      strings-ansi (~> 0.1)
-      unicode-display_width (~> 1.5)
-      unicode_utils (~> 1.4)
-    strings-ansi (0.2.0)
     sucker_punch (2.1.2)
       concurrent-ruby (~> 1.0)
-    thor (0.20.3)
+    thor (1.3.2)
     thread_safe (0.3.6)
     tilt (2.4.0)
     timeout (0.4.2)
-    tty-color (0.6.0)
-    tty-pager (0.12.1)
-      strings (~> 0.1.4)
-      tty-screen (~> 0.6)
-      tty-which (~> 0.4)
-    tty-screen (0.6.5)
-    tty-tree (0.3.0)
-    tty-which (0.5.0)
     turbolinks (5.2.1)
       turbolinks-source (~> 5.2)
     turbolinks-source (5.2.0)
@@ -382,8 +314,8 @@ GEM
       tilt (>= 1.4, < 3)
     tzinfo (1.2.11)
       thread_safe (~> 0.1)
-    unicode-display_width (1.8.0)
-    unicode_utils (1.4.0)
+    tzinfo-data (1.2024.2)
+      tzinfo (>= 1.0.0)
     warden (1.2.9)
       rack (>= 2.0.9)
     wasabi (4.0.0)
@@ -395,10 +327,6 @@ GEM
       activemodel (>= 6.0.0)
       bindex (>= 0.4.0)
       railties (>= 6.0.0)
-    webdrivers (5.3.1)
-      nokogiri (~> 1.6)
-      rubyzip (>= 1.3.0)
-      selenium-webdriver (~> 4.0, < 4.11)
     webmock (3.24.0)
       addressable (>= 2.8.0)
       crack (>= 0.3.2)
@@ -407,7 +335,6 @@ GEM
       activesupport (>= 4.2)
       rack-proxy (>= 0.6.1)
       railties (>= 4.2)
-    webrick (1.9.0)
     websocket (1.2.11)
     websocket-driver (0.7.6)
       websocket-extensions (>= 0.1.0)
@@ -428,27 +355,20 @@ DEPENDENCIES
   awesome_print (= 1.8.0)
   bootstrap (~> 4.3.1)
   byebug
-  capybara (>= 2.15)
-  capybara-selenium
+  capybara
   config
-  cuprite
   database_cleaner (= 1.7.0)
   devise (= 4.7.0)
   exception_notification
   factory_bot_rails (= 5.0.2)
-  faker (= 1.9.4)
   font-awesome-sass (~> 5.6.1)
-  guard (= 2.15.0)
-  guard-minitest (= 2.4.6)
-  guard-rails (= 0.8.1)
   httparty
   jbuilder (~> 2.7)
   jwt
   listen (>= 3.0.5, < 3.2)
   lolsoap
-  mimemagic (~> 0.3.10)
+  mimemagic
   mysql2
-  populator!
   puma
   rails (~> 6.0.0)
   sass-rails (~> 5)
@@ -467,7 +387,6 @@ DEPENDENCIES
   turnout (= 2.5.0)
   tzinfo-data
   web-console (>= 3.3.0)
-  webdrivers
   webmock
   webpacker (~> 4.0)
   whenever (= 1.0.0)

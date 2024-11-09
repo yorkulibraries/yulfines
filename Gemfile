@@ -1,5 +1,4 @@
 source 'https://rubygems.org'
-git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ## RAILS GEMS AND RELATED
 gem 'rails', '~> 6.0.0'
@@ -54,32 +53,18 @@ group :development do
 end
 
 group :test do
-  # Adds support for Capybara system testing and selenium driver
-  gem 'capybara', '>= 2.15'
+  gem 'byebug'
+  gem 'capybara'
   gem 'selenium-webdriver'
-  gem 'capybara-selenium'
-  gem "cuprite"
-  # Easy installation and use of web drivers to run system tests with browsers
-  gem 'webdrivers'
 
   gem "factory_bot_rails", "5.0.2"
-  gem 'guard-rails',"0.8.1", require: false
-  gem 'guard',"2.15.0"
-  gem 'guard-minitest', "2.4.6"
 
   gem 'shoulda', "3.6.0"
   gem 'shoulda-matchers'
   gem 'shoulda-context'
 
   gem 'database_cleaner', "1.7.0"
-
-
-  gem 'faker', "1.9.4"
-  gem 'populator', git: "https://github.com/norikt/populator.git"
 end
 
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-
-
-gem 'mimemagic', '~> 0.3.10'
+gem 'tzinfo-data'
+gem 'mimemagic'
