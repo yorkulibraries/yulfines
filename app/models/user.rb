@@ -10,7 +10,7 @@ class User < ApplicationRecord
   validates_format_of :email, allow_blank: true, :with => Devise::email_regexp
 
   #validates_uniqueness_of :email, allow_blank: true,  message: "The email address is already in use."
-  validates_uniqueness_of :yorku_id, message: "The YorkU ID is already in use."
+  validates_uniqueness_of :yorku_id, case_sensitive: false, message: "The YorkU ID is already in use."
 
   ## RELATIONSHIPS ##
   def alma_fees
