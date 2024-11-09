@@ -4,12 +4,11 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ## RAILS GEMS AND RELATED
 gem 'rails', '~> 6.0.0'
 gem 'puma'
-gem 'bootsnap', '>= 1.4.2', require: false
 gem 'sass-rails', '~> 5'
 
 ## DATABASES ##
-gem 'sqlite3', '~> 1.4'
-gem "mysql2",  "< 0.5"
+gem 'sqlite3'
+gem "mysql2"
 
 ## JAVASCRIPT AND JSON
 gem 'webpacker', '~> 4.0'
@@ -23,13 +22,13 @@ gem 'font-awesome-sass', '~> 5.6.1'
 ## TOOLS AND UTILITIES
 gem 'simple_form', "4.1.0"
 gem "devise", "4.7.0"
-gem "config", "1.7.0"
+gem "config"
 gem "whenever", "1.0.0"
 gem 'turnout', "2.5.0"
 gem 'sucker_punch', '~> 2.0' # for async, quick jobs i.e logging
 
 ## ALMA ACCESS ##
-gem "alma"
+gem "alma", '0.2.8'
 gem "httparty"
 gem "jwt"
 
@@ -55,8 +54,6 @@ group :development do
 end
 
 group :test do
-
-
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 2.15'
   gem 'selenium-webdriver'
