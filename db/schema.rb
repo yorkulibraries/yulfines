@@ -2,17 +2,16 @@
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
 #
-# This file is the source Rails uses to define your schema when running `rails
-# db:schema:load`. When creating a new database, `rails db:schema:load` tends to
+# This file is the source Rails uses to define your schema when running `bin/rails
+# db:schema:load`. When creating a new database, `bin/rails db:schema:load` tends to
 # be faster and is potentially less error prone than running all of your
 # migrations from scratch. Old migrations may fail to apply correctly if those
 # migrations use external dependencies or application code.
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_11_09_190602) do
-
-  create_table "alma_fees", force: :cascade do |t|
+ActiveRecord::Schema[7.0].define(version: 2024_11_09_204443) do
+  create_table "alma_fees", charset: "utf8mb3", force: :cascade do |t|
     t.string "fee_id"
     t.string "fee_type"
     t.string "fee_description"
@@ -22,20 +21,20 @@ ActiveRecord::Schema.define(version: 2024_11_09_190602) do
     t.float "remaining_vat_amount"
     t.float "original_amount"
     t.float "original_vat_amount"
-    t.datetime "creation_time"
-    t.datetime "status_time"
+    t.datetime "creation_time", precision: nil
+    t.datetime "status_time", precision: nil
     t.string "owner_id"
     t.string "owner_description"
     t.text "item_title"
     t.string "item_barcode"
     t.string "yorku_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["fee_id", "yorku_id"], name: "index_alma_fees_on_fee_id_and_yorku_id"
     t.index ["fee_id"], name: "index_alma_fees_on_fee_id", unique: true
   end
 
-  create_table "payment_records", force: :cascade do |t|
+  create_table "payment_records", charset: "utf8mb3", force: :cascade do |t|
     t.integer "fee_id"
     t.integer "user_id"
     t.integer "transaction_id"
@@ -44,10 +43,10 @@ ActiveRecord::Schema.define(version: 2024_11_09_190602) do
     t.float "amount"
     t.string "status"
     t.text "payment_token"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.datetime "alma_fines_paid_at"
-    t.datetime "alma_fines_rejected_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "alma_fines_paid_at", precision: nil
+    t.datetime "alma_fines_rejected_at", precision: nil
     t.string "alma_fines_rejected_error_reason"
     t.string "alma_fines_rejected_error_code"
     t.string "alma_fines_rejected_error_tracking_id"
@@ -57,7 +56,7 @@ ActiveRecord::Schema.define(version: 2024_11_09_190602) do
     t.string "fee_item_barcode"
   end
 
-  create_table "payment_transactions", force: :cascade do |t|
+  create_table "payment_transactions", charset: "utf8mb3", force: :cascade do |t|
     t.string "uid"
     t.integer "user_id"
     t.string "yorku_id"
@@ -71,31 +70,31 @@ ActiveRecord::Schema.define(version: 2024_11_09_190602) do
     t.string "txn_num"
     t.string "cardholder"
     t.string "cardnum"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "yporderid"
-    t.datetime "alma_fines_paid_at"
-    t.datetime "ypb_transaction_approved_at"
-    t.datetime "ypb_transaction_declined_at"
+    t.datetime "alma_fines_paid_at", precision: nil
+    t.datetime "ypb_transaction_approved_at", precision: nil
+    t.datetime "ypb_transaction_declined_at", precision: nil
     t.string "library_id"
   end
 
-  create_table "transaction_logs", force: :cascade do |t|
+  create_table "transaction_logs", charset: "utf8mb3", force: :cascade do |t|
     t.string "yorku_id"
     t.string "alma_fee_id"
     t.integer "transaction_id"
     t.string "ypb_transaction_id"
-    t.datetime "logged_at"
+    t.datetime "logged_at", precision: nil
     t.string "process_name"
     t.text "message"
     t.text "additional_changes"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["transaction_id"], name: "index_transaction_logs_on_transaction_id"
     t.index ["yorku_id"], name: "index_transaction_logs_on_yorku_id"
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", charset: "utf8mb3", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
     t.string "email"
@@ -103,17 +102,17 @@ ActiveRecord::Schema.define(version: 2024_11_09_190602) do
     t.string "role"
     t.string "level"
     t.string "yorku_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "username"
-    t.datetime "remember_created_at"
+    t.datetime "remember_created_at", precision: nil
     t.integer "sign_in_count", default: 0, null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
+    t.datetime "current_sign_in_at", precision: nil
+    t.datetime "last_sign_in_at", precision: nil
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
-    t.datetime "became_admin_at"
+    t.datetime "became_admin_at", precision: nil
     t.index ["yorku_id"], name: "index_users_on_yorku_id", unique: true
   end
 
