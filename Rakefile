@@ -3,6 +3,4 @@
 
 require_relative 'config/application'
 
-require 'turnout/rake_tasks'
-
 Rails.application.load_tasks
