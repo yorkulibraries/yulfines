@@ -3,11 +3,11 @@ services:
     build:
       context: .
       args:
-        - NODE_VER=${NODE_VER:-14}
+        - NODE_VER=${NODE_VER:-lts}
     volumes:
       - ./:/app
     working_dir: /app
-    command: sh -c "yarn install && bundle exec rake db:create && bundle exec rake db:migrate && bundle exec rake db:seed && bundle exec rake assets:precompile && rm -f tmp/pids/server.pid && bundle exec rails server -b '0.0.0.0'"
+    command: sh -c "[ ! -f Gemfile ] && gem install rails -v '~> ${RAILS_VERSION:-7.0.0}' && rails new . -f -G -d mysql && bundle add sqlite3 --group test ; yarn install && gem install bundler -v '~> ${BUNDLER_VERSION:-2.4.22}' && bundle install && rails db:create && rails db:migrate && rails db:seed && rails assets:precompile && rm -f tmp/pids/server.pid && rails server -b '0.0.0.0' "
     ports:
       - ${PORT:-4004}:${PORT:-4004}
     depends_on:
@@ -20,7 +20,7 @@ services:
       - DATABASE_URL=mysql2://root:mypasswd@db/${COMPOSE_PROJECT_NAME}_${RAILS_ENV:-development}
       - TEST_DATABASE_URL=sqlite3:db/test.sqlite3
       - RAILS_SERVE_STATIC_FILES=true
-      - NODE_OPTIONS=
+      - NODE_OPTIONS=${NODE_OPTIONS}
       - SELENIUM_REMOTE_URL=http://chrome:4444
     env_file:
       - path: ./override.env
