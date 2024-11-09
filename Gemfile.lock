@@ -67,7 +67,6 @@ GEM
       xml-simple
     autoprefixer-rails (10.4.19.0)
       execjs (~> 2)
-    awesome_print (1.8.0)
     base64 (0.2.0)
     bcrypt (3.1.20)
     bigdecimal (3.1.8)
@@ -97,7 +96,12 @@ GEM
       rexml
     crass (1.0.6)
     csv (3.3.0)
-    database_cleaner (1.7.0)
+    database_cleaner (2.1.0)
+      database_cleaner-active_record (>= 2, < 3)
+    database_cleaner-active_record (2.2.0)
+      activerecord (>= 5.a)
+      database_cleaner-core (~> 2.0.0)
+    database_cleaner-core (2.0.1)
     date (3.4.0)
     deep_merge (1.2.2)
     devise (4.7.0)
@@ -107,9 +111,6 @@ GEM
       responders
       warden (~> 1.2.3)
     erubi (1.13.0)
-    exception_notification (4.5.0)
-      actionmailer (>= 5.2, < 8)
-      activesupport (>= 5.2, < 8)
     execjs (2.10.0)
     ezwadl (0.1.0)
       httparty (~> 0.14)
@@ -141,10 +142,9 @@ GEM
       activesupport (>= 5.0.0)
     jwt (2.9.3)
       base64
-    listen (3.1.5)
-      rb-fsevent (~> 0.9, >= 0.9.4)
-      rb-inotify (~> 0.9, >= 0.9.7)
-      ruby_dep (~> 1.2)
+    listen (3.9.0)
+      rb-fsevent (~> 0.10, >= 0.10.3)
+      rb-inotify (~> 0.9, >= 0.9.10)
     lolsoap (0.11.0)
       nokogiri (~> 1.5)
     loofah (2.23.1)
@@ -236,7 +236,6 @@ GEM
       railties (>= 5.2)
     rexml (3.3.9)
     ruby2_keywords (0.0.5)
-    ruby_dep (1.5.0)
     rubyzip (2.3.2)
     sass (3.7.4)
       sass-listen (~> 4.0.0)
@@ -270,12 +269,9 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
-    shoulda (3.6.0)
-      shoulda-context (~> 1.0, >= 1.0.1)
-      shoulda-matchers (~> 3.0)
-    shoulda-context (1.2.2)
-    shoulda-matchers (3.1.3)
-      activesupport (>= 4.0.0)
+    shoulda-context (2.0.0)
+    shoulda-matchers (5.3.0)
+      activesupport (>= 5.2.0)
     simple_form (4.1.0)
       actionpack (>= 5.0)
       activemodel (>= 5.0)
@@ -284,10 +280,6 @@ GEM
       rack (~> 2.2, >= 2.2.4)
       rack-protection (= 3.2.0)
       tilt (~> 2.0)
-    spring (2.1.1)
-    spring-watcher-listen (2.0.1)
-      listen (>= 2.7, < 4.0)
-      spring (>= 1.2, < 3.0)
     sprockets (3.7.5)
       base64
       concurrent-ruby (~> 1.0)
@@ -352,20 +344,18 @@ PLATFORMS
 
 DEPENDENCIES
   alma (= 0.2.8)
-  awesome_print (= 1.8.0)
   bootstrap (~> 4.3.1)
   byebug
   capybara
   config
-  database_cleaner (= 1.7.0)
+  database_cleaner
   devise (= 4.7.0)
-  exception_notification
   factory_bot_rails (= 5.0.2)
   font-awesome-sass (~> 5.6.1)
   httparty
   jbuilder (~> 2.7)
   jwt
-  listen (>= 3.0.5, < 3.2)
+  listen
   lolsoap
   mimemagic
   mysql2
@@ -374,19 +364,16 @@ DEPENDENCIES
   sass-rails (~> 5)
   savon
   selenium-webdriver
-  shoulda (= 3.6.0)
   shoulda-context
   shoulda-matchers
   simple_form (= 4.1.0)
   sinatra
-  spring
-  spring-watcher-listen (~> 2.0.0)
   sqlite3
   sucker_punch (~> 2.0)
   turbolinks (~> 5)
   turnout (= 2.5.0)
   tzinfo-data
-  web-console (>= 3.3.0)
+  web-console
   webmock
   webpacker (~> 4.0)
   whenever (= 1.0.0)
