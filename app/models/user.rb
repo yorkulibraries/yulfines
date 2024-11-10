@@ -47,7 +47,6 @@ class User < ApplicationRecord
 
   def self.get_univ_id_from_alma_user(alma_user)
     alma_user.user_identifier.each do |i|
-      puts i['id_type']['value']
       if i['id_type']['value'] == 'UNIV_ID'
         return i['value']
       end

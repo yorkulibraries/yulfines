@@ -1,11 +1,13 @@
 class Warden::PpyAuthStrategy < Warden::Strategies::Base
   def authenticate!
-
+    Rails.logger.debug "start PpyAuthStrategy.authenticate"
     if ppy_present?
       user = nil
       begin
+        Rails.logger.debug "Looking for user in Alma with CYIN: #{user_id}"
         user = Alma::User.find user_id
       rescue
+        Rails.logger.debug "fail PpyAuthStrategy.authenticate - User not found in Alma with CYIN: #{user_id}"
         fail!("User not found in Alma")
         return false
       end
@@ -14,6 +16,7 @@ class Warden::PpyAuthStrategy < Warden::Strategies::Base
 
       # The PPY CYIN *MUST* match the UNIV_ID in Alma to be authenticated
       if univ_id != user_id
+        Rails.logger.debug "fail PpyAuthStrategy.authenticate - UNIV_ID: #{univ_id} != CYIN: #{user_id}"
         fail!("User not found in Alma") 
         return false
       end
@@ -31,8 +34,10 @@ class Warden::PpyAuthStrategy < Warden::Strategies::Base
       end
       local_user.username = user_id
 
+      Rails.logger.debug "success PpyAuthStrategy.authenticate - UNIV_ID: #{univ_id} == CYIN: #{user_id}"
       success!(local_user)
     else
+      Rails.logger.debug "fail PpyAuthStrategy.authenticate - No PY Headers present"
       fail("NO PPY DEFINED")
     end
   end
