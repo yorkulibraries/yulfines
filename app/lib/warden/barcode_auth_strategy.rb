@@ -1,18 +1,8 @@
 require 'digest'
 
 class Warden::BarcodeAuthStrategy < Warden::Strategies::Base
-
-  def user_id
-    params[:user][:username].strip
-  end
-
-  def password
-    params[:user][:password].strip
-  end
-
   def valid?
-    return if params[:user] == nil
-    user_id || password
+    user_id && password
   end
 
   def authenticate!
@@ -43,5 +33,13 @@ class Warden::BarcodeAuthStrategy < Warden::Strategies::Base
       Rails.logger.debug "fail BarcodeAuthStrategy.authenticate #{user_id}"
       fail!('Invalid barcode or password')
     end
+  end
+
+  def user_id
+    params[:user][:username].strip unless (params[:user].nil? || params[:user][:username].nil?)
+  end
+
+  def password
+    params[:user][:password].strip unless (params[:user].nil? || params[:user][:password].nil?)
   end
 end
