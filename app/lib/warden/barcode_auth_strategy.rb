@@ -1,3 +1,4 @@
+require 'digest'
 
 class Warden::BarcodeAuthStrategy < Warden::Strategies::Base
 
@@ -15,8 +16,8 @@ class Warden::BarcodeAuthStrategy < Warden::Strategies::Base
   end
 
   def authenticate!
-    Rails.logger.debug "start BarcodeAuthStrategy.authenticate!"
-    if Alma::User.authenticate(user_id: user_id.strip, password: password)
+    Rails.logger.debug "start BarcodeAuthStrategy.authenticate"
+    if Alma::User.authenticate(user_id: user_id, password: password)
       user = Alma::User.find user_id
 
       univ_id = User.get_univ_id_from_alma_user(user)
@@ -29,18 +30,17 @@ class Warden::BarcodeAuthStrategy < Warden::Strategies::Base
       local_user = User.find_by_yorku_id stable_id
       if !local_user
         email = user.email.kind_of?(Array) ? user.email.first : user.email
-
-        local_user = User.create! username: user_id, password: password,
+        random = Digest::SHA256.hexdigest(rand().to_s)
+        Rails.logger.debug "random generated password #{random}"
+        local_user = User.create! username: user.primary_id, password: random,
                       yorku_id: stable_id, email: user.email,
                       first_name: user.first_name, last_name: user.last_name
       end
-      local_user.username = user_id
 
-      Rails.logger.debug "success BarcodeAuthStrategy.authenticate! #{user_id}"
+      Rails.logger.debug "success BarcodeAuthStrategy.authenticate #{user_id}"
       success!(local_user)
     else
-      Rails.logger.debug "fail BarcodeAuthStrategy.authenticate! #{user_id}"
-      # Fail and move on to the other startegies (i.e. db authenticatable)
+      Rails.logger.debug "fail BarcodeAuthStrategy.authenticate #{user_id}"
       fail!('Invalid barcode or password')
     end
   end
