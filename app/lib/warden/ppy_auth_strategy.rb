@@ -23,7 +23,7 @@ class Warden::PpyAuthStrategy < Warden::Strategies::Base
       # create  in db if doesn't exist
       if !local_user
         email = alma_user.email.kind_of?(Array) ? alma_user.email.first : alma_user.email
-        random = Digest::SHA256.hexdigest(rand())
+        random = Digest::SHA256.hexdigest(rand().to_s)
         Rails.logger.debug "random generated password #{random}"
         local_user = User.create! username: alma_user.primary_id, password: random,
                       yorku_id: univ_id, email: email,
