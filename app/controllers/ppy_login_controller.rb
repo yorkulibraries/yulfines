@@ -5,6 +5,6 @@ class PpyLoginController < ApplicationController
 
   def logout
     sign_out :user
-    redirect_to Warden::PpyAuthStrategy.py_logout_url, allow_other_host: true 
+    redirect_to Warden::PpyAuthStrategy.py_logout_url, allow_other_host: true
   end
 end

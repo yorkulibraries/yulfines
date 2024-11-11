@@ -20,7 +20,7 @@ class Redirectors::ToPaymentBrokerController < AuthenticatedController
       TLOG.log_ypb_steps current_user.yorku_id, @transaction.id, "Redirecting to YPB Payment Broker"
 
       ## setup payment broker stuff and send person there
-      redirect_to "#{Settings.ypb.payment_page_url}?tokenid=#{token_id}"
+      redirect_to "#{Settings.ypb.payment_page_url}?tokenid=#{token_id}", allow_other_host: true
     else
       TLOG.log_ypb_steps current_user.yorku_id, @transaction.id, "ERROR: TRIED REDIRECTING WITH EXISTING TRANSACTION"
       redirect_to transaction_path @transaction
