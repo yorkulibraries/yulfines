@@ -13,7 +13,7 @@ class Alma::FeeLoaderTest < ActiveSupport::TestCase
                  "original_amount" => 3.0,
                  "original_vat_amount" => 0.0,
                  "creation_time" => "2010-10-27T10:59:00Z",
-                 "status_time" => "2019-05-30T02:01:11.174Z",
+                 "status_time" => "2019-05-30T02:01:11Z",
                  "comment" => "CALL_ITEMNUM: QP 355.2 P76 2000 | ITEM_COPYNUM: 4 | USER_ALT_ID: 123456789",
                  "owner" => { "value" => "SCOTT", "desc" => "Scott Library" },
                  "title" => "Principles of neural science / edited by Eric R. Kandel, James H. Schwartz, Thomas M. Jessell ; art direction by Sarah Mack and Jane Dodd.",
