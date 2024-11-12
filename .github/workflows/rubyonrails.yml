@@ -24,7 +24,7 @@ jobs:
           --health-retries 5
 
       chrome-server:
-        image: selenium/standalone-chrome:nightly
+        image: selenium/standalone-chrome:96.0
         ports:
           - 4444:4444
 
@@ -35,21 +35,21 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
-      - name: Run tests with mysql
-        env:
-          RAILS_ENV: test
-          DATABASE_URL: mysql2://test:test@127.0.0.1:3306/test
-          SELENIUM_SERVER: 127.0.0.1
-        run: |
-          bundle exec rake db:reset
-          bundle exec rake test
-          bundle exec rake test:system
       - name: Run tests with sqlite3
         env:
           RAILS_ENV: test
           DATABASE_URL: sqlite3:db/test.sqlite3
           SELENIUM_SERVER: 127.0.0.1
         run: |
-          bundle exec rake db:reset
-          bundle exec rake test
-          bundle exec rake test:system
+          bundle exec rails db:reset
+          bundle exec rails test --verbose
+          bundle exec rails test:system
+      - name: Run tests with mysql
+        env:
+          RAILS_ENV: test
+          DATABASE_URL: mysql2://test:test@127.0.0.1:3306/test
+          SELENIUM_SERVER: 127.0.0.1
+        run: |
+          bundle exec rails db:reset
+          bundle exec rails test --verbose
+          bundle exec rails test:system
