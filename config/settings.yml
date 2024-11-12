@@ -1,21 +1,20 @@
 app:
-  name: "YULFines"
+  name: "Pay YUL"
   hostname: "localhost"
-  url: "http://locahost:3000"
-  email_host_name: "localhost:3000"
+  email_host_name: "localhost"
   auth:
     cas_header: "CAS_HEADER"
     py_logout_url: "https://passportyork.yorku.ca/ppylogin/ppylogout"
     py_authenticated_paths: 
       - "/ppy_login"
 error_notifier:
-  subject_prefix: "[YULFINES ERROR]"
+  subject_prefix: "[Pay YUL ERROR]"
   from_email: "errors@your.institution"
-  from_name: "ERROR Notifier"
-  recipients: "list_of@people.com, separted@by_commas.net"
+  from_name: "Pay YUL"
+  recipients: "list_of@people.com, separated@by_commas.net"
 alma:
-  api_key: "define this in settings.local.yml, it will be overriden in production"
-  region: "define this in settings.local.yml, it will be overriden in production"
+  api_key: "override this in settings.local.yml"
+  region: "override this in settings.local.yml"
   api:
     item_url: "https://api-na.hosted.exlibrisgroup.com/almaws/v1/items?item_barcode={{barcode}}"
     user_url: "https://api-na.hosted.exlibrisgroup.com/almaws/v1/users/{{user_primary_id}}"
