@@ -24,7 +24,7 @@ jobs:
           --health-retries 5
 
       chrome-server:
-        image: selenium/standalone-chrome:96.0
+        image: selenium/standalone-chrome:nightly
         ports:
           - 4444:4444
 
