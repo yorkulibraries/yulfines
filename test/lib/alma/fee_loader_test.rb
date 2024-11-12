@@ -85,11 +85,11 @@ class Alma::FeeLoaderTest < ActiveSupport::TestCase
     changed_fee = FEE_SAMPLE.clone
     changed_fee["balance"] = 10.0
     changed_fee["remaining_vat_amount"] = 10.0
-    changed_fee["status_time"] = "2019-06-30T02:01:11.174Z"
+    changed_fee["status_time"] = "2019-06-30T02:01:11Z"
     changed_fee["status"]["value"] = "DIFFERENTONE"
 
     changed_fee["original_amount"] = 202020.0
-    changed_fee["creation_time_time"] = "2019-06-30T02:01:11.174Z"
+    changed_fee["creation_time_time"] = "2019-06-30T02:01:11Z"
     changed_fee["title"] = "TITLE CHANGE"
 
     assert updated.balance == FEE_SAMPLE["balance"]
@@ -102,7 +102,7 @@ class Alma::FeeLoaderTest < ActiveSupport::TestCase
 
     assert new_one.balance == changed_fee["balance"]
     assert new_one.remaining_vat_amount == changed_fee["remaining_vat_amount"]
-    assert new_one.status_time == changed_fee["status_time"]
+    assert new_one.status_time == Time.zone.parse(changed_fee["status_time"])
     assert new_one.fee_status == changed_fee["status"]["value"]
 
     assert new_one.original_amount == FEE_SAMPLE["original_amount"]
