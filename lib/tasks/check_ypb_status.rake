@@ -52,6 +52,17 @@ namespace :ypb do
       end
     end
 
+    # clean up abandoned transactions
+    # older than 15 minutes AND status is NEW and uid (token) is nill and yporderid (YPB order ID) is nil
+    transactions = PaymentTransaction.older_than.where(status: PaymentTransaction::STATUS_NEW, uid: nil, yporderid: nil)
+    TLOG.info "Cleaning up Abandoned transactions - #{transactions.size}"
+    transactions.each do |txn|
+      txn.records.each do |record|
+        record.mark_incomplete!
+      end
+      txn.status = PaymentTransaction::STATUS_ABANDONED
+      txn.save
+    end
   end
 
 
