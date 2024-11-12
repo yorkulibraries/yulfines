@@ -38,8 +38,8 @@ class Alma::FeeLoaderTest < ActiveSupport::TestCase
     assert_equal fee.remaining_vat_amount, FEE_SAMPLE["remaining_vat_amount"]
     assert_equal fee.original_amount, FEE_SAMPLE["original_amount"]
     assert_equal fee.original_vat_amount, FEE_SAMPLE["original_vat_amount"]
-    assert_equal fee.creation_time, Time.parse(FEE_SAMPLE["creation_time"])
-    assert_equal fee.status_time, Time.parse(FEE_SAMPLE["status_time"])
+    assert_equal fee.creation_time, Time.zone.parse(FEE_SAMPLE["creation_time"])
+    assert_equal fee.status_time, Time.zone.parse(FEE_SAMPLE["status_time"])
 
     assert_equal fee.owner_id, FEE_SAMPLE["owner"]["value"]
     assert_equal fee.owner_description, FEE_SAMPLE["owner"]["desc"]
