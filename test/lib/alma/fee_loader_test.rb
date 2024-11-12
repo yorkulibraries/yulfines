@@ -14,7 +14,7 @@ class Alma::FeeLoaderTest < ActiveSupport::TestCase
                  "original_vat_amount" => 0.0,
                  "creation_time" => "2010-10-27T10:59:00Z",
                  "status_time" => "2019-05-30T02:01:11.174Z",
-                 "comment" => "CALL_ITEMNUM: QP 355.2 P76 2000 | ITEM_COPYNUM: 4 | USER_ALT_ID: 102028607",
+                 "comment" => "CALL_ITEMNUM: QP 355.2 P76 2000 | ITEM_COPYNUM: 4 | USER_ALT_ID: 123456789",
                  "owner" => { "value" => "SCOTT", "desc" => "Scott Library" },
                  "title" => "Principles of neural science / edited by Eric R. Kandel, James H. Schwartz, Thomas M. Jessell ; art direction by Sarah Mack and Jane Dodd.",
                  "barcode" => { "value" => "39007047016860", "link" => "https://something.com" },
@@ -38,8 +38,8 @@ class Alma::FeeLoaderTest < ActiveSupport::TestCase
     assert_equal fee.remaining_vat_amount, FEE_SAMPLE["remaining_vat_amount"]
     assert_equal fee.original_amount, FEE_SAMPLE["original_amount"]
     assert_equal fee.original_vat_amount, FEE_SAMPLE["original_vat_amount"]
-    assert_equal fee.creation_time, FEE_SAMPLE["creation_time"]
-    assert_equal fee.status_time, FEE_SAMPLE["status_time"]
+    assert_equal fee.creation_time, FEE_SAMPLE["creation_time"].to_datetime
+    assert_equal fee.status_time, FEE_SAMPLE["status_time"].to_datetime
 
     assert_equal fee.owner_id, FEE_SAMPLE["owner"]["value"]
     assert_equal fee.owner_description, FEE_SAMPLE["owner"]["desc"]
