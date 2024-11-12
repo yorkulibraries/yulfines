@@ -5,6 +5,9 @@ app:
   email_host_name: "localhost:3000"
   auth:
     cas_header: "CAS_HEADER"
+    py_logout_url: "https://passportyork.yorku.ca/ppylogin/ppylogout"
+    py_authenticated_paths: 
+      - "/ppy_login"
 error_notifier:
   subject_prefix: "[YULFINES ERROR]"
   from_email: "errors@your.institution"

@@ -1,4 +1,4 @@
-FROM ruby:2.6.9-bullseye
+FROM ruby:3.1.4-bullseye
 
 WORKDIR /app
 
@@ -13,13 +13,6 @@ RUN apt-get update -qq && apt-get install -y --no-install-recommends \
 build-essential curl git nodejs vim sqlite3 chromium chromium-driver libvips python
 
 RUN npm install --global yarn
-
-ADD Gemfil[e] /app/
-ADD Gemfile.loc[k] /app/
-ADD .ruby-versio[n] /app/
-
-RUN if [ -f Gemfile ] ; then gem install bundler:2.3.8 && bundle install ; fi
-RUN if [ ! -f Gemfile ] ; then gem install rails ; fi
 
 ADD https://raw.githubusercontent.com/yorkulibraries/docker-rails/main/rt.sh /usr/local/bin/rt
 RUN chmod a+x /usr/local/bin/rt

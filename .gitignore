@@ -41,6 +41,8 @@ config/environments/*.local.yml
 
 REVISION
 assets_manifest_backup/
-config/database.yml
 config/secrets.yml
 config/app_settings.yml
+
+
+.DS_Store
