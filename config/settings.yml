@@ -1,5 +1,6 @@
 app:
-  name: "Pay YUL"
+  brand: "Institution Name"
+  name: "Pay X"
   hostname: "localhost"
   email_host_name: "localhost"
   auth:
@@ -8,9 +9,9 @@ app:
     py_authenticated_paths: 
       - "/ppy_login"
 error_notifier:
-  subject_prefix: "[Pay YUL ERROR]"
+  subject_prefix: "[Pay X ERROR]"
   from_email: "errors@your.institution"
-  from_name: "Pay YUL"
+  from_name: "Pay X"
   recipients: "list_of@people.com, separated@by_commas.net"
 alma:
   api_key: "override this in settings.local.yml"
@@ -20,9 +21,9 @@ alma:
     user_url: "https://api-na.hosted.exlibrisgroup.com/almaws/v1/users/{{user_primary_id}}"
     fee_url: "https://api-na.hosted.exlibrisgroup.com/almaws/v1/users/{{user_primary_id}}/fees/{{fee_id}}"
 ypb:
-  wsdl_url: https://vanansi.uit.yorku.ca/ypbpaymentservice/?wsdl
-  payment_page_url: https://vanansi.uit.yorku.ca/ypbpaymentapp/Payment.aspx
-  receipt_page_url: https://vanansi.uit.yorku.ca/ypbpaymentapp/Receipt.aspx
+  wsdl_url: https://ypbpaymentapp/?wsdl
+  payment_page_url: https://ypbpaymentapp/Payment.aspx
+  receipt_page_url: https://ypbpaymentapp/Receipt.aspx
   application_name: yulfines
   application_id: QATEST
   application_password:

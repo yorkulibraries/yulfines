@@ -5,7 +5,7 @@ class ProcessPaymentsController < AuthenticatedController
       @which = "Osgoode"
     else
       @fees = current_user.alma_fees.other_fees
-      @which = "York University Libraries"
+      @which = "YUL"
     end
 
     @records = []
@@ -60,7 +60,7 @@ class ProcessPaymentsController < AuthenticatedController
 
       redirect_to redirect_to_payment_broker_path(transaction_id: @transaction.id)
     else
-      redirect_to new_process_payment_path, flash: { error: "Please select at least 1 item to pay." }
+      redirect_to new_process_payment_path, flash: { error: "Please select an item to pay." }
     end
   end
 

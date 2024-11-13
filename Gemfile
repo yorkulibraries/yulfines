@@ -3,7 +3,6 @@ source 'https://rubygems.org'
 ## RAILS GEMS AND RELATED
 gem 'rails', '~> 7.0.0'
 gem 'puma'
-gem 'sass-rails', '~> 5'
 
 ## DATABASES ##
 gem 'mysql2'
@@ -11,14 +10,15 @@ gem 'mysql2'
 ## JAVASCRIPT AND JSON
 
 ## CSS ##
-gem 'bootstrap', '~> 4.3.1'
-gem 'font-awesome-sass', '~> 5.6.1'
+gem 'bootstrap'
+gem "sassc-rails"
 
 ## TOOLS AND UTILITIES
 gem 'simple_form'
 gem 'devise'
 gem 'config'
 gem 'sucker_punch', '~> 2.0' # for async, quick jobs i.e logging
+gem 'active_link_to'
 
 ## ALMA ACCESS ##
 gem 'alma', '0.2.8'

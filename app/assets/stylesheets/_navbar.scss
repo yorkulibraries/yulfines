@@ -1,13 +1,11 @@
-@import "_theme_variables";
-
 .bg-dark {
   background-color: #000 !important;
 }
 
 .bg-light {
-  background-color: $white !important;
-  color: $black;
-  border: 1px solid $gray-200;
+  background-color: #fff !important;
+  color: #000;
+  border: 1px solid #eee;
 
   &.navbar-fixed-top {
     border-width: 0 0 1px 0;
@@ -20,13 +18,12 @@
 
 .navbar {
   font-size: 18px;
-  font-family: $headings-font-family;
-  font-weight: $headings-font-weight;
+  font-weight: 700;
 }
 
 .navbar-brand {
   padding-top: 0.5rem;
   font-size: inherit;
-  font-weight: $headings-font-weight;
+  font-weight: 700;
   text-transform: uppercase;
 }

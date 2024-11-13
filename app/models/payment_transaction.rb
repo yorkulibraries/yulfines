@@ -16,9 +16,10 @@ class PaymentTransaction < ApplicationRecord
   STATUS_REJECTED_BY_ALMA = "ALMA_REJECTED" # all payments were rejected by alma
   STATUS_PROCESSING = "PROCESSING"
   STATUS_NEW = "NEW"
+  STATUS_ABANDONED = "ABANDONED"
 
   STATUSES = [STATUS_PROCESSING, STATUS_PAID, STATUS_PAID_PARTIAL, STATUS_REJECTED_BY_ALMA,
-              STATUS_APPROVED, STATUS_DECLINED, STATUS_CANCELLED ]
+              STATUS_APPROVED, STATUS_DECLINED, STATUS_CANCELLED, STATUS_ABANDONED ]
 
   ## RELATIONSHIPS ##
   belongs_to :user
@@ -46,6 +47,7 @@ class PaymentTransaction < ApplicationRecord
   scope :cancelled, -> { where(status: STATUS_CANCELLED )}
   scope :stale, -> { where(status: STATUS_STALE )}
   scope :declined_or_cancelled, -> { declined.or(cancelled) }
+  scope :abandoned, -> { older_than.where(status: PaymentTransaction::STATUS_NEW, uid: nil, yporderid: nil) }
 
 
   def mark_paid!

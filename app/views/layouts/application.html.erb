@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-CA">
   <head>
-    <title><%= content_for?(:page_title) ? yield(:page_title) : "YUL Fines" %></title>
+    <title><%= content_for?(:page_title) ? yield(:page_title) : "Pay YUL" %></title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -34,31 +34,6 @@
           </div>
         </div>
       </div>
-      <!-- <footer class="pt-4 my-md-5 pt-md-5 border-top">
-        <div class="row">
-          <div class="col-12 col-md">
-            <small class="d-block mb-3 text-muted">&copy; <%= Date.current.year %>. York University Libraries.</small>
-          </div>
-          <div class="col-6 col-md">
-            <h5>Help and Resources</h5>
-            <ul class="list-unstyled text-small">
-              <li><a class="text-muted" href="#">Dispute A Charge</a></li>
-              <li><a class="text-muted" href="#">Speak with Staff</a></li>
-              <li><a class="text-muted" href="#">Back to Primo</a></li>
-            </ul>
-          </div>
-          <div class="col-6 col-md">
-            <h5>About</h5>
-            <ul class="list-unstyled text-small">
-            	<li><a class="text-muted" href="/web/about-us/library-policies/">Library Policies</a></li>
-            	<li><a class="text-muted" href="/web/about-us/news-exhibits/">News &amp; Exhibits</a></li>
-            	<li><a class="text-muted" href="/web/about-us/visitors/">Visitors</a></li>
-            	<li><a class="text-muted" href="/web/about-us/support-yul/">Support YUL</a></li>
-            </ul>
-          </div>
-        </div>
-      </footer> -->
     </div>
-
   </body>
 </html>

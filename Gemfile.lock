@@ -46,6 +46,9 @@ GEM
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.1, >= 1.2.0)
+    active_link_to (1.0.5)
+      actionpack
+      addressable
     activejob (7.0.8.6)
       activesupport (= 7.0.8.6)
       globalid (>= 0.3.6)
@@ -82,10 +85,9 @@ GEM
     bcrypt (3.1.20)
     bigdecimal (3.1.8)
     bindex (0.8.1)
-    bootstrap (4.3.1)
+    bootstrap (5.3.3)
       autoprefixer-rails (>= 9.1.0)
-      popper_js (>= 1.14.3, < 2)
-      sassc-rails (>= 2.0.0)
+      popper_js (>= 2.11.8, < 3)
     builder (3.3.0)
     byebug (11.1.3)
     capybara (3.40.0)
@@ -135,8 +137,6 @@ GEM
     faraday-net_http (3.3.0)
       net-http
     ffi (1.17.0-x86_64-linux-gnu)
-    font-awesome-sass (5.6.1)
-      sassc (>= 1.11)
     globalid (1.2.1)
       activesupport (>= 6.1)
     guard-compat (1.2.1)
@@ -146,7 +146,7 @@ GEM
     gyoku (1.4.0)
       builder (>= 2.1.2)
       rexml (~> 3.0)
-    hashdiff (1.1.1)
+    hashdiff (1.1.2)
     httparty (0.22.0)
       csv
       mini_mime (>= 1.0.0)
@@ -210,7 +210,7 @@ GEM
       bigdecimal
     orm_adapter (0.5.0)
     ostruct (0.6.1)
-    popper_js (1.16.1)
+    popper_js (2.11.8)
     public_suffix (6.0.1)
     puma (6.4.3)
       nio4r (~> 2.0)
@@ -264,17 +264,6 @@ GEM
     rexml (3.3.9)
     ruby2_keywords (0.0.5)
     rubyzip (2.3.2)
-    sass (3.7.4)
-      sass-listen (~> 4.0.0)
-    sass-listen (4.0.0)
-      rb-fsevent (~> 0.9, >= 0.9.4)
-      rb-inotify (~> 0.9, >= 0.9.7)
-    sass-rails (5.1.0)
-      railties (>= 5.2.0)
-      sass (~> 3.1)
-      sprockets (>= 2.8, < 4.0)
-      sprockets-rails (>= 2.0, < 4.0)
-      tilt (>= 1.1, < 3)
     sassc (2.4.0)
       ffi (~> 1.9)
     sassc-rails (2.1.2)
@@ -309,10 +298,9 @@ GEM
       rack (~> 2.2, >= 2.2.4)
       rack-protection (= 3.2.0)
       tilt (~> 2.0)
-    sprockets (3.7.5)
-      base64
+    sprockets (4.2.1)
       concurrent-ruby (~> 1.0)
-      rack (> 1, < 3)
+      rack (>= 2.2.4, < 4)
     sprockets-rails (3.5.2)
       actionpack (>= 6.1)
       activesupport (>= 6.1)
@@ -357,15 +345,15 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  active_link_to
   alma (= 0.2.8)
-  bootstrap (~> 4.3.1)
+  bootstrap
   byebug
   capybara
   config
   database_cleaner-active_record
   devise
   factory_bot_rails
-  font-awesome-sass (~> 5.6.1)
   guard-minitest
   httparty
   jwt
@@ -378,7 +366,7 @@ DEPENDENCIES
   puma
   rails (~> 7.0.0)
   rails-controller-testing
-  sass-rails (~> 5)
+  sassc-rails
   savon
   selenium-webdriver
   shoulda-context
