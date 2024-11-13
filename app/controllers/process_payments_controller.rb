@@ -5,7 +5,7 @@ class ProcessPaymentsController < AuthenticatedController
       @which = "Osgoode"
     else
       @fees = current_user.alma_fees.other_fees
-      @which = "York University Libraries"
+      @which = "YUL"
     end
 
     @records = []

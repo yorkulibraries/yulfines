@@ -1,25 +1,25 @@
-<% page_header "My Fees", page_title: true %>
+<% page_header "Overview", page_title: true %>
 
 <% if @active_fees.size > 0 %>
-  <h5  class="text-center text-lg">York University Libraries Fees</h5>
+  <h5  class="text-center text-lg">Fines + Fees (YUL)</h5>
   <% @other_fees.each do |fee| %>
     <%= render "fee_listing", fee: fee %>
   <% end %>
 
   <p class="text-center">
-    <%= link_to "Pay YUL Fees", new_process_payment_path, class: 'btn btn-primary' %>
+    <%= link_to "Pay YUL", new_process_payment_path, class: 'btn btn-primary' %>
   </p>
 
   <% if @osgoode_fees.size > 0 %>
     <hr class="mt-5"/>
-    <h5 class="text-center text-lg">Osgoode Hall Law Library Fees</h5>
+    <h5 class="text-center text-lg">Fines + Fees (Osgoode)</h5>
     <% @osgoode_fees.each do |fee| %>
       <%= render "fee_listing", fee: fee %>
     <% end %>
 
 
     <p class="text-center">
-      <%= link_to "Pay Osgoode Hall Law Library Fees", new_process_payment_path(osgoode: true), class: 'btn btn-primary' %>
+      <%= link_to "Pay Osgoode", new_process_payment_path(osgoode: true), class: 'btn btn-primary' %>
     </p>
   <% end %>
 

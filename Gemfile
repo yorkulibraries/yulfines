@@ -12,7 +12,6 @@ gem 'mysql2'
 
 ## CSS ##
 gem 'bootstrap', '~> 4.3.1'
-gem 'font-awesome-sass', '~> 5.6.1'
 
 ## TOOLS AND UTILITIES
 gem 'simple_form'

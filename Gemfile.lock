@@ -135,8 +135,6 @@ GEM
     faraday-net_http (3.3.0)
       net-http
     ffi (1.17.0-x86_64-linux-gnu)
-    font-awesome-sass (5.6.1)
-      sassc (>= 1.11)
     globalid (1.2.1)
       activesupport (>= 6.1)
     guard-compat (1.2.1)
@@ -146,7 +144,7 @@ GEM
     gyoku (1.4.0)
       builder (>= 2.1.2)
       rexml (~> 3.0)
-    hashdiff (1.1.1)
+    hashdiff (1.1.2)
     httparty (0.22.0)
       csv
       mini_mime (>= 1.0.0)
@@ -365,7 +363,6 @@ DEPENDENCIES
   database_cleaner-active_record
   devise
   factory_bot_rails
-  font-awesome-sass (~> 5.6.1)
   guard-minitest
   httparty
   jwt

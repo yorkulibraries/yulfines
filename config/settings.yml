@@ -1,5 +1,5 @@
 app:
-  name: "Pay YUL"
+  name: "Pay Fines + Fees"
   hostname: "localhost"
   email_host_name: "localhost"
   auth:
