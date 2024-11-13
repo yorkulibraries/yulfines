@@ -60,7 +60,7 @@ class ProcessPaymentsController < AuthenticatedController
 
       redirect_to redirect_to_payment_broker_path(transaction_id: @transaction.id)
     else
-      redirect_to new_process_payment_path, flash: { error: "Please select at least 1 item to pay." }
+      redirect_to new_process_payment_path, flash: { error: "Please select an item to pay." }
     end
   end
 

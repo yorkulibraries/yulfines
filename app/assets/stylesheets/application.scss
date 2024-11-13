@@ -16,8 +16,26 @@
 @import "_theme_variables";
 @import "bootstrap";
 
-@import "_main";
 @import "_navbar";
-@import "_buttons";
-@import "_misc";
 @import "_login";
+
+body {
+  background: #fffefe;
+}
+
+.bg-primary { background-color: $red !important; }
+
+.btn {
+  &-primary,
+  &-secondary,
+  &-info,
+  &-success {
+    color: #fff;
+  }
+}
+
+.pagination {
+  a:hover {
+    text-decoration: none;
+  }
+}
