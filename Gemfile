@@ -19,11 +19,11 @@ gem 'devise'
 gem 'config'
 gem 'sucker_punch', '~> 2.0' # for async, quick jobs i.e logging
 gem 'active_link_to'
+gem 'exception_notification'
 
 ## ALMA ACCESS ##
 gem 'alma', '0.2.8'
 gem 'httparty'
-gem 'jwt'
 
 ## SOAP ACCESS ##
 gem 'savon'

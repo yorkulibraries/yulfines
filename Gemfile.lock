@@ -121,6 +121,9 @@ GEM
       responders
       warden (~> 1.2.3)
     erubi (1.13.0)
+    exception_notification (4.5.0)
+      actionmailer (>= 5.2, < 8)
+      activesupport (>= 5.2, < 8)
     execjs (2.10.0)
     ezwadl (0.1.0)
       httparty (~> 0.14)
@@ -130,12 +133,12 @@ GEM
     factory_bot_rails (6.4.4)
       factory_bot (~> 6.5)
       railties (>= 5.0.0)
-    faraday (2.12.0)
-      faraday-net_http (>= 2.0, < 3.4)
+    faraday (2.12.1)
+      faraday-net_http (>= 2.0, < 3.5)
       json
       logger
-    faraday-net_http (3.3.0)
-      net-http
+    faraday-net_http (3.4.0)
+      net-http (>= 0.5.0)
     ffi (1.17.0-x86_64-linux-gnu)
     globalid (1.2.1)
       activesupport (>= 6.1)
@@ -158,9 +161,7 @@ GEM
       rack (>= 2.0, < 4)
     i18n (1.14.6)
       concurrent-ruby (~> 1.0)
-    json (2.8.1)
-    jwt (2.9.3)
-      base64
+    json (2.8.2)
     listen (3.9.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -315,7 +316,7 @@ GEM
       concurrent-ruby (~> 1.0)
     tzinfo-data (1.2024.2)
       tzinfo (>= 1.0.0)
-    uri (1.0.1)
+    uri (1.0.2)
     warden (1.2.9)
       rack (>= 2.0.9)
     wasabi (5.1.0)
@@ -353,10 +354,10 @@ DEPENDENCIES
   config
   database_cleaner-active_record
   devise
+  exception_notification
   factory_bot_rails
   guard-minitest
   httparty
-  jwt
   listen
   lolsoap
   mimemagic
