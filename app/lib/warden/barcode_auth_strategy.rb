@@ -12,22 +12,33 @@ class Warden::BarcodeAuthStrategy < Warden::Strategies::Base
 
       univ_id = User.get_univ_id_from_alma_user(alma_user)
 
-      # Normally a user has a University ID, so we use that ID if it exists
-      # patrons that don't belong to the university, the only ID they have is the barcode
-      stable_id = univ_id ? univ_id : user_id
+      local_user_by_univ_id = User.find_by_yorku_id univ_id if univ_id
+      local_user_by_username = User.find_by_username alma_user.primary_id
 
-      # create  in db if doesn't exist
-      local_user = User.find_by_yorku_id stable_id
+      if local_user_by_univ_id && local_user_by_username && local_user_by_univ_id.id != local_user_by_username.id
+        Rails.logger.debug "Found 2 conflicting user records in db. ID: #{local_user_by_univ_id.id } and #{local_user_by_username.id }."
+        Rails.logger.debug "fail BarcodeAuthStrategy.authenticate #{user_id}"
+        fail!('Invalid user account.')
+        return false
+      end
+
+      local_user = local_user_by_univ_id ? local_user_by_univ_id : local_user_by_username
+
+      # create in db if doesn't exist
+      email = alma_user.email.kind_of?(Array) ? alma_user.email.first : alma_user.email
       if !local_user
-        email = alma_user.email.kind_of?(Array) ? alma_user.email.first : alma_user.email
         random = Digest::SHA256.hexdigest(rand().to_s)
         Rails.logger.debug "random generated password #{random}"
         local_user = User.create! username: alma_user.primary_id, password: random,
-                      yorku_id: stable_id, email: email,
+                      yorku_id: univ_id, email: email,
                       first_name: alma_user.first_name, last_name: alma_user.last_name
+      else
+        local_user.username = alma_user.primary_id
+        local_user.email = email
+        local_user.save
       end
 
-      Rails.logger.debug "success BarcodeAuthStrategy.authenticate #{user_id}"
+      Rails.logger.debug "success BarcodeAuthStrategy.authenticate #{user_id} - local user ID: #{local_user.id}"
       success!(local_user)
     else
       Rails.logger.debug "fail BarcodeAuthStrategy.authenticate #{user_id}"
