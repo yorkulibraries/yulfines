@@ -15,9 +15,9 @@
         <div class="col-lg-12">
           <% if current_user %>
             <p class="text-center mt-3 text-muted">
-              <%= "Admin -" if current_user.admin? %>
               <%= current_user.name %> -
-              <%= current_user.yorku_id %>
+              <%= current_user.username %>
+              <%= "(Admin)" if current_user.admin? %>
             </p>
           <% end %>
 
