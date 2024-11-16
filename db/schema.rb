@@ -11,7 +11,7 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.0].define(version: 2024_11_09_204443) do
-  create_table "alma_fees", charset: "utf8mb3", force: :cascade do |t|
+  create_table "alma_fees", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "fee_id"
     t.string "fee_type"
     t.string "fee_description"
@@ -34,7 +34,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_09_204443) do
     t.index ["fee_id"], name: "index_alma_fees_on_fee_id", unique: true
   end
 
-  create_table "payment_records", charset: "utf8mb3", force: :cascade do |t|
+  create_table "payment_records", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.integer "fee_id"
     t.integer "user_id"
     t.integer "transaction_id"
@@ -56,7 +56,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_09_204443) do
     t.string "fee_item_barcode"
   end
 
-  create_table "payment_transactions", charset: "utf8mb3", force: :cascade do |t|
+  create_table "payment_transactions", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "uid"
     t.integer "user_id"
     t.string "yorku_id"
@@ -79,7 +79,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_09_204443) do
     t.string "library_id"
   end
 
-  create_table "transaction_logs", charset: "utf8mb3", force: :cascade do |t|
+  create_table "transaction_logs", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "yorku_id"
     t.string "alma_fee_id"
     t.integer "transaction_id"
@@ -94,7 +94,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_09_204443) do
     t.index ["yorku_id"], name: "index_transaction_logs_on_yorku_id"
   end
 
-  create_table "users", charset: "utf8mb3", force: :cascade do |t|
+  create_table "users", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
     t.string "email"

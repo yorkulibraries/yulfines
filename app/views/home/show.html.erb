@@ -30,31 +30,31 @@
 
 <% if @processing_fees.count > 0 %>
   <hr class="mt-5"/>
-  <h5 class="mt-5">Processing Fees</h5>
   <% @processing_fees.each do |fee| %>
-  <div class="row mb-4">
-    <div class="col-12 col-md-2 text-center pb-2 ">
-      <span class="text-muted text-sm">Fee Date</span><br/>
-      <span class="text-monospace text-sm text-muted"><%= format_date fee.creation_time %></span>
-      <div class="badge badge-secondary badge-pill d-block"><%= fee.fee_description %></div>
-      PROCESSING
+  <div class="row mb-2">
+    <div class="col-6 pb-2">
+      <div class="col-12 pb-2">
+      <span class="h6"><%= fee.fee_description %></span><br/>
+        <span class="h6"><%= fee.item_title %></span>
+      </div>
     </div>
-    <div class="col-12 col-md-6  pb-2">
-      <span class="text-muted text-sm">Item</span><br/>
-      <span class="h6 font-weight-light"><%= fee.item_title %></span>
-    </div>
-    <div class="col-6 col-md-2 text-center">
-      <span class="text-muted text-sm">Balance</span><br/>
-      <span class="h4"><%= number_to_currency fee.balance %></span>
-    </div>
-
-    <div class="col-6 col-md-2 text-center">
-      <span class="text-muted text-sm">Owner</span><br/>
-      <%= fee.owner_description %>
+    <div class="col-6 pb-2">
+      <span class="text-muted text-sm">Debit</span>
+      <span class="text-sm"><%= number_to_currency fee.balance %></span><br/>
+      <span class="text-muted text-sm">Fine date:</span>
+      <span class="text-monospace text-sm"><%= format_date fee.creation_time %></span><br/>
+      <span class="text-muted text-sm">Fine Type: </span>
+      <span class="text-sm"><%= fee.fee_status %></span><br/>
+      <span class="text-muted text-sm">Fine Main Location: </span>
+      <span class="text-sm"><%= fee.owner_description %></span><br/>
+      <span class="text-muted text-sm">Fine ID:</span>
+      <span class="text-sm"><%= fee.fee_id %></span><br/>
     </div>
   </div>
+  <hr class="mt-2"/>
   <% end %>
 <% end %>
+
 
 <% if Rails.env.development? %>
   <p class="mt-5">
