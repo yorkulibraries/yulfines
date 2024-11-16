@@ -10,7 +10,7 @@ RUN chmod a+x /tmp/setup_nodejs.x
 RUN /tmp/setup_nodejs.x 
 
 RUN apt-get update -qq && apt-get install -y --no-install-recommends \
-build-essential curl git nodejs vim sqlite3 chromium chromium-driver libvips python
+build-essential curl git nodejs vim sqlite3 chromium chromium-driver libvips python default-mysql-client
 
 RUN npm install --global yarn
 
