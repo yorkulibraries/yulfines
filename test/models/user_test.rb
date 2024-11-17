@@ -19,7 +19,7 @@ class UserTest < ActiveSupport::TestCase
   end
 
   should "not create a valid user" do
-    assert ! build(:user, email: nil).valid?, "Email is required"
+    assert build(:user, email: nil).valid?, "Email is NOT required"
     #assert ! build(:user, password: nil).valid?, "Password is required"
     assert ! build(:user, email: "whatever").valid?, "Email is not valid"
 

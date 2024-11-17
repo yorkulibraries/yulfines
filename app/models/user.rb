@@ -2,15 +2,13 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   # :registerable, :recoverable,
-  devise :database_authenticatable, :trackable, :rememberable, :validatable
-  #devise :barcode_authenticatable, :validatable, :trackable
+  devise :database_authenticatable, :trackable
 
   ## VALIDATIONS ##
-  validates_presence_of :yorku_id
   validates_presence_of :username
   validates_format_of :email, allow_blank: true, :with => Devise::email_regexp
 
-  validates_uniqueness_of :yorku_id, case_sensitive: false
+  validates_uniqueness_of :yorku_id, allow_blank: true, case_sensitive: false
   validates_uniqueness_of :username, case_sensitive: false
 
   ## RELATIONSHIPS ##
@@ -54,18 +52,4 @@ class User < ApplicationRecord
     end
     return nil
   end
-
-  private
-  ## CUSTOM VALIDATION
-  def email_uniqueness
-    if User.find_by_email(email) != nil
-      errors.add(:email, "There is an account associated with this email already.")
-    end
-  end
-
-  # Disable EMAIL Uniqueness Validation: rails 5.1+
-  def will_save_change_to_email?
-    false
-  end
-
 end
