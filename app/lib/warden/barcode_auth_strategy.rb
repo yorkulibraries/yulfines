@@ -1,12 +1,16 @@
 require 'digest'
+require 'devise/strategies/authenticatable'
 
-class Warden::BarcodeAuthStrategy < Warden::Strategies::Base
+class Warden::BarcodeAuthStrategy < Devise::Strategies::Authenticatable
   def valid?
     user_id && password
   end
 
   def authenticate!
     Rails.logger.debug "start BarcodeAuthStrategy.authenticate"
+
+    resource = User.find_by_username user_id
+
     if Alma::User.authenticate(user_id: user_id, password: password)
       alma_user = Alma::User.find user_id
 
@@ -19,7 +23,7 @@ class Warden::BarcodeAuthStrategy < Warden::Strategies::Base
         Rails.logger.debug "Found 2 conflicting user records in db. ID: #{local_user_by_univ_id.id } and #{local_user_by_username.id }."
         Rails.logger.debug "fail BarcodeAuthStrategy.authenticate #{user_id}"
         fail!('Invalid user account.')
-        return false
+        return validate(resource) { false }
       end
 
       local_user = local_user_by_univ_id ? local_user_by_univ_id : local_user_by_username
@@ -33,7 +37,9 @@ class Warden::BarcodeAuthStrategy < Warden::Strategies::Base
                       yorku_id: univ_id, email: email,
                       first_name: alma_user.first_name, last_name: alma_user.last_name
       else
+        Rails.logger.debug "Updating username=#{alma_user.primary_id} yorku_id=#{univ_id} email=#{email}"
         local_user.username = alma_user.primary_id
+        local_user.yorku_id = univ_id
         local_user.email = email
         local_user.save
       end
@@ -42,7 +48,8 @@ class Warden::BarcodeAuthStrategy < Warden::Strategies::Base
       success!(local_user)
     else
       Rails.logger.debug "fail BarcodeAuthStrategy.authenticate #{user_id}"
-      fail!('Invalid barcode or password')
+      fail!(:invalid)
+      return validate(resource) { false }
     end
   end
 

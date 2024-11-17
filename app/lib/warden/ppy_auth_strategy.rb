@@ -1,6 +1,7 @@
 require 'digest'
+require 'devise/strategies/authenticatable'
 
-class Warden::PpyAuthStrategy < Warden::Strategies::Base
+class Warden::PpyAuthStrategy < Devise::Strategies::Authenticatable
   def valid?
     Warden::PpyAuthStrategy.py_authenticated(request)
   end
@@ -8,12 +9,14 @@ class Warden::PpyAuthStrategy < Warden::Strategies::Base
   def authenticate!
     Rails.logger.debug "start PpyAuthStrategy.authenticate"
 
+    resource = User.find_by_username user_id
+
     if Warden::PpyAuthStrategy.py_authenticated(request)
       alma_user = Warden::PpyAuthStrategy.find_alma_user_matching_py_cyin(request)
 
       if alma_user.nil?
-        fail!("User not found in Alma") 
-        return false
+        fail!("User not found in Alma")
+        return validate(resource) { false }
       end
 
       univ_id = ::User.get_univ_id_from_alma_user(alma_user)
@@ -25,7 +28,7 @@ class Warden::PpyAuthStrategy < Warden::Strategies::Base
         Rails.logger.debug "Found 2 conflicting user records in db. ID: #{local_user_by_univ_id.id } and #{local_user_by_username.id }."
         Rails.logger.debug "fail PpyAuthStrategy.authenticate #{user_id}"
         fail!('Invalid user account.')
-        return false
+        return validate(resource) { false }
       end
 
       local_user = local_user_by_univ_id ? local_user_by_univ_id : local_user_by_username
@@ -39,20 +42,19 @@ class Warden::PpyAuthStrategy < Warden::Strategies::Base
                       yorku_id: univ_id, email: email,
                       first_name: alma_user.first_name, last_name: alma_user.last_name
       else
-        Rails.logger.debug "Updating username=#{alma_user.primary_id} email=#{email}"
+        Rails.logger.debug "Updating username=#{alma_user.primary_id} yorku_id=#{univ_id} email=#{email}"
         local_user.username = alma_user.primary_id
+        local_user.yorku_id = univ_id
         local_user.email = email
         local_user.save
       end
 
       Rails.logger.debug "success PpyAuthStrategy.authenticate - UNIV_ID: #{univ_id} == CYIN: #{user_id}, local user ID: #{local_user.id}"
       success!(local_user)
-      return true
     else
       Rails.logger.debug "fail PpyAuthStrategy.authenticate - No PY Headers present"
-      fail("Not yet authenticated by Passport York")
+      fail!("Not authenticated by Passport York")
     end
-    return false
   end
 
   def user_id

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_11_09_204443) do
+ActiveRecord::Schema[7.0].define(version: 2024_11_17_110352) do
   create_table "alma_fees", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "fee_id"
     t.string "fee_type"
@@ -106,13 +106,14 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_09_204443) do
     t.datetime "updated_at", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "username"
-    t.datetime "remember_created_at", precision: nil
     t.integer "sign_in_count", default: 0, null: false
     t.datetime "current_sign_in_at", precision: nil
     t.datetime "last_sign_in_at", precision: nil
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
     t.datetime "became_admin_at", precision: nil
+    t.integer "failed_attempts", default: 0, null: false
+    t.datetime "locked_at"
     t.index ["yorku_id"], name: "index_users_on_yorku_id", unique: true
   end
 
