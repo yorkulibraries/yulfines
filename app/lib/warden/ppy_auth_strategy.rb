@@ -15,7 +15,7 @@ class Warden::PpyAuthStrategy < Devise::Strategies::Authenticatable
       alma_user = Warden::PpyAuthStrategy.find_alma_user_matching_py_cyin(request)
 
       if alma_user.nil?
-        fail!("User not found in Alma")
+        fail!(:invalid)
         return validate(resource) { false }
       end
 
@@ -27,7 +27,7 @@ class Warden::PpyAuthStrategy < Devise::Strategies::Authenticatable
       if local_user_by_univ_id && local_user_by_username && local_user_by_univ_id.id != local_user_by_username.id
         Rails.logger.debug "Found 2 conflicting user records in db. ID: #{local_user_by_univ_id.id } and #{local_user_by_username.id }."
         Rails.logger.debug "fail PpyAuthStrategy.authenticate #{user_id}"
-        fail!('Invalid user account.')
+        fail!(:invalid)
         return validate(resource) { false }
       end
 
@@ -53,7 +53,8 @@ class Warden::PpyAuthStrategy < Devise::Strategies::Authenticatable
       success!(local_user)
     else
       Rails.logger.debug "fail PpyAuthStrategy.authenticate - No PY Headers present"
-      fail!("Not authenticated by Passport York")
+      fail!(:invalid)
+      return validate(resource) { false }
     end
   end
 

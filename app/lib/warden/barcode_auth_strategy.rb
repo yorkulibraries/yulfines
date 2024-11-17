@@ -22,7 +22,7 @@ class Warden::BarcodeAuthStrategy < Devise::Strategies::Authenticatable
       if local_user_by_univ_id && local_user_by_username && local_user_by_univ_id.id != local_user_by_username.id
         Rails.logger.debug "Found 2 conflicting user records in db. ID: #{local_user_by_univ_id.id } and #{local_user_by_username.id }."
         Rails.logger.debug "fail BarcodeAuthStrategy.authenticate #{user_id}"
-        fail!('Invalid user account.')
+        fail!(:invalid)
         return validate(resource) { false }
       end
 
