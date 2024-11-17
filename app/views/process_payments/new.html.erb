@@ -1,4 +1,4 @@
-<% page_header "Pay - #{@which}", page_title: true %>
+<% page_header "Pay Fines + Fees (#{@which})", page_title: true %>
 <%= simple_form_for :records, url: process_payments_path do |f| %>
   <% @records.each do |record| %>
     <%= f.fields_for "payment_record[#{record.fee_id}]" do |fr| %>
@@ -30,7 +30,7 @@
   </div>
 
   <div class="row">
-    <div class="col-12">
+    <div class="col-12 text-center">
       <%= f.button :submit, "Pay Selected Items", class: 'btn btn-primary'%>
     </div>
   </div>
