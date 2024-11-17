@@ -1,12 +1,16 @@
 <div class="mb-5">
-  <h3 class="border-bottom"><%= format_date transaction.created_at %></h3>
+  <h3 class="border-bottom border-2"><%= format_date transaction.created_at %></h3>
 
   <div class="row">
     <div class="col-12 col-md-9">
       <% transaction.records.each do |record| %>
       <div class="mb-4">
           <div class="h5 text-muted">
-            <%= record.fee.nil? ? 'Fee description not available'  : record.fee.fee_description %>
+            <%= record.fee.nil? ? 'Fee description not available'  : record.fee.fee_description %> 
+            <% if !record.fee.nil? %>
+              <span class="visually-hidden">Fee balance:</span> 
+              <span class="badge bg-secondary"><%= number_to_currency record.fee.balance %></span>
+            <% end %>
           </div>
           <div class="text-muted"><%= record.fee.nil? || record.fee.item_title.nil? ? 'Item title not available.' : record.fee.item_title %></div>
       </div>
@@ -18,18 +22,18 @@
           <%= transaction.status %>
         </h5>
         <div class="card-body">
-          <div class="card-title h1"><%= number_to_currency transaction.amount %></div>
+          <div class="card-title h1"><span class="visually-hidden">Transaction total:</span> <%= number_to_currency transaction.amount %></div>
           <% if transaction.status == 'APPROVED' %>
-          <p class="card-text">Your payment was approved.</p>
+          <p class="card-text">Your card payment was approved.</p>
           <% end %>
           <% if transaction.status == 'CANCELLED' %>
-          <p class="card-text">Your payment was cancelled.</p>
+          <p class="card-text">Your card payment was cancelled.</p>
           <% end %>
           <% if transaction.status == 'DECLINED' %>
-          <p class="card-text">Your payment was declined.</p>
+          <p class="card-text">Your card payment was declined.</p>
           <% end %>
           <% if transaction.status == 'PAID' %>
-          <p class="card-text">Your payment is complete.</p>
+          <p class="card-text">Your fee payment is now complete.</p>
           <% end %>
           <p class="card-text">
             <% if transaction.uid != nil %>
