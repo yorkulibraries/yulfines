@@ -7,7 +7,5 @@
 <% if @transactions.size > 0 %>
   <% @transactions.each do |t| %>
     <%= render "transaction", transaction: t %>
-    <hr class="mt-2"/>
   <% end %>
-
 <% end %>

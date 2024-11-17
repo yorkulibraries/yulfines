@@ -1,9 +1,7 @@
 class TransactionsController < AuthenticatedController
   
   def index
-    @transactions = current_user.payment_transactions.order('created_at DESC').records
-
-    #@transactions = current_user.payment_transactions
+    @transactions = current_user.payment_transactions.order('created_at DESC')
     @total_transactions = @transactions.size
   end
 
