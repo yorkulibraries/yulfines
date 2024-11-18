@@ -37,7 +37,7 @@ class PaymentTransaction < ApplicationRecord
 
   ## SCOPES ##
   scope :processing, -> { where(status: STATUS_PROCESSING )}
-  scope :older_than, ->(time_from = 1.minutes.ago) { where("created_at <= ?", time_from) }
+  scope :older_than, ->(time_from = 15.minutes.ago) { where("created_at <= ?", time_from) }
   scope :approved, -> { where(status: STATUS_APPROVED )}
   scope :paid, -> { where(status: STATUS_PAID )}
   scope :paid_partial, -> { where(status: STATUS_PAID_PARTIAL )}
