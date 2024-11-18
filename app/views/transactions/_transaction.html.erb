@@ -1,36 +1,51 @@
-<div class="row mb-4">
-  <div class="col-12 col-md-6 pb-2">
-    <span class="text-muted text-sm">Items</span><br/>
-    <span class="h6 font-weight-light">
+<div class="mb-5">
+  <h3 class="border-bottom border-2 mb-4 h2"><%= format_date transaction.created_at %></h3>
+
+  <div class="row">
+    <div class="col-12 col-md-9">
       <% transaction.records.each do |record| %>
-        <p><%= record.fee_item_title rescue "n/a" %></p>
+      <div class="mb-4">
+          <div class="h4 text-muted">
+            <%= record.fee.nil? ? 'Fee description not available'  : record.fee.fee_description %> 
+            <% if !record.fee.nil? %>
+              <span class="visually-hidden">Balance:</span> 
+              <span class="badge bg-secondary"><%= number_to_currency record.fee.balance %></span>
+            <% end %>
+          </div>
+          <div class="text-muted"><%= record.fee.nil? || record.fee.item_title.nil? ? 'Item title not available.' : record.fee.item_title %></div>
+      </div>
       <% end %>
-    </span>
+    </div>
+    <div class="col-12 col-md-3">
+      <div class="card">
+        <h5 class="card-header text-white <%= 'bg-success' if ['APPROVED', 'PAID'].include?(transaction.status) %> <%= 'bg-info' if ['PROCESSING'].include?(transaction.status) %><%= 'bg-danger' if ['CANCELLED'].include?(transaction.status) %>">
+          <%= transaction.status %>
+        </h5>
+        <div class="card-body">
+          <div class="card-title h1"><span class="visually-hidden">Transaction total:</span> <%= number_to_currency transaction.amount %></div>
+          <% if transaction.status == 'APPROVED' %>
+          <p class="card-text">Your card payment was approved.</p>
+          <% end %>
+          <% if transaction.status == 'CANCELLED' %>
+          <p class="card-text">Your card payment was cancelled.</p>
+          <% end %>
+          <% if transaction.status == 'DECLINED' %>
+          <p class="card-text">Your card payment was declined.</p>
+          <% end %>
+          <% if transaction.status == 'PAID' %>
+          <p class="card-text">Your fee payment is now complete.</p>
+          <% end %>
+          <% if transaction.status == 'PROCESSING' %>
+          <p class="card-text">Your card payment is in progress.</p>
+          <% end %>
+          <p class="card-text">
+            <% if transaction.uid != nil %>
+              <%= link_to "View Receipt", "#{Settings.ypb.receipt_page_url}?tokenid=#{transaction.uid}", target: "_blank", class: "btn btn-secondary"%>
+            <% end %>
+          </p>
+        </div>
+      </div>
+
+    </div>
   </div>
-  <div class="col-12 col-md-6 pb-2">
-      <span class="text-muted text-sm">Date: </span>
-      <span class="text-monospace">
-        <%= format_date transaction.created_at %></span><br/>
-
-      <span class="text-muted text-sm">Amount: </span>
-      <span class="text-monospace">
-        <%= number_to_currency transaction.amount %></span><br/>
-
-      <span class="text-muted text-sm">Status: </span>
-      <span class="text-monospace">
-        <%= transaction.status %></span><br/>
-
-      <span class="text-muted text-sm">Receipt</span>
-      <span class="text-monospace">
-        <% if transaction.uid != nil %>
-          <%= link_to "View Receipt", "#{Settings.ypb.receipt_page_url}?tokenid=#{transaction.uid}" %>
-        <% else %>
-          <%= transaction.order_id %>
-        <% end %>
-
-      </span>
-  </div>
-
-
-
 </div>

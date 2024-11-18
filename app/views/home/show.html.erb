@@ -1,60 +1,30 @@
 <% page_header "Overview", page_title: true %>
 
 <% if @active_fees.size > 0 %>
-  <h5  class="text-center text-lg">Fines + Fees (YUL)</h5>
-  <% @other_fees.each do |fee| %>
-    <%= render "fee_listing", fee: fee %>
+  <% if @other_fees.size > 0 %>
+    <h3 class="border-bottom border-2 mb-4 h2">Fines + Fees (YUL)</h3>
+    <% @other_fees.each do |fee| %>
+      <%= render "fee_listing", fee: fee %>
+    <% end %>
+
+    <p class="text-center">
+      <%= link_to "Pay Fines + Fees (YUL)", new_process_payment_path, class: 'btn btn-primary' %>
+    </p>
   <% end %>
 
-  <p class="text-center">
-    <%= link_to "Pay YUL", new_process_payment_path, class: 'btn btn-primary' %>
-  </p>
-
   <% if @osgoode_fees.size > 0 %>
-    <hr class="mt-5"/>
-    <h5 class="text-center text-lg">Fines + Fees (Osgoode)</h5>
+    <h2 class="">Fines + Fees (Osgoode)</h2>
     <% @osgoode_fees.each do |fee| %>
       <%= render "fee_listing", fee: fee %>
     <% end %>
 
-
     <p class="text-center">
-      <%= link_to "Pay Osgoode", new_process_payment_path(osgoode: true), class: 'btn btn-primary' %>
+      <%= link_to "Pay Fines + Fees (Osgoode)", new_process_payment_path(osgoode: true), class: 'btn btn-primary' %>
     </p>
   <% end %>
-
-
 <% else %>
   <p class="text-center">You have no outstanding fees.</p>
 <% end %>
-
-<% if @processing_fees.count > 0 %>
-  <hr class="mt-5"/>
-  <% @processing_fees.each do |fee| %>
-  <div class="row mb-2">
-    <div class="col-6 pb-2">
-      <div class="col-12 pb-2">
-      <span class="h6"><%= fee.fee_description %></span><br/>
-        <span class="h6"><%= fee.item_title %></span>
-      </div>
-    </div>
-    <div class="col-6 pb-2">
-      <span class="text-muted text-sm">Debit</span>
-      <span class="text-sm"><%= number_to_currency fee.balance %></span><br/>
-      <span class="text-muted text-sm">Fine date:</span>
-      <span class="text-monospace text-sm"><%= format_date fee.creation_time %></span><br/>
-      <span class="text-muted text-sm">Fine Type: </span>
-      <span class="text-sm"><%= fee.fee_status %></span><br/>
-      <span class="text-muted text-sm">Fine Main Location: </span>
-      <span class="text-sm"><%= fee.owner_description %></span><br/>
-      <span class="text-muted text-sm">Fine ID:</span>
-      <span class="text-sm"><%= fee.fee_id %></span><br/>
-    </div>
-  </div>
-  <hr class="mt-2"/>
-  <% end %>
-<% end %>
-
 
 <% if Rails.env.development? %>
   <p class="mt-5">
