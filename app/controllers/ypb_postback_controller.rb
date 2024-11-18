@@ -12,7 +12,7 @@ class YpbPostbackController < ApplicationController
     transaction = PaymentTransaction.processing.where(uid: token_id, order_id: order_id).first
 
     if transaction
-      transaction.yporderid = params[:yporderid]
+      transaction.yporderid = params[:ypborderid]
       transaction.status = params[:status]
       transaction.message = params[:message]
       transaction.cardtype = params[:cardtype]
