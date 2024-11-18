@@ -18,7 +18,7 @@
     </div>
     <div class="col-12 col-md-3">
       <div class="card">
-        <h5 class="card-header text-white <%= 'bg-success' if ['APPROVED', 'PAID'].include?(transaction.status) %> <%= 'bg-info' if ['PROCESSING'].include?(transaction.status) %><%= 'bg-danger' if ['CANCELLED'].include?(transaction.status) %>">
+        <h5 class="card-header text-white <%= 'bg-success' if ['APPROVED', 'PAID'].include?(transaction.status) %> <%= 'bg-info' if ['PROCESSING'].include?(transaction.status) %><%= 'bg-danger' if ['CANCELLED', 'DECLINED'].include?(transaction.status) %>">
           <%= transaction.status %>
         </h5>
         <div class="card-body">
