@@ -82,3 +82,15 @@ Run a specific test
 docker compose exec web bash
 rt test/system/process_payments_controller_test.rb:16
 ```
+
+# Test payment with test creditcard number in QA
+
+Use the following card numbers with future expiry to get an APPROVED status
+
+```
+5454545454545454
+4242424242424242
+373599005095005
+36462462742008
+```
+
