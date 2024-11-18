@@ -9,7 +9,7 @@ class YpbPostbackControllerTest < ActionDispatch::IntegrationTest
     @params =  {
               tokenid: @transaction.uid,
               orderid: @transaction.order_id,
-              yporderid: @transaction.order_id,
+              ypborderid: @transaction.order_id,
               status: PaymentTransaction::STATUS_APPROVED,
               message: "Some message",
               cardtype: "V",
@@ -29,7 +29,7 @@ class YpbPostbackControllerTest < ActionDispatch::IntegrationTest
 
     @transaction.reload
     assert_not_nil @transaction.ypb_transaction_approved_at
-    assert_equal @params[:yporderid], @transaction.yporderid
+    assert_equal @params[:ypborderid], @transaction.yporderid
     assert_equal @params[:status], @transaction.status
     assert_equal @params[:message], @transaction.message
     assert_equal @params[:cardtype], @transaction.cardtype
@@ -50,7 +50,7 @@ class YpbPostbackControllerTest < ActionDispatch::IntegrationTest
 
     @transaction.reload
     assert_not_nil @transaction.ypb_transaction_declined_at
-    assert_equal @params[:yporderid], @transaction.yporderid
+    assert_equal @params[:ypborderid], @transaction.yporderid
     assert_equal @params[:status], @transaction.status
     assert_equal @params[:message], @transaction.message
     assert_equal @params[:cardtype], @transaction.cardtype
