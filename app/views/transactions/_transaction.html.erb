@@ -5,10 +5,10 @@
     <div class="col-12 col-md-9">
       <% transaction.records.each do |record| %>
       <div class="mb-4">
-          <div class="h5 text-muted">
+          <div class="h4 text-muted">
             <%= record.fee.nil? ? 'Fee description not available'  : record.fee.fee_description %> 
             <% if !record.fee.nil? %>
-              <span class="visually-hidden">Fee balance:</span> 
+              <span class="visually-hidden">Balance:</span> 
               <span class="badge bg-secondary"><%= number_to_currency record.fee.balance %></span>
             <% end %>
           </div>
@@ -18,7 +18,7 @@
     </div>
     <div class="col-12 col-md-3">
       <div class="card">
-        <h5 class="card-header text-white <%= ['APPROVED', 'PAID'].include?(transaction.status) ? 'bg-success' : 'bg-danger' %>">
+        <h5 class="card-header text-white <%= 'bg-success' if ['APPROVED', 'PAID'].include?(transaction.status) %> <%= 'bg-info' if ['PROCESSING'].include?(transaction.status) %><%= 'bg-danger' if ['CANCELLED'].include?(transaction.status) %>">
           <%= transaction.status %>
         </h5>
         <div class="card-body">
