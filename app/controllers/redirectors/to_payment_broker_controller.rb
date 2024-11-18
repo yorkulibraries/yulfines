@@ -31,20 +31,11 @@ class Redirectors::ToPaymentBrokerController < AuthenticatedController
     if transaction.records.first.fee.owner_id == Alma::Fee::OWNER_OSGOODE
       TLOG.log_ypb_steps current_user.yorku_id, transaction.id, "Redirecting to YPB Payment Broker FOR OSGOODE ACCOUNT"
 
-      Ypb::Broker.new wsdl: Settings.ypb.wsdl_url,
-                                success_url: ypb_postback_url,
-                                failure_url: ypb_postback_url,
-                                log: true,
-                                app_id: Settings.ypb.application_law_id,
-                                app_password: Settings.ypb.application_law_password,
-                                app_name: Settings.ypb.application_law_name
+      Ypb::Broker.new_broker_instance(ypb_postback_url, true)
     else
       TLOG.log_ypb_steps current_user.yorku_id, transaction.id, "Redirecting to YPB Payment Broker FOR YUL ACCOUNT"
 
-      Ypb::Broker.new wsdl: Settings.ypb.wsdl_url,
-                                success_url: ypb_postback_url,
-                                failure_url: ypb_postback_url,
-                                log: true
+      Ypb::Broker.new_broker_instance(ypb_postback_url, false)
     end
   end
 

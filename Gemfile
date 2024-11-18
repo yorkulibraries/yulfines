@@ -8,6 +8,7 @@ gem 'puma'
 gem 'mysql2'
 
 ## JAVASCRIPT AND JSON
+gem "importmap-rails"
 
 ## CSS ##
 gem 'bootstrap'

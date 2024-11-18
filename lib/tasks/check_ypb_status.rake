@@ -53,6 +53,12 @@ namespace :ypb do
     end
   end
 
+  task acknowledge_complete_status: :environment do
+    token = ENV['token']
+    osgoode = ENV['law'].present? || ENV['osgoode'].present?
+    broker = Ypb::Broker.new_broker_instance(nil, osgoode)
+    status = broker.acknowledge_complete_status(token, osgoode)
+  end
 
   def cron_lock(name)
     #pp "CHECKING IF LOCK EXISTS"

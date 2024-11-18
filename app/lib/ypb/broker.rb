@@ -27,8 +27,20 @@ class Ypb::Broker
     @failure_url = failure_url
   end
 
-  def get_ack(token_id)
-    r = @client.call :acknowledge_complete_status, message: { tokenid: token_id}
+  def acknowledge_complete_status(ypborderid, osgoode=false)
+    if osgoode
+      r = @client.call :acknowledge_complete_status, message: { application: Settings.ypb.application_law_id, password: Settings.ypb.application_law_password, token: ypborderid}
+    else
+      r = @client.call :acknowledge_complete_status, message: { application: Settings.ypb.application_id, password: Settings.ypb.application_password, token: ypborderid}
+    end
+  end
+
+  def acknowledge_complete(ypborderid, osgoode=false)
+    if osgoode
+      r = @client.call :acknowledge_complete, message: { application: Settings.ypb.application_law_id, password: Settings.ypb.application_law_password, token: ypborderid}
+    else
+      r = @client.call :acknowledge_complete, message: { application: Settings.ypb.application_id, password: Settings.ypb.application_password, token: ypborderid}
+    end
   end
 
   def get_token(payment_transaction)
@@ -111,5 +123,25 @@ class Ypb::Broker
     end
 
     return { ItemInfo: items_list }
+  end
+
+  def self.new_broker_instance(ypb_postback_url, osgoode=false)
+    if osgoode
+      Ypb::Broker.new wsdl: Settings.ypb.wsdl_url,
+                  success_url: ypb_postback_url,
+                  failure_url: ypb_postback_url,
+                  log: true,
+                  app_id: Settings.ypb.application_law_id,
+                  app_password: Settings.ypb.application_law_password,
+                  app_name: Settings.ypb.application_law_name
+    else
+      Ypb::Broker.new wsdl: Settings.ypb.wsdl_url,
+                  success_url: ypb_postback_url,
+                  failure_url: ypb_postback_url,
+                  log: true,
+                  app_id: Settings.ypb.application_id,
+                  app_password: Settings.ypb.application_password,
+                  app_name: Settings.ypb.application_name
+    end
   end
 end
