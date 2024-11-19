@@ -22,7 +22,7 @@
           <%= transaction.status %>
         </h5>
         <div class="card-body">
-          <div class="card-title h1"><span class="visually-hidden">Transaction total:</span> <%= number_to_currency transaction.amount %></div>
+          <div class="card-title h1"><span class="visually-hidden">Transaction total:</span> <%= number_to_currency transaction.total_amount_fees %></div>
           <% if transaction.status == 'APPROVED' %>
           <p class="card-text">Your card payment was approved.</p>
           <% end %>
