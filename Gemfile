@@ -23,7 +23,7 @@ gem 'active_link_to'
 gem 'exception_notification'
 
 ## ALMA ACCESS ##
-gem 'alma', '0.2.8'
+gem 'alma'
 gem 'httparty'
 
 ## SOAP ACCESS ##
