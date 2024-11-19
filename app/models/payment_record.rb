@@ -89,5 +89,7 @@ class PaymentRecord < ApplicationRecord
     update_attribute :fee_owner_description, fee.owner_description
     update_attribute :fee_item_title, fee.item_title
     update_attribute :fee_item_barcode, fee.item_barcode
+    update_attribute :fee_type, fee.fee_type
+    update_attribute :fee_description, fee.fee_description
   end
 end
