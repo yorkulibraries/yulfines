@@ -49,7 +49,7 @@ namespace :yul_fines do
     # if a user record has no payment transaction then simply delete it
     User.all.each do |u|
       if u.payment_transactions.empty?
-        u.destroy
+        u.destroy unless [24].include?(u.id)
       end
     end
 
@@ -108,9 +108,17 @@ namespace :yul_fines do
 
   task count: :environment do
     puts "#{User.count} User"
+    puts "#{Alma::Fee.count} Alma::Fee"
     puts "#{PaymentTransaction.count} PaymentTransaction"
     puts "#{PaymentRecord.count} PaymentRecord"
     puts "#{TransactionLog.count} TransactionLog"
   end
 
+  task admins: :environment do
+    User.all.each do |u|
+      if u.admin?
+        puts "#{u.username},#{u.yorku_id},#{u.email},#{u.id}"
+      end
+    end
+  end
 end
