@@ -20,7 +20,8 @@
           </div>
           <div class="text-muted text-truncate">
             <% if record.fee.nil? || record.fee.item_title.nil? %>
-              <span class="invisible"><%= "Fee ID: #{record.fee.id}" unless record.fee.nil? %></span>
+              <%= record.fee_item_title %>
+              <span class="invisible"> <%= "Fee ID: #{record.fee.id}" unless record.fee.nil? %></span>
             <% else %>
               <%= record.fee.item_title %>
             <% end %> 
