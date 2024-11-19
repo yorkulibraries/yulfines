@@ -4,7 +4,10 @@ import "bootstrap";
 import "jquery";
 import "datepicker";
 
-// init jquery datepicker
 $(document).ready(function () {
    $('.datepicker').datepicker();
+
+   if ($('#overview_fees_container').length > 0) {
+      $.getScript('/alma/reload_fees.js');
+   }
 });

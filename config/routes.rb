@@ -13,6 +13,7 @@ Rails.application.routes.draw do
 
   ## LOAD FEES from ALMA
   get "alma/load_fees" => "alma/load_fees#index", as: :load_alma_fees
+  get "alma/reload_fees" => "alma/load_fees#reload", as: :reload_alma_fees
 
   ## REDIRECTOR to payment broker
   get "redirecting/to_payment_broker" => "redirectors/to_payment_broker#show", as: :redirect_to_payment_broker

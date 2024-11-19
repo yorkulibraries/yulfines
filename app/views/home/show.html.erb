@@ -1,34 +1,7 @@
 <% page_header "Overview", page_title: true %>
 
-<% if @active_fees.size > 0 %>
-  <% if @other_fees.size > 0 %>
-    <h3 class="border-bottom border-2 mb-4 h2">Fines + Fees (YUL)</h3>
-    <% @other_fees.each do |fee| %>
-      <%= render "fee_listing", fee: fee %>
-    <% end %>
-
-    <p class="text-center">
-      <%= link_to "Pay Fines + Fees (YUL)", new_process_payment_path, class: 'btn btn-primary' %>
-    </p>
-  <% end %>
-
-  <% if @osgoode_fees.size > 0 %>
-    <h2 class="">Fines + Fees (Osgoode)</h2>
-    <% @osgoode_fees.each do |fee| %>
-      <%= render "fee_listing", fee: fee %>
-    <% end %>
-
-    <p class="text-center">
-      <%= link_to "Pay Fines + Fees (Osgoode)", new_process_payment_path(osgoode: true), class: 'btn btn-primary' %>
-    </p>
-  <% end %>
-<% else %>
-  <p class="text-center">You have no outstanding fees.</p>
-<% end %>
-
-<% if Rails.env.development? %>
-  <p class="mt-5">
-    <%= link_to "Reload Fees", load_alma_fees_path, data: { disable_with: "Loading Fees, Please wait..." }%>
-  </p>
-  <p>Fees Loaded: <%= session[:alma_fees_loaded]  %></p>
-<% end %>
+<div id="overview_fees_container">
+  <div class="spinner-border text-danger" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>

@@ -1,0 +1,25 @@
+<% if @active_fees.size > 0 %>
+  <% if @other_fees.size > 0 %>
+    <h3 class="border-bottom border-2 mb-4 h2">Fines + Fees (YUL)</h3>
+    <% @other_fees.each do |fee| %>
+      <%= render "fee_listing", fee: fee %>
+    <% end %>
+
+    <p class="text-center">
+      <%= link_to "Pay Fines + Fees (YUL)", new_process_payment_path, class: 'btn btn-primary' %>
+    </p>
+  <% end %>
+
+  <% if @osgoode_fees.size > 0 %>
+    <h2 class="">Fines + Fees (Osgoode)</h2>
+    <% @osgoode_fees.each do |fee| %>
+      <%= render "fee_listing", fee: fee %>
+    <% end %>
+
+    <p class="text-center">
+      <%= link_to "Pay Fines + Fees (Osgoode)", new_process_payment_path(osgoode: true), class: 'btn btn-primary' %>
+    </p>
+  <% end %>
+<% else %>
+  <p class="text-center">You have no outstanding fees.</p>
+<% end %>
