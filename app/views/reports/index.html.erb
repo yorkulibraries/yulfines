@@ -39,7 +39,7 @@
 </div>
 
 
-<table class="table xtable-striped table-hover mt-3">
+<table class="table table-striped mt-3">
   <tr>
     <th>id</th>
     <th>Date</th>
@@ -59,8 +59,7 @@
     <td><%= t.status %></td>
     <td>
       <% if t.uid != nil %>
-        <%= link_to "View Receipt", "#{Settings.ypb.receipt_page_url}?tokenid=#{t.uid}" %>
-        <div class="text-muted small"><%= t.order_id %></div>
+        <%= link_to t.order_id, "#{Settings.ypb.receipt_page_url}?tokenid=#{t.uid}", target: "_blank" %>
       <% else %>
         <%= t.order_id %>
       <% end %>
