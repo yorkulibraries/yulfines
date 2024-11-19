@@ -11,6 +11,9 @@ class ReportsController < AdminController
     @from_date = @from.blank? ? 1.month.ago : Date.parse(@from)
     @to_date = @to.blank? ? Date.today : Date.parse(@to)
 
+    @from = @from_date.strftime("%Y-%m-%d")
+    @to = @to_date.strftime("%Y-%m-%d")
+
     @transactions = @transactions.where('created_at BETWEEN ? AND ?', @from_date.beginning_of_day, @to_date.end_of_day)
 
     if !@library.blank?
