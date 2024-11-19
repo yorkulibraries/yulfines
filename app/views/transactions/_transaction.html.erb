@@ -6,13 +6,22 @@
       <% transaction.records.each do |record| %>
       <div class="mb-4">
           <div class="h4 text-muted">
-            <%= record.fee.nil? ? 'Fee description not available'  : record.fee.fee_description %> 
-            <% if !record.fee.nil? %>
-              <span class="visually-hidden">Balance:</span> 
+            <% if record.fee.nil? %>
+              Fee description not available 
+              <span class="invisible"><%= "Payment record ID: #{record.id}" %></span>
+            <% else %>
+              <%= record.fee.fee_description %>
+              <span class="visually-hidden">Amount:</span> 
               <span class="badge bg-secondary"><%= number_to_currency record.fee.balance %></span>
             <% end %>
           </div>
-          <div class="text-muted text-truncate"><%= record.fee.nil? || record.fee.item_title.nil? ? 'Item title not available.' : record.fee.item_title %></div>
+          <div class="text-muted text-truncate">
+            <% if record.fee.nil? || record.fee.item_title.nil? %>
+              <span class="invisible"><%= "Fee ID: #{record.fee.id}" unless record.fee.nil? %></span>
+            <% else %>
+              <%= record.fee.item_title %>
+            <% end %> 
+          </div>
       </div>
       <% end %>
     </div>
@@ -24,19 +33,19 @@
         <div class="card-body">
           <div class="card-title h1"><span class="visually-hidden">Transaction total:</span> <%= number_to_currency transaction.total_amount_fees %></div>
           <% if transaction.status == 'APPROVED' %>
-          <p class="card-text">Your card payment was approved.</p>
+          <p class="card-text">Transaction was approved.</p>
           <% end %>
           <% if transaction.status == 'CANCELLED' %>
-          <p class="card-text">Your card payment was cancelled.</p>
+          <p class="card-text">Transaction was cancelled.</p>
           <% end %>
           <% if transaction.status == 'DECLINED' %>
-          <p class="card-text">Your card payment was declined.</p>
+          <p class="card-text">Transaction was declined.</p>
           <% end %>
           <% if transaction.status == 'PAID' %>
-          <p class="card-text">Your fee payment is now complete.</p>
+          <p class="card-text">Payment is complete.</p>
           <% end %>
           <% if transaction.status == 'PROCESSING' %>
-          <p class="card-text">Your card payment is in progress.</p>
+          <p class="card-text">Transaction is in progress.</p>
           <% end %>
           <p class="card-text">
             <% if transaction.uid != nil %>
