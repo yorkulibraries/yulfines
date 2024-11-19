@@ -44,9 +44,7 @@ class Ypb::Broker
   end
 
   def get_token(payment_transaction)
-
     response = @client.call ORDER_INITIALIZE_OP
-
 
     token_message = setup_required_information response.body, total: payment_transaction.amount
     token_message = setup_order_details token_message, payment_transaction
@@ -61,9 +59,8 @@ class Ypb::Broker
     order[:items] = setup_items(items_response, payment_transaction)
     order[:taxes] = ""
 
-    pp order[:items]
+    #pp order[:items]
     order.deep_transform_keys! { |key| "#{key.to_s.camelize}" }
-
 
     token_response = @client.call GET_TOKEN_OP, message: { "order": {}.merge(order) }
 

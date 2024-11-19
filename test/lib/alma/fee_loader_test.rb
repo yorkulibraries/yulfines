@@ -22,10 +22,11 @@ class Alma::FeeLoaderTest < ActiveSupport::TestCase
                 }
 
   should "parse alma json fees into Alma::Fee objects" do
-    york_id = "10101010"
-    fee = Alma::FeeLoader.parse_alma_fee FEE_SAMPLE, york_id
+    yorku_id = "10101010"
+    local_user = create :user, yorku_id: yorku_id
+    fee = Alma::FeeLoader.parse_alma_fee FEE_SAMPLE, local_user
 
-    assert_equal fee.yorku_id, york_id
+    assert_equal fee.yorku_id, local_user.yorku_id
 
     assert_equal fee.fee_id, FEE_SAMPLE["id"]
     assert_equal fee.fee_type, FEE_SAMPLE["type"]["value"]
@@ -49,9 +50,11 @@ class Alma::FeeLoaderTest < ActiveSupport::TestCase
   end
 
   should "create a brand new fee since it doesn't exist" do
+    yorku_id = 101010
+    local_user = create :user, yorku_id: yorku_id
     assert_difference "Alma::Fee.count" do
-      alma_fee = Alma::FeeLoader.parse_alma_fee FEE_SAMPLE, 101010
-      Alma::FeeLoader.update_existing_or_create_new alma_fee, 101010
+      alma_fee = Alma::FeeLoader.parse_alma_fee FEE_SAMPLE, local_user
+      Alma::FeeLoader.update_existing_or_create_new alma_fee, local_user
     end
 
     assert_equal 1, Alma::Fee.active.size, "Ensure that there is one active fee"
@@ -59,8 +62,9 @@ class Alma::FeeLoaderTest < ActiveSupport::TestCase
 
   should "update existing fee, if it exists" do
     yorku_id = 101010
-    alma_fee = Alma::FeeLoader.parse_alma_fee FEE_SAMPLE, yorku_id
-    updated = Alma::FeeLoader.update_existing_or_create_new alma_fee, yorku_id
+    local_user = create :user, yorku_id: yorku_id
+    alma_fee = Alma::FeeLoader.parse_alma_fee FEE_SAMPLE, local_user
+    updated = Alma::FeeLoader.update_existing_or_create_new alma_fee, local_user
 
     changed_fee = FEE_SAMPLE.clone
     changed_fee["balance"] = 10.0
@@ -68,8 +72,8 @@ class Alma::FeeLoaderTest < ActiveSupport::TestCase
     assert updated.balance == FEE_SAMPLE["balance"]
 
     assert_no_difference "Alma::Fee.count" do
-      alma_fee2 = Alma::FeeLoader.parse_alma_fee changed_fee, yorku_id
-      new_one = Alma::FeeLoader.update_existing_or_create_new alma_fee2, yorku_id
+      alma_fee2 = Alma::FeeLoader.parse_alma_fee changed_fee, local_user
+      new_one = Alma::FeeLoader.update_existing_or_create_new alma_fee2, local_user
 
       assert new_one.balance == changed_fee["balance"]
     end
@@ -79,8 +83,9 @@ class Alma::FeeLoaderTest < ActiveSupport::TestCase
 
   should "only change predefined fees" do
     yorku_id = 101010
-    alma_fee = Alma::FeeLoader.parse_alma_fee FEE_SAMPLE, yorku_id
-    updated = Alma::FeeLoader.update_existing_or_create_new alma_fee, yorku_id
+    local_user = create :user, yorku_id: yorku_id
+    alma_fee = Alma::FeeLoader.parse_alma_fee FEE_SAMPLE, local_user
+    updated = Alma::FeeLoader.update_existing_or_create_new alma_fee, local_user
 
     changed_fee = FEE_SAMPLE.clone
     changed_fee["balance"] = 10.0
@@ -95,8 +100,8 @@ class Alma::FeeLoaderTest < ActiveSupport::TestCase
     assert updated.balance == FEE_SAMPLE["balance"]
     assert updated.original_amount == FEE_SAMPLE["original_amount"]
 
-    alma_fee2 = Alma::FeeLoader.parse_alma_fee changed_fee, yorku_id
-    new_one = Alma::FeeLoader.update_existing_or_create_new alma_fee2, yorku_id
+    alma_fee2 = Alma::FeeLoader.parse_alma_fee changed_fee, local_user
+    new_one = Alma::FeeLoader.update_existing_or_create_new alma_fee2, local_user
 
     assert_equal 1, Alma::Fee.active.size, "Ensure that there is one active fee"
 
@@ -124,18 +129,18 @@ class Alma::FeeLoaderTest < ActiveSupport::TestCase
 
   should "mark all active fees as stale for user" do
     yorku_id = 101010
-    user = create :user, yorku_id: yorku_id
+    local_user = create :user, yorku_id: yorku_id
 
-    #alma_fee = Alma::FeeLoader.parse_alma_fee FEE_SAMPLE, yorku_id
-    create :alma_fee, fee_status: "ACTIVE", yorku_id: yorku_id
+    #alma_fee = Alma::FeeLoader.parse_alma_fee FEE_SAMPLE, local_user
+    create :alma_fee, fee_status: "ACTIVE", yorku_id: local_user.yorku_id
     create :alma_fee, fee_status: "ACTIVE", yorku_id: "SOMETHING_ELSE"
     create :alma_fee, fee_status: Alma::Fee::STATUS_STALE, yorku_id: yorku_id
     create :alma_fee, fee_status: Alma::Fee::STATUS_PAID, yorku_id: yorku_id
 
-    assert_equal 1, user.alma_fees.size
+    assert_equal 1, local_user.alma_fees.size
 
-    Alma::FeeLoader.mark_all_active_fees_as_stale yorku_id
+    Alma::FeeLoader.mark_all_active_fees_as_stale local_user
 
-    assert_equal 0, user.alma_fees.size
+    assert_equal 0, local_user.alma_fees.size
   end
 end

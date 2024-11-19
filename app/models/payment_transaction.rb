@@ -25,7 +25,7 @@ class PaymentTransaction < ApplicationRecord
   has_many :records, class_name: "PaymentRecord", foreign_key: "transaction_id"
 
   ## VALIDATIONS ##
-  validates_presence_of :yorku_id, :status
+  validates_presence_of :status
   validates_inclusion_of :status, in: [STATUS_APPROVED, STATUS_DECLINED, STATUS_CANCELLED,
                                         STATUS_NEW, STATUS_PROCESSING,
                                         STATUS_PAID, STATUS_PAID_PARTIAL,
@@ -49,7 +49,6 @@ class PaymentTransaction < ApplicationRecord
 
   def mark_paid!
     return if status != STATUS_APPROVED
-
 
     if records.rejected.size == records.size
       update_attribute :status, STATUS_REJECTED_BY_ALMA
@@ -108,7 +107,4 @@ class PaymentTransaction < ApplicationRecord
   def generate_new_order_id
     update_attribute :order_id, "#{id}-#{Time.now.to_i}"
   end
-
-
-
 end

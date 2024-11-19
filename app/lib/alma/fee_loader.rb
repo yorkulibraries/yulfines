@@ -4,36 +4,38 @@ class Alma::FeeLoader
     user = Alma::User.find id
   end
 
-  def self.load_fees(yorku_id)
+  def self.load_fees(local_user)
     user = nil
     begin
-      user = Alma::User.find yorku_id
+      if (local_user.yorku_id)
+        user = Alma::User.find local_user.yorku_id
+      else
+        user = Alma::User.find local_user.username
+      end
     rescue
       return nil
     end
     user.fines.response["fee"]
   end
 
-  def self.load_and_update_fees(yorku_id)
-    update_internal_fees load_fees(yorku_id), yorku_id if yorku_id != nil
+  def self.load_and_update_fees(local_user)
+    update_internal_fees load_fees(local_user), local_user
   end
 
-  def self.update_internal_fees(json_fees, yorku_id)
+  def self.update_internal_fees(json_fees, local_user)
     return if json_fees == nil
 
-    mark_all_active_fees_as_stale(yorku_id)
+    mark_all_active_fees_as_stale(local_user)
 
     fee_ids = []
     json_fees.each do |fee|
-      alma_fee = parse_alma_fee(fee, yorku_id)
+      alma_fee = parse_alma_fee(fee, local_user)
       fee_ids << alma_fee.fee_id
-      update_existing_or_create_new(alma_fee, yorku_id)
+      update_existing_or_create_new(alma_fee, local_user)
     end
-
   end
 
-
-  def self.update_existing_or_create_new(fresh_alma_fee, yorku_id)
+  def self.update_existing_or_create_new(fresh_alma_fee, local_user)
     existing = Alma::Fee.find_by_fee_id(fresh_alma_fee.fee_id)
 
     if existing
@@ -49,7 +51,7 @@ class Alma::FeeLoader
       #  existing.original_vat_amount = fresh_alma_fee.original_vat_amount
 
       existing.user_primary_id = fresh_alma_fee.user_primary_id
-      existing.yorku_id = yorku_id
+      existing.yorku_id = local_user.yorku_id
 
       existing.save
       return existing
@@ -60,8 +62,8 @@ class Alma::FeeLoader
 
   end
 
-  def self.mark_all_active_fees_as_stale(yorku_id)
-    user = User.find_by_yorku_id yorku_id
+  def self.mark_all_active_fees_as_stale(local_user)
+    user = local_user
     fees = user.alma_fees
 
     fees.each do |f|
@@ -77,18 +79,15 @@ class Alma::FeeLoader
 
   ## HELPER METHODS TO PARSE RETURNING JSON STRUCTURE ##
 
-  def self.parse_alma_fee(json_fee,  yorku_id)
-    alma_fee = Alma::Fee.new yorku_id: yorku_id
+  def self.parse_alma_fee(json_fee, local_user)
+    alma_fee = Alma::Fee.new yorku_id: local_user.yorku_id
 
     alma_fee.fee_id = get_val json_fee, :id
     alma_fee.fee_type = get_val json_fee, :type, :value
     alma_fee.fee_description = get_val json_fee, :type, :desc
-
     alma_fee.fee_status = get_val json_fee, :status, :value
     alma_fee.user_primary_id = get_val json_fee, :user_primary_id, :value
-
     alma_fee.balance = get_val json_fee, :balance
-
     alma_fee.remaining_vat_amount = get_val json_fee, :remaining_vat_amount
     alma_fee.original_amount = get_val json_fee, :original_amount
     alma_fee.original_vat_amount = get_val json_fee, :original_vat_amount

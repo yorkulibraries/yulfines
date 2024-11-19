@@ -15,7 +15,7 @@ class PaymentTransactionTest < ActiveSupport::TestCase
   end
 
   should "not be able to create an invalid Payment transaction" do
-    assert ! build(:payment_transaction, yorku_id: nil).valid?
+    assert build(:payment_transaction, yorku_id: nil).valid?
     assert ! build(:payment_transaction, user: nil).valid?
     assert ! build(:payment_transaction, status: nil).valid?
 

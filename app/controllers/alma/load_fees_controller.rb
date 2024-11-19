@@ -1,11 +1,7 @@
 class Alma::LoadFeesController < AuthenticatedController
 
   def index
-    yorku_id = current_user.yorku_id #params[:uid]
-
-    if yorku_id
-      Alma::FeeLoader.load_and_update_fees yorku_id
-    end
+    Alma::FeeLoader.load_and_update_fees current_user
     TLOG.log_load_fees yorku_id: current_user.yorku_id
 
     session[:alma_fees_loaded] = true
@@ -13,7 +9,7 @@ class Alma::LoadFeesController < AuthenticatedController
   end
 
   def reload
-    Alma::FeeLoader.load_and_update_fees current_user.yorku_id
+    Alma::FeeLoader.load_and_update_fees current_user
     TLOG.log_load_fees yorku_id: current_user.yorku_id
   end
 end
