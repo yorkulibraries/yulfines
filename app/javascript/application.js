@@ -5,14 +5,30 @@ import "jquery";
 import "datepicker";
 
 $(document).ready(function () {
-   $('.datepicker').datepicker();
+  $('.datepicker').datepicker();
 
-   if ($('#overview_fees_container').length > 0) {
-      $.getScript('/alma/reload_fees.js').fail(function( jqxhr, settings, exception ) {
-         var error = '<h2 class="text-muted">' + exception + '</h2>';
-         var reload = '<p class="text-muted"><a href="#" onclick="window.location.reload(); return false;">Reload</a></p>';
-         var html = error + reload;
-         $('#overview_fees_container').empty().append(html);
-      });
-   }
+  if ($('#overview_fees_container').length > 0) {
+    $.ajax({
+      url : '/alma/reload_fees.js',
+      retries : 0,
+      retryLimit : 10,
+      success : function(json) {
+        console.log('reload_fees.js success after ' +  this.retries + ' retries.');
+      },
+      error : function(jqxhr, settings, exception) {
+        this.retries++;
+        var me = this;
+        if (this.retries <= this.retryLimit) {
+          setTimeout(function(){
+            $.ajax(me);
+          }, 2000);
+        } else {
+          var error = '<h2 class="text-muted">' + exception + '</h2>';
+          var reload = '<p class="text-muted"><a href="#" onclick="window.location.reload(); return false;">Reload</a></p>';
+          var html = error + reload;
+          $('#overview_fees_container').empty().append(html);
+        }
+      }
+    });
+  }
 });
