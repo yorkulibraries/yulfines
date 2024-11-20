@@ -9,7 +9,7 @@ $(document).ready(function () {
 
   if ($('#overview_fees_container').length > 0) {
     $.ajax({
-      url : '/alma/reload_fees.js',
+      url : '/load_fees.js',
       retries : 0,
       retryLimit : 10,
       success : function(json) {
