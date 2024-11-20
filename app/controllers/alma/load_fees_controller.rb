@@ -2,7 +2,7 @@ class Alma::LoadFeesController < AuthenticatedController
 
   def index
     Alma::FeeLoader.load_and_update_fees current_user
-    TLOG.log_load_fees yorku_id: current_user.yorku_id
+    TLOG.log_load_fees username: current_user.username
 
     session[:alma_fees_loaded] = true
     redirect_to root_path
@@ -10,6 +10,6 @@ class Alma::LoadFeesController < AuthenticatedController
 
   def reload
     Alma::FeeLoader.load_and_update_fees current_user
-    TLOG.log_load_fees yorku_id: current_user.yorku_id
+    TLOG.log_load_fees username: current_user.username
   end
 end

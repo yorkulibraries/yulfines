@@ -7,7 +7,7 @@ class LogJobTest < ActiveJob::TestCase
 
     assert_difference "TransactionLog.count" do
       LogJob.perform_now message: "test",
-                           yorku_id: "123",
+                           username: "123",
                            alma_fee_id: "123",
                            transaction_id: 1,
                            ypb_transaction_id: "ypb_2",
@@ -18,7 +18,7 @@ class LogJobTest < ActiveJob::TestCase
 
     last = TransactionLog.last
     assert_equal "test", last.message
-    assert_equal "123", last.yorku_id
+    assert_equal "123", last.username
     assert_equal "123", last.alma_fee_id
     assert_equal logged_time.to_i, last.logged_at.to_i
     assert_equal 1, last.transaction_id

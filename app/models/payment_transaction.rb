@@ -25,7 +25,7 @@ class PaymentTransaction < ApplicationRecord
   has_many :records, class_name: "PaymentRecord", foreign_key: "transaction_id"
 
   ## VALIDATIONS ##
-  validates_presence_of :status
+  validates_presence_of :user_primary_id, :status
   validates_inclusion_of :status, in: [STATUS_APPROVED, STATUS_DECLINED, STATUS_CANCELLED,
                                         STATUS_NEW, STATUS_PROCESSING,
                                         STATUS_PAID, STATUS_PAID_PARTIAL,

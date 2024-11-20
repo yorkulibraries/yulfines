@@ -3,6 +3,7 @@ FactoryBot.define do
   factory :payment_transaction do
     association :user
     yorku_id { user.yorku_id rescue nil }
+    user_primary_id { user.username rescue nil }
 
     status { PaymentTransaction::STATUS_NEW  }
     order_id { nil }

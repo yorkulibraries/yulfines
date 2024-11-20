@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_11_19_132902) do
+ActiveRecord::Schema[7.0].define(version: 2024_11_20_000523) do
   create_table "alma_fees", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "fee_id"
     t.string "fee_type"
@@ -79,6 +79,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_19_132902) do
     t.datetime "ypb_transaction_approved_at", precision: nil
     t.datetime "ypb_transaction_declined_at", precision: nil
     t.string "library_id"
+    t.string "user_primary_id"
   end
 
   create_table "transaction_logs", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
@@ -92,6 +93,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_19_132902) do
     t.text "additional_changes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "username"
     t.index ["transaction_id"], name: "index_transaction_logs_on_transaction_id"
     t.index ["yorku_id"], name: "index_transaction_logs_on_yorku_id"
   end

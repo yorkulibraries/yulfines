@@ -11,7 +11,7 @@ class TransactionLogTest < ActiveSupport::TestCase
   end
 
   should "not create an invalid transaction log" do
-    assert ! build(:transaction_log, yorku_id: nil).valid?, "YorkU ID is required"
+    assert ! build(:transaction_log, username: nil).valid?, "username is required"
     assert ! build(:transaction_log, logged_at: nil).valid?, "Logged At is required"
     assert ! build(:transaction_log, message: nil).valid?, "Message is required"
   end
@@ -25,7 +25,7 @@ class TransactionLogTest < ActiveSupport::TestCase
 
   should "create a valid TransactionLog using helper method" do
     assert_difference "TransactionLog.count" do
-      TransactionLog.log message: "Woot", yorku_id: "Yea", alma_fee_id: "soso",
+      TransactionLog.log message: "Woot", username: "Yea", alma_fee_id: "soso",
                          logged_at: Time.now, process_name: TransactionLog::ALMA_LOAD_FEES
     end
   end

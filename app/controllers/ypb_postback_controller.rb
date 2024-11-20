@@ -30,8 +30,8 @@ class YpbPostbackController < ApplicationController
 
       transaction.save
 
-      TLOG.log_ypb_postback transaction.yorku_id, transaction.id,  "Post Back From YPB"
-      TLOG.log_ypb_postback transaction.yorku_id, transaction.id, "Transaction: #{transaction.status} YP_ID: #{transaction.yporderid}"
+      TLOG.log_ypb_postback transaction.user_primary_id, transaction.id,  "Post Back From YPB"
+      TLOG.log_ypb_postback transaction.user_primary_id, transaction.id, "Transaction: #{transaction.status} YP_ID: #{transaction.yporderid}"
 
       if transaction.declined? || transaction.cancelled?
         transaction.records.each do |record|

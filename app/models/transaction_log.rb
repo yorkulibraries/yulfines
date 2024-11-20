@@ -13,7 +13,7 @@ class TransactionLog < ApplicationRecord
   belongs_to :payment_transaction, foreign_key: "transaction_id" , optional: true
 
   ## VALIDATIONS ##
-  validates_presence_of :yorku_id, :logged_at, :message
+  validates_presence_of :username, :logged_at, :message
 
   ## CALLBACKS ##
   after_create do
@@ -31,7 +31,7 @@ class TransactionLog < ApplicationRecord
     tlog.process_name = opts[:process_name]
     tlog.alma_fee_id = opts[:alma_fee_id]
     tlog.additional_changes = opts[:additional_changes]
-
+    tlog.username = opts[:username]
     tlog.save
   end
 

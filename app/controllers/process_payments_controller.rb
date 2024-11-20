@@ -29,10 +29,11 @@ class ProcessPaymentsController < AuthenticatedController
     if @records.size > 0
       @transaction = PaymentTransaction.create! status: PaymentTransaction::STATUS_NEW,
                                                 yorku_id: current_user.yorku_id,
+                                                user_primary_id: current_user.username,
                                                 user: current_user
 
       TLOG.log_transaction_step step: TransactionLog::YPB_START,
-                  yorku_id: current_user.yorku_id, transaction_id: @transaction.id,
+                  username: current_user.username, transaction_id: @transaction.id,
                   message: "Created new transaction. Status: #{@transaction.status}"
 
       total_amount = 0
@@ -43,9 +44,8 @@ class ProcessPaymentsController < AuthenticatedController
         record.save
 
         TLOG.log_transaction_step step: TransactionLog::YPB_START,
-                    yorku_id: current_user.yorku_id, transaction_id: @transaction.id,
+                    username: current_user.username, transaction_id: @transaction.id,
                     message: "Alma Record: #{record.fee.item_barcode rescue 'error'} Amount: #{record.amount}"
-        #TLOG.record current_user.yorku_id, "For record: #{record.fee.item_barcode rescue 'error'}"
 
         library_id = record.fee.owner_id if library_id == nil
       end
@@ -54,9 +54,8 @@ class ProcessPaymentsController < AuthenticatedController
       @transaction.update amount: total_amount
 
       TLOG.log_transaction_step step: TransactionLog::YPB_START,
-                  yorku_id: current_user.yorku_id, transaction_id: @transaction.id,
+                  username: current_user.username, transaction_id: @transaction.id,
                   message: "Total Amount: #{total_amount}"
-      #TLOG.record current_user.yorku_id, "Total Amount: #{total_amount}"
 
       redirect_to redirect_to_payment_broker_path(transaction_id: @transaction.id)
     else

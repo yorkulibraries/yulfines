@@ -1,6 +1,6 @@
 class HomeController < AuthenticatedController
   def show
-    @fees = Alma::Fee.active.where(yorku_id: current_user.yorku_id)
+    @fees = Alma::Fee.active.where(user_primary_id: current_user.username)
     @active_fees = @fees.reject { |f| f.payment_pending? }
     @osgoode_fees = @active_fees.reject { |f| f.owner_id != Alma::Fee::OWNER_OSGOODE}
     @other_fees = @active_fees.reject { |f| f.owner_id == Alma::Fee::OWNER_OSGOODE}

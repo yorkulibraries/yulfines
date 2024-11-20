@@ -2,6 +2,7 @@ FactoryBot.define do
 
   factory :transaction_log do
     sequence(:yorku_id)  { |n| "#{n}#{n}12393939" }
+    sequence(:username)  { |n| "#{n}#{n}12393939" }
     alma_fee_id { nil }
     transaction_id { nil }
     ypb_transaction_id { nil }
