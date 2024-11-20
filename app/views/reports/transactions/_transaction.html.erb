@@ -1,0 +1,8 @@
+<% transaction.attribute_names.each do |a| %>
+  <% if transaction[a].to_s.strip.length > 0 %>
+    <div class="row border-bottom border-bottom-1">
+      <div class="col col-5 col-md-3 text-truncate text-muted"><%= a %></div>
+      <div class="col col-7 col-md-9 text-truncate text-muted"><%= transaction[a] %></div>
+    </div>
+  <% end %>
+<% end %>

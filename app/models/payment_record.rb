@@ -91,5 +91,6 @@ class PaymentRecord < ApplicationRecord
     update_attribute :fee_item_barcode, fee.item_barcode
     update_attribute :fee_type, fee.fee_type
     update_attribute :fee_description, fee.fee_description
+    update_attribute :user_primary_id, fee.user_primary_id
   end
 end

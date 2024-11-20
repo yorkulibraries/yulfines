@@ -1,0 +1,13 @@
+<ul class="list-group list-group-flush">
+  <% logs.each do |log| %>
+    <li class="list-group-item">
+      <div class="d-flex w-100 justify-content-between">
+        <h6 class="mb-1"><%= log.logged_at.in_time_zone("Eastern Time (US & Canada)").strftime("%A, %b %d %I:%M:%S %p") %></h6>
+        <small class="text-muted"><%= log.process_name.upcase %></small>
+      </div>
+      <p class="mb-1"><%= log.message %></p>
+      <small class="text-muted">User ID: <%= log.username ? log.username : log.yorku_id %> </small>
+      <span class="badge badge-primary badge-pill"><%= log.alma_fee_id %></span>
+    </li>
+  <% end %>
+</ul>

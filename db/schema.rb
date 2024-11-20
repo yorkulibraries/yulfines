@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_11_20_000523) do
+ActiveRecord::Schema[7.0].define(version: 2024_11_20_101610) do
   create_table "alma_fees", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "fee_id"
     t.string "fee_type"
@@ -56,6 +56,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_20_000523) do
     t.string "fee_item_barcode"
     t.string "fee_type"
     t.string "fee_description"
+    t.string "user_primary_id"
   end
 
   create_table "payment_transactions", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|

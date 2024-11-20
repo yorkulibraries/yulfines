@@ -14,38 +14,80 @@
       <%= @transaction.created_at.strftime("%A, %b %d %Y %I:%M:%S %p") %> 
     </p>
 
-    <%= link_to "View Log", report_transaction_log_url(@transaction), 
-      class: "btn btn-secondary"%>
-
+    <p class="card-text">
     <% if @transaction.uid != nil %>
       <%= link_to "View Receipt", "#{Settings.ypb.receipt_page_url}?tokenid=#{@transaction.uid}", 
       target: "_blank", class: "btn btn-secondary"%>
     <% end %>
+    </p>
     
     <div class="accordion accordion-flush mt-4" id="payment_records_accordion">
       <% @transaction.records.each do |record| %>
       <div class="accordion-item">
-        <h2 class="accordion-header" id="heading_<%= record.id %>">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_<%= record.id %>" aria-controls="collapse_<%= record.id %>"  aria-expanded="false">
-            <span class="text-muted text-truncate"><%= record.fee_item_title %></span>
+        <h5 class="accordion-header" id="heading_payment_<%= record.id %>">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_payment_<%= record.id %>" aria-controls="collapse_payment_<%= record.id %>"  aria-expanded="false">
+            <span class="text-muted h5">Fee Payment Record: <%= record.id %></span>
           </button>
-        </h2>
-        <div id="collapse_<%= record.id %>" class="accordion-collapse collapse" aria-labelledby="heading_<%= record.id %>" data-bs-parent="#payment_records_accordion">
+        </h5>
+        <div id="collapse_payment_<%= record.id %>" class="accordion-collapse collapse" aria-labelledby="heading_payment_<%= record.id %>" data-bs-parent="#payment_records_accordion">
           <div class="accordion-body">
-            <div class="row">
-              <div class="col-md-6">
-                <span class="text-muted text-sm">Full Payment Record Details</span>
-                <%= render "record", record: record rescue "n/a" %>
-              </div>
-              <div class="col-md-6">
-                <span class="text-muted text-sm">Full Fee Details</span>
-                <%= render "fee", fee: record.fee rescue "n/a" %>
-              </div>
-            </div>
+            <%= render "record", record: record %>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <h5 class="accordion-header" id="heading_fee_<%= record.fee.id %>">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_fee_<%= record.fee.id %>" aria-controls="collapse_fee_<%= record.fee.id %>"  aria-expanded="false">
+            <span class="text-muted h5">Fee Record: <%= record.fee.id %></span>
+          </button>
+        </h5>
+        <div id="collapse_fee_<%= record.fee.id %>" class="accordion-collapse collapse" aria-labelledby="heading_fee_<%= record.fee.id %>" data-bs-parent="#payment_records_accordion">
+          <div class="accordion-body">
+            <%= render "fee", fee: record.fee %>
           </div>
         </div>
       </div>
       <% end %>
+
+      <div class="accordion-item">
+        <h5 class="accordion-header" id="heading_transaction_<%= @transaction.id %>">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_transaction_<%= @transaction.id %>" aria-controls="collapse_transaction_<%= @transaction.id %>"  aria-expanded="false">
+            <span class="text-muted h5">Payment Transaction Record</span>
+          </button>
+        </h5>
+        <div id="collapse_transaction_<%= @transaction.id %>" class="accordion-collapse collapse" aria-labelledby="heading_transaction_<%= @transaction.id %>" data-bs-parent="#payment_records_accordion">
+          <div class="accordion-body">
+            <%= render "transaction", transaction: @transaction %>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <h5 class="accordion-header" id="heading_user_<%= @transaction.user.id %>">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_user_<%= @transaction.user.id %>" aria-controls="collapse_user_<%= @transaction.user.id %>"  aria-expanded="false">
+            <span class="text-muted h5">User Record</span>
+          </button>
+        </h5>
+        <div id="collapse_user_<%= @transaction.user.id %>" class="accordion-collapse collapse" aria-labelledby="heading_user_<%= @transaction.user.id %>" data-bs-parent="#payment_records_accordion">
+          <div class="accordion-body">
+            <%= render "user", user: @transaction.user %>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <h5 class="accordion-header" id="heading_logs_<%= @transaction.id %>">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_logs_<%= @transaction.id %>" aria-controls="collapse_logs_<%= @transaction.id %>" aria-expanded="false">
+            <span class="text-muted h5">Transaction Logs</span>
+          </button>
+        </h5>
+        <div id="collapse_logs_<%= @transaction.id %>" class="accordion-collapse collapse" aria-labelledby="heading_logs_<%= @transaction.id %>" data-bs-parent="#payment_records_accordion">
+          <div class="accordion-body">
+            <%= render "logs", logs: @logs %>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

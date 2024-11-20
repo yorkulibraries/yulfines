@@ -1,8 +1,8 @@
-<table class="table table-condensed">
-  <% record.attribute_names.each do |a|   %>
-    <tr>
-      <td class="font-weight-light"><%= a.humanize %> </td>
-      <td><%= record[a] %></td>
-    <tr/>
+<% record.attribute_names.each do |a| %>
+  <% if record[a].to_s.strip.length > 0 %>
+  <div class="row border-bottom border-bottom-1">
+    <div class="col col-5 col-md-3 text-truncate text-muted"><%= a %></div>
+    <div class="col col-7 col-md-9 text-truncate text-muted"><%= record[a] %></div>
+  </div>
   <% end %>
-</table>
+<% end %>
