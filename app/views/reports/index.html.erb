@@ -54,7 +54,7 @@
     <td><%= link_to t.id, report_transaction_path(t.id) %></td>
     <td><%= format_date t.created_at %></td>
     <td><%= number_to_currency (t.amount == nil ? t.total_amount_fees : t.amount) %></td>
-    <td><%=  t.yorku_id %></td>
+    <td><%= t.user_primary_id ? t.user_primary_id : t.yorku_id %></td>
     <td><%= library_name t.library_id %></td>
     <td><%= t.status %></td>
     <td>
