@@ -32,18 +32,18 @@ namespace :yul_fines do
     u13 = User.find 13
     u2.payment_transactions.each do |t|
       t.user = u
-      t.save
+      t.save(validate: false)
     end
     u13.payment_transactions.each do |t|
       t.user = u
-      t.save
+      t.save(validate: false)
     end
 
     u = User.find 3759
     u3063 = User.find 3063
     u3063.payment_transactions.each do |t|
       t.user = u
-      t.save
+      t.save(validate: false)
     end
 
     # if a user record has no payment transaction then simply delete it
