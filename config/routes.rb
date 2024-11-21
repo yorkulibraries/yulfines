@@ -13,10 +13,7 @@ Rails.application.routes.draw do
   get "/load_fees" => "home#load_fees"
 
   ## REDIRECTOR to payment broker
-  get "redirecting/to_payment_broker" => "redirectors/to_payment_broker#show", as: :redirect_to_payment_broker
-
-  ## REDIRECTOR to alma fine payment
-  get "redirecting/to_alma_fines" => "redirectors/to_alma_fines#show", as: :redirect_to_alma_fines
+  get "to_payment_broker" => "to_payment_broker#show"
 
   ## POSTBACK From YPB
   resource :ypb_postback, only: :create, controller: "ypb_postback"
@@ -32,7 +29,6 @@ Rails.application.routes.draw do
   ## REPORTS ##
   get "/reports" => "reports#index", as: :reports
   get "/reports/transaction/:id" => "reports/transactions#show", as: :report_transaction
-  get "/reports/transaction/:id/logs" => "reports/transaction_logs#show", as: :report_transaction_log
 
   ## DUMMY ALMA API ##
   unless Rails.env.production?

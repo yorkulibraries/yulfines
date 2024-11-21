@@ -1,11 +1,7 @@
-class Redirectors::ToPaymentBrokerController < AuthenticatedController
+class ToPaymentBrokerController < AuthenticatedController
   def show
-
     @transaction = PaymentTransaction.find params[:transaction_id]
-
     if @transaction.status == PaymentTransaction::STATUS_NEW
-
-      # lets build the broker, depending on which fees we are processing
       broker = setup_broker @transaction
 
       TLOG.log_ypb_steps current_user.username, @transaction.id, "Getting the Token from YPB Payment Broker"
@@ -18,8 +14,6 @@ class Redirectors::ToPaymentBrokerController < AuthenticatedController
       @transaction.save
 
       TLOG.log_ypb_steps current_user.username, @transaction.id, "Redirecting to YPB Payment Broker"
-
-      ## setup payment broker stuff and send person there
       redirect_to "#{Settings.ypb.payment_page_url}?tokenid=#{token_id}", allow_other_host: true
     else
       TLOG.log_ypb_steps current_user.username, @transaction.id, "ERROR: TRIED REDIRECTING WITH EXISTING TRANSACTION"
@@ -27,6 +21,7 @@ class Redirectors::ToPaymentBrokerController < AuthenticatedController
     end
   end
 
+  private
   def setup_broker(transaction)
     if transaction.records.first.fee.owner_id == Alma::Fee::OWNER_OSGOODE
       TLOG.log_ypb_steps current_user.username, transaction.id, "Redirecting to YPB Payment Broker FOR OSGOODE ACCOUNT"
@@ -38,5 +33,4 @@ class Redirectors::ToPaymentBrokerController < AuthenticatedController
       Ypb::Broker.new_broker_instance(ypb_postback_url, false)
     end
   end
-
 end

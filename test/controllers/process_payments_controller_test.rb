@@ -50,7 +50,7 @@ class ProcessPaymentsControllerTest < ActionDispatch::IntegrationTest
           assert_equal records.find_by_fee_id(fee2.id).alma_fee_id, fee2.fee_id
           assert_equal records.find_by_fee_id(fee1.id).alma_fee_id, fee1.fee_id
 
-          assert_redirected_to redirect_to_payment_broker_path(transaction_id: transaction.id)
+          assert_redirected_to to_payment_broker_path(transaction_id: transaction.id)
         end
       end
 

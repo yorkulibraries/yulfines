@@ -57,7 +57,7 @@ class ProcessPaymentsController < AuthenticatedController
                   username: current_user.username, transaction_id: @transaction.id,
                   message: "Total Amount: #{total_amount}"
 
-      redirect_to redirect_to_payment_broker_path(transaction_id: @transaction.id)
+      redirect_to to_payment_broker_path(transaction_id: @transaction.id)
     else
       redirect_to new_process_payment_path, flash: { error: "Please select an item to pay." }
     end

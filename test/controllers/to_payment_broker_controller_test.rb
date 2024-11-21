@@ -1,11 +1,11 @@
 require 'test_helper'
 
-class Redirectors::ToPaymentBrokerControllerTest < ActionDispatch::IntegrationTest
+class ToPaymentBrokerControllerTest < ActionDispatch::IntegrationTest
   logged_in_with_user do
     should "redirect to transaction details path if status is not new" do
       transaction = create :payment_transaction, status: PaymentTransaction::STATUS_APPROVED, amount: 10
       
-      get redirect_to_payment_broker_path(transaction_id: transaction.id)
+      get to_payment_broker_path(transaction_id: transaction.id)
       assert_response :redirect
       assert_redirected_to transaction_path(transaction)
     end
