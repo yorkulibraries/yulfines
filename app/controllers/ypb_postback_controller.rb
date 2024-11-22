@@ -6,12 +6,13 @@ class YpbPostbackController < ApplicationController
   end
 
   def create
+    id = params[:id]
     token_id = params[:tokenid]
     order_id = params[:orderid]
     status = params[:status]
     ypborderid = params[:ypborderid]
 
-    @transaction = PaymentTransaction.processing.where(uid: token_id, order_id: order_id).first
+    @transaction = PaymentTransaction.processing.where(uid: token_id, id: id).first
     if @transaction
       TLOG.log_ypb_postback @transaction.user_primary_id, @transaction.id,  "Post Back From YPB - status: #{status}, ypborderid: #{ypborderid} "
       TLOG.log_ypb_postback @transaction.user_primary_id, @transaction.id,  "Begin parsing receipt for transaction status"

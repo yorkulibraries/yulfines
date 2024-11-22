@@ -12,9 +12,6 @@ Rails.application.routes.draw do
   get "/home" => "home#show"
   get "/load_fees" => "home#load_fees"
 
-  ## REDIRECTOR to payment broker
-  get "to_payment_broker" => "to_payment_broker#show"
-
   ## POSTBACK From YPB
   resource :ypb_postback, only: :create, controller: "ypb_postback"
 

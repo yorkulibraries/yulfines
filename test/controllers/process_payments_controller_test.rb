@@ -1,27 +1,27 @@
 require 'test_helper'
 
 class ProcessPaymentsControllerTest < ActionDispatch::IntegrationTest
-
-
   logged_in_with_user do
-
     should "show a list of fees to be paid by the user" do
       fee = create :alma_fee, yorku_id: @user.yorku_id
       get new_process_payment_path
       assert_response :ok
-
       assert_match fee.item_title, response.body
     end
 
     should "create the list of payment records and redirect to payment broker redirector" do
+      if Settings.ypb.application_password.nil? 
+        skip "YPB password not set skipping this test"
+      end
+
       fee1 = create :alma_fee, yorku_id: @user.yorku_id, balance: 3
       fee2 = create :alma_fee, yorku_id: @user.yorku_id, balance: 7
 
       records = {
         payment_record: {
-                          fee1.id => { "amount" => fee1.balance },
-                          fee2.id => { "amount" => fee2.balance }
-                        }
+          fee1.id => { "amount" => fee1.balance },
+          fee2.id => { "amount" => fee2.balance }
+        }
       }
 
       assert_difference "PaymentRecord.count", 2 do
@@ -34,7 +34,7 @@ class ProcessPaymentsControllerTest < ActionDispatch::IntegrationTest
 
           assert_equal transaction.yorku_id, @user.yorku_id
           assert_equal transaction.user_id, @user.id
-          assert_equal transaction.status, PaymentTransaction::STATUS_NEW
+          assert_equal transaction.status, PaymentTransaction::STATUS_PROCESSING
           assert_equal transaction.amount, records.map(&:amount).reduce(0, :+)
           assert_equal transaction.library_id, records.last.fee.owner_id
           
@@ -50,10 +50,9 @@ class ProcessPaymentsControllerTest < ActionDispatch::IntegrationTest
           assert_equal records.find_by_fee_id(fee2.id).alma_fee_id, fee2.fee_id
           assert_equal records.find_by_fee_id(fee1.id).alma_fee_id, fee1.fee_id
 
-          assert_redirected_to to_payment_broker_path(transaction_id: transaction.id)
+          assert_redirected_to "#{Settings.ypb.payment_page_url}?tokenid=#{transaction.uid}"
         end
       end
-
     end
   end
 end

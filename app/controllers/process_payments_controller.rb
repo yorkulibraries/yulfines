@@ -45,7 +45,7 @@ class ProcessPaymentsController < AuthenticatedController
 
         TLOG.log_transaction_step step: TransactionLog::YPB_START,
                     username: current_user.username, transaction_id: @transaction.id,
-                    message: "Alma Record: #{record.fee.item_barcode rescue 'error'} Amount: #{record.amount}"
+                    message: "Fee Record: #{record.fee.fee_id} Amount: #{record.amount}"
 
         library_id = record.fee.owner_id if library_id == nil
       end
@@ -57,17 +57,43 @@ class ProcessPaymentsController < AuthenticatedController
                   username: current_user.username, transaction_id: @transaction.id,
                   message: "Total Amount: #{total_amount}"
 
-      redirect_to to_payment_broker_path(transaction_id: @transaction.id)
+      redirect_to_payment_broker
     else
       redirect_to new_process_payment_path, flash: { error: "Please select an item to pay." }
     end
   end
-
 
   private
   def fees
     return [] if params[:records].nil?
     records = params.require(:records).permit!
     records[:payment_record].keys
+  end
+
+  def redirect_to_payment_broker
+    broker = setup_broker @transaction
+
+    TLOG.log_ypb_steps current_user.username, @transaction.id, "Getting the Token from YPB"
+    token_id = broker.get_token @transaction
+
+    TLOG.log_ypb_steps current_user.username, @transaction.id, "Updating transaction: #{@transaction.id} with Token: #{token_id}"
+    @transaction.uid = token_id
+    @transaction.status = PaymentTransaction::STATUS_PROCESSING
+    @transaction.save
+
+    TLOG.log_ypb_steps current_user.username, @transaction.id, "Redirecting to YPB"
+    redirect_to "#{Settings.ypb.payment_page_url}?tokenid=#{token_id}", allow_other_host: true
+  end
+
+  def setup_broker(transaction)
+    postback_url = ypb_postback_url + "?id=#{transaction.id}"
+    TLOG.log_ypb_steps current_user.username, transaction.id, "Setting post back URL to: #{postback_url}"
+    if transaction.records.first.fee.owner_id == Alma::Fee::OWNER_OSGOODE
+      TLOG.log_ypb_steps current_user.username, transaction.id, "Using YPB Account for Osgoode"
+      Ypb::Broker.new_broker_instance(postback_url, true)
+    else
+      TLOG.log_ypb_steps current_user.username, transaction.id, "Using YPB Account for YUL"
+      Ypb::Broker.new_broker_instance(postback_url, false)
+    end
   end
 end
