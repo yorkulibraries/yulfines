@@ -21,13 +21,13 @@ alma:
     user_url: "https://api-na.hosted.exlibrisgroup.com/almaws/v1/users/{{user_primary_id}}"
     fee_url: "https://api-na.hosted.exlibrisgroup.com/almaws/v1/users/{{user_primary_id}}/fees/{{fee_id}}"
 ypb:
-  wsdl_url: https://ypbpaymentapp/?wsdl
-  payment_page_url: https://ypbpaymentapp/Payment.aspx
-  receipt_page_url: https://ypbpaymentapp/Receipt.aspx
-  application_name: yulfines
-  application_id: QATEST
+  wsdl_url: https://qapayments.uit.yorku.ca/ypbpaymentservice/?wsdl
+  payment_page_url: https://qapayments.uit.yorku.ca/ypbpaymentmco/Payment.aspx
+  receipt_page_url: https://qapayments.uit.yorku.ca/ypbpaymentmco/Receipt.aspx
+  application_name: Pay X
+  application_id:
   application_password:
-  application_law_name: Osgoode Fines
+  application_law_name: Pay X
   application_law_id:
   application_law_password:
   application_language: enUS
