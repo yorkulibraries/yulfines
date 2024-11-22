@@ -19,18 +19,19 @@ class PaymentRecordTest < ActiveSupport::TestCase
     assert ! build(:payment_record, user: create(:user), fee: create(:alma_fee)).valid?, "Fee should belong to user"
   end
 
-  should "update yorku id from user and alma_fee from fee" do
+  should "update user_primary_id from user and alma_fee_id from fee" do
     user = create :user
-    fee = create :alma_fee, yorku_id: user.yorku_id
+    fee = create :alma_fee, user_primary_id: user.username
 
-    record = build :payment_record, user: user, fee: fee, yorku_id: nil, alma_fee_id: nil
-    assert_nil record.yorku_id
+    record = build :payment_record, user: user, fee: fee, user_primary_id: nil, alma_fee_id: nil
+    assert record.valid?
+    assert_nil record.user_primary_id
     assert_nil record.alma_fee_id
 
     record.save
 
     assert_equal fee.fee_id, record.alma_fee_id
-    assert_equal user.yorku_id, record.yorku_id
+    assert_equal fee.user_primary_id, record.user_primary_id
   end
 
   should "set status to processing after create" do

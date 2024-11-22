@@ -5,7 +5,7 @@ FactoryBot.define do
     fee_type { "OVERDUE" }
     fee_description { "Overdue fine"}
     fee_status { "ACTIVE" }
-    sequence(:user_primary_id)  { |n| "#{n}#{n}12393939" }
+    sequence(:user_primary_id)  { |n| "#{n}#{n}1239" }
     balance { 4.25 }
     remaining_vat_amount { 0.0 }
     original_amount { 4.25 }

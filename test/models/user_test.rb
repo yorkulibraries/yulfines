@@ -41,7 +41,7 @@ class UserTest < ActiveSupport::TestCase
 
   end
 
-  should "display first name and last name and not bitch" do
+  should "display first name and last name" do
       user = create(:user, first_name: "WOOT", last_name: "YEST")
       assert_equal user.first_name, "WOOT"
       assert_equal user.last_name, "YEST"
@@ -56,8 +56,8 @@ class UserTest < ActiveSupport::TestCase
     user = create :user
 
     create :alma_fee, fee_status: "ACTIVE"
-    active_fee = create :alma_fee, fee_status: "ACTIVE", yorku_id: user.yorku_id
-    paid_fee = create :alma_fee, fee_status: Alma::Fee::STATUS_PAID,  yorku_id: user.yorku_id
+    active_fee = create :alma_fee, fee_status: "ACTIVE", user_primary_id: user.username
+    paid_fee = create :alma_fee, fee_status: Alma::Fee::STATUS_PAID,  user_primary_id: user.username
 
     assert_equal 1, user.alma_fees.size
     assert_equal user.alma_fees.first.id, active_fee.id

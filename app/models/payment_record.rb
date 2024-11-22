@@ -70,7 +70,7 @@ class PaymentRecord < ApplicationRecord
 
   private
   def fee_belongs_to_user?
-    if fee.try(:yorku_id) != user.try(:yorku_id)
+    if fee.try(:user_primary_id) != user.try(:username)
       errors.add(:fee, "Fee must belong to the user")
     end
   end
@@ -80,7 +80,7 @@ class PaymentRecord < ApplicationRecord
   end
 
   def update_yorku_id_and_alma_fee_id
-    update_attribute :yorku_id, user.yorku_id #if self[:yorku_id] == nil
+    update_attribute :yorku_id, user.yorku_id
     update_attribute :alma_fee_id, fee.fee_id
   end
 

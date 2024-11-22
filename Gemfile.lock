@@ -167,8 +167,6 @@ GEM
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
     logger (1.6.1)
-    lolsoap (0.11.0)
-      nokogiri (~> 1.5)
     loofah (2.23.1)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
@@ -184,14 +182,14 @@ GEM
       nokogiri (~> 1)
       rake
     mini_mime (1.1.5)
-    minitest (5.25.1)
+    minitest (5.25.2)
     mocha (2.5.0)
       ruby2_keywords (>= 0.0.5)
     multi_xml (0.7.1)
       bigdecimal (~> 3.1)
     mustermann (3.0.3)
       ruby2_keywords (~> 0.0.1)
-    mutex_m (0.2.0)
+    mutex_m (0.3.0)
     mysql2 (0.5.6)
     net-http (0.5.0)
       uri
@@ -318,6 +316,8 @@ GEM
     tzinfo-data (1.2024.2)
       tzinfo (>= 1.0.0)
     uri (1.0.2)
+    vcr (6.3.1)
+      base64
     warden (1.2.9)
       rack (>= 2.0.9)
     wasabi (5.1.0)
@@ -361,7 +361,6 @@ DEPENDENCIES
   httparty
   importmap-rails
   listen
-  lolsoap
   mimemagic
   minitest
   mocha
@@ -379,6 +378,7 @@ DEPENDENCIES
   sqlite3 (~> 1.4)
   sucker_punch (~> 2.0)
   tzinfo-data
+  vcr
   web-console
   webmock
 

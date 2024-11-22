@@ -7,7 +7,7 @@ class Alma::FeeLoaderTest < ActiveSupport::TestCase
   FEE_SAMPLE = { "id" => "12345678910",
                  "type" => { "value" => "OVERDUEFINE", "desc" => "Overdue fine" },
                  "status" => { "value" => "ACTIVE", "desc" => "Active" },
-                 "user_primary_id" => { "value" => "ID12345678910", "link" => "https://something.com" },
+                 "user_primary_id" => { "value" => "12345678910", "link" => "https://something.com" },
                  "balance" => 3.0,
                  "remaining_vat_amount" => 0.0,
                  "original_amount" => 3.0,
@@ -23,10 +23,11 @@ class Alma::FeeLoaderTest < ActiveSupport::TestCase
 
   should "parse alma json fees into Alma::Fee objects" do
     yorku_id = "10101010"
-    local_user = create :user, yorku_id: yorku_id
+    local_user = create :user, yorku_id: yorku_id, username: "12345678910"
     fee = Alma::FeeLoader.parse_alma_fee FEE_SAMPLE, local_user
 
     assert_equal fee.yorku_id, local_user.yorku_id
+    assert_equal fee.user_primary_id, local_user.username
 
     assert_equal fee.fee_id, FEE_SAMPLE["id"]
     assert_equal fee.fee_type, FEE_SAMPLE["type"]["value"]
@@ -132,10 +133,10 @@ class Alma::FeeLoaderTest < ActiveSupport::TestCase
     local_user = create :user, yorku_id: yorku_id
 
     #alma_fee = Alma::FeeLoader.parse_alma_fee FEE_SAMPLE, local_user
-    create :alma_fee, fee_status: "ACTIVE", yorku_id: local_user.yorku_id
-    create :alma_fee, fee_status: "ACTIVE", yorku_id: "SOMETHING_ELSE"
-    create :alma_fee, fee_status: Alma::Fee::STATUS_STALE, yorku_id: yorku_id
-    create :alma_fee, fee_status: Alma::Fee::STATUS_PAID, yorku_id: yorku_id
+    create :alma_fee, fee_status: "ACTIVE", yorku_id: local_user.yorku_id, user_primary_id: local_user.username
+    create :alma_fee, fee_status: "ACTIVE", yorku_id: "SOMETHING_ELSE", user_primary_id: "something else"
+    create :alma_fee, fee_status: Alma::Fee::STATUS_STALE, yorku_id: yorku_id, user_primary_id: local_user.username
+    create :alma_fee, fee_status: Alma::Fee::STATUS_PAID, yorku_id: yorku_id, user_primary_id: local_user.username
 
     assert_equal 1, local_user.alma_fees.size
 

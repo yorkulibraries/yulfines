@@ -24,7 +24,7 @@ class Alma::FeeTest < ActiveSupport::TestCase
 
   should "return true of payment is pending(processing) but alma fee  has been paid yet" do
     user = create :user
-    fee = create :alma_fee, fee_status: "ACTIVE", yorku_id: user.yorku_id
+    fee = create :alma_fee, fee_status: "ACTIVE", user_primary_id: user.username
     assert ! fee.payment_pending?
 
     record = create :payment_record, user:user, fee: fee
@@ -37,7 +37,7 @@ class Alma::FeeTest < ActiveSupport::TestCase
 
   should "make fee as stale and return proper flag" do
     user = create :user
-    fee = create :alma_fee, fee_status: "ACTIVE", yorku_id: user.yorku_id
+    fee = create :alma_fee, fee_status: "ACTIVE", user_primary_id: user.username
 
     assert ! fee.stale?
     fee.mark_as_stale!

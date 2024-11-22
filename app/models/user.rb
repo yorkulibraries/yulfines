@@ -13,15 +13,14 @@ class User < ApplicationRecord
 
   ## RELATIONSHIPS ##
   def alma_fees
-    Alma::Fee.active.where(yorku_id: self[:yorku_id])
+    Alma::Fee.active.where(user_primary_id: self[:username])
   end
 
   def paid_alma_fees
-    Alma::Fee.paid.where(yorku_id: self[:yorku_id])
+    Alma::Fee.paid.where(user_primary_id: self[:username])
   end
 
   has_many :payment_transactions
-
 
   ## HELPER METHODS ##
   def initials

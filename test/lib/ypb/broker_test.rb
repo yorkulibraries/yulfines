@@ -1,20 +1,26 @@
 require 'test_helper'
+require 'vcr'
 
 class Ypb::BrokerTest < ActiveSupport::TestCase
+  YPB_TOKEN_LENGTH = 55
 
-  should "get token somehow" do
-    # transaction = create :payment_transaction, amount: 10.00
-    # record = create :payment_record, payment_transaction: transaction, user: transaction.user, amount: 8.00
-    # record2 = create :payment_record, payment_transaction: transaction, user: transaction.user, amount: 2.00
+  Rails.application.routes.default_url_options[:host] = 'localhost'
 
-    # transaction.records.reload
+  include Rails.application.routes.url_helpers
 
-    # root_url = "https://library.yorku.ca/fines"
-    # broker = Ypb::Broker.new wsdl: Settings.ypb.wsdl_url, success_url: root_url, failure_url: root_url, log: true
-    # #transaction.id = Time.now.to_i # this is done so that YPB doesn't bitch
+  should "get token" do
+    transaction = create :payment_transaction, amount: 10.00
+    record = create :payment_record, payment_transaction: transaction, user: transaction.user, amount: 8.00
+    record2 = create :payment_record, payment_transaction: transaction, user: transaction.user, amount: 2.00
+    transaction.records.reload
 
-    # token_id = broker.get_token transaction
-
-    # assert_not_nil token_id
+    postback_url = ypb_postback_url + "?id=#{transaction.id}"
+    broker = Ypb::Broker.new_broker_instance(postback_url, false)
+    
+    VCR.use_cassette('ypb_broker_get_token') do
+      token = broker.get_token transaction
+      assert_not_nil token
+      assert_equal YPB_TOKEN_LENGTH, token.length
+    end
   end
 end

@@ -57,14 +57,6 @@ module ActiveSupport
   end
 end
 
-module ActionController
-  class TestCase
-    def log_user_in(user)
-      session[:user_id] = user.id unless user.blank?
-    end
-  end
-end
-
 class ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
   include ActionDispatch::TestProcess
@@ -74,12 +66,8 @@ class ActionDispatch::IntegrationTest
     context "logged in user" do
       setup do
         @user = create :user
-
         sign_in @user
-
-        #post user_session_path "user[email]"    => user.email, "user[password]" => user.password
       end
-
       yield block
     end
   end

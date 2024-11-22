@@ -1,0 +1,296 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://qapayments.uit.yorku.ca/ypbpaymentservice/?wsdl
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/xml; charset=UTF-8
+      Server:
+      - Microsoft-IIS/10.0
+      X-Powered-By:
+      - ASP.NET
+      Date:
+      - Fri, 22 Nov 2024 11:46:25 GMT
+      Content-Length:
+      - '11504'
+    body:
+      encoding: UTF-8
+      string: <?xml version="1.0" encoding="utf-8"?><wsdl:definitions name="Broker"
+        targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+        xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
+        xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy"
+        xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract"
+        xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing"
+        xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        xmlns:tns="http://tempuri.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+        xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"><wsp:Policy
+        wsu:Id="BasicHttpBinding_IPaymentService_policy"><wsp:ExactlyOne><wsp:All><sp:TransportBinding
+        xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy"><wsp:Policy><sp:TransportToken><wsp:Policy><sp:HttpsToken
+        RequireClientCertificate="false"/></wsp:Policy></sp:TransportToken><sp:AlgorithmSuite><wsp:Policy><sp:Basic256/></wsp:Policy></sp:AlgorithmSuite><sp:Layout><wsp:Policy><sp:Strict/></wsp:Policy></sp:Layout></wsp:Policy></sp:TransportBinding></wsp:All></wsp:ExactlyOne></wsp:Policy><wsdl:types><xsd:schema
+        targetNamespace="http://tempuri.org/Imports"><xsd:import schemaLocation="https://qapayments.uit.yorku.ca/YpbPaymentService/Broker.svc?xsd=xsd0"
+        namespace="http://tempuri.org/"/></xsd:schema></wsdl:types><wsdl:message name="IPaymentService_GetToken_InputMessage"><wsdl:part
+        name="parameters" element="tns:GetToken"/></wsdl:message><wsdl:message name="IPaymentService_GetToken_OutputMessage"><wsdl:part
+        name="parameters" element="tns:GetTokenResponse"/></wsdl:message><wsdl:message
+        name="IPaymentService_OrderInitialize_InputMessage"><wsdl:part name="parameters"
+        element="tns:OrderInitialize"/></wsdl:message><wsdl:message name="IPaymentService_OrderInitialize_OutputMessage"><wsdl:part
+        name="parameters" element="tns:OrderInitializeResponse"/></wsdl:message><wsdl:message
+        name="IPaymentService_ItemsInitialize_InputMessage"><wsdl:part name="parameters"
+        element="tns:ItemsInitialize"/></wsdl:message><wsdl:message name="IPaymentService_ItemsInitialize_OutputMessage"><wsdl:part
+        name="parameters" element="tns:ItemsInitializeResponse"/></wsdl:message><wsdl:message
+        name="IPaymentService_TaxesInitialize_InputMessage"><wsdl:part name="parameters"
+        element="tns:TaxesInitialize"/></wsdl:message><wsdl:message name="IPaymentService_TaxesInitialize_OutputMessage"><wsdl:part
+        name="parameters" element="tns:TaxesInitializeResponse"/></wsdl:message><wsdl:message
+        name="IPaymentService_ParameterVariablesInitialize_InputMessage"><wsdl:part
+        name="parameters" element="tns:ParameterVariablesInitialize"/></wsdl:message><wsdl:message
+        name="IPaymentService_ParameterVariablesInitialize_OutputMessage"><wsdl:part
+        name="parameters" element="tns:ParameterVariablesInitializeResponse"/></wsdl:message><wsdl:message
+        name="IPaymentService_AcknowledgeComplete_InputMessage"><wsdl:part name="parameters"
+        element="tns:AcknowledgeComplete"/></wsdl:message><wsdl:message name="IPaymentService_AcknowledgeComplete_OutputMessage"><wsdl:part
+        name="parameters" element="tns:AcknowledgeCompleteResponse"/></wsdl:message><wsdl:message
+        name="IPaymentService_AcknowledgeCompleteStatus_InputMessage"><wsdl:part name="parameters"
+        element="tns:AcknowledgeCompleteStatus"/></wsdl:message><wsdl:message name="IPaymentService_AcknowledgeCompleteStatus_OutputMessage"><wsdl:part
+        name="parameters" element="tns:AcknowledgeCompleteStatusResponse"/></wsdl:message><wsdl:message
+        name="IPaymentService_GetRefund_InputMessage"><wsdl:part name="parameters"
+        element="tns:GetRefund"/></wsdl:message><wsdl:message name="IPaymentService_GetRefund_OutputMessage"><wsdl:part
+        name="parameters" element="tns:GetRefundResponse"/></wsdl:message><wsdl:message
+        name="IPaymentService_CaptureTransaction_InputMessage"><wsdl:part name="parameters"
+        element="tns:CaptureTransaction"/></wsdl:message><wsdl:message name="IPaymentService_CaptureTransaction_OutputMessage"><wsdl:part
+        name="parameters" element="tns:CaptureTransactionResponse"/></wsdl:message><wsdl:message
+        name="IPaymentService_TransactionInformationInitialize_InputMessage"><wsdl:part
+        name="parameters" element="tns:TransactionInformationInitialize"/></wsdl:message><wsdl:message
+        name="IPaymentService_TransactionInformationInitialize_OutputMessage"><wsdl:part
+        name="parameters" element="tns:TransactionInformationInitializeResponse"/></wsdl:message><wsdl:portType
+        name="IPaymentService"><wsdl:operation name="GetToken"><wsdl:input wsaw:Action="http://tempuri.org/IPaymentService/GetToken"
+        message="tns:IPaymentService_GetToken_InputMessage"/><wsdl:output wsaw:Action="http://tempuri.org/IPaymentService/GetTokenResponse"
+        message="tns:IPaymentService_GetToken_OutputMessage"/></wsdl:operation><wsdl:operation
+        name="OrderInitialize"><wsdl:input wsaw:Action="http://tempuri.org/IPaymentService/OrderInitialize"
+        message="tns:IPaymentService_OrderInitialize_InputMessage"/><wsdl:output wsaw:Action="http://tempuri.org/IPaymentService/OrderInitializeResponse"
+        message="tns:IPaymentService_OrderInitialize_OutputMessage"/></wsdl:operation><wsdl:operation
+        name="ItemsInitialize"><wsdl:input wsaw:Action="http://tempuri.org/IPaymentService/ItemsInitialize"
+        message="tns:IPaymentService_ItemsInitialize_InputMessage"/><wsdl:output wsaw:Action="http://tempuri.org/IPaymentService/ItemsInitializeResponse"
+        message="tns:IPaymentService_ItemsInitialize_OutputMessage"/></wsdl:operation><wsdl:operation
+        name="TaxesInitialize"><wsdl:input wsaw:Action="http://tempuri.org/IPaymentService/TaxesInitialize"
+        message="tns:IPaymentService_TaxesInitialize_InputMessage"/><wsdl:output wsaw:Action="http://tempuri.org/IPaymentService/TaxesInitializeResponse"
+        message="tns:IPaymentService_TaxesInitialize_OutputMessage"/></wsdl:operation><wsdl:operation
+        name="ParameterVariablesInitialize"><wsdl:input wsaw:Action="http://tempuri.org/IPaymentService/ParameterVariablesInitialize"
+        message="tns:IPaymentService_ParameterVariablesInitialize_InputMessage"/><wsdl:output
+        wsaw:Action="http://tempuri.org/IPaymentService/ParameterVariablesInitializeResponse"
+        message="tns:IPaymentService_ParameterVariablesInitialize_OutputMessage"/></wsdl:operation><wsdl:operation
+        name="AcknowledgeComplete"><wsdl:input wsaw:Action="http://tempuri.org/IPaymentService/AcknowledgeComplete"
+        message="tns:IPaymentService_AcknowledgeComplete_InputMessage"/><wsdl:output
+        wsaw:Action="http://tempuri.org/IPaymentService/AcknowledgeCompleteResponse"
+        message="tns:IPaymentService_AcknowledgeComplete_OutputMessage"/></wsdl:operation><wsdl:operation
+        name="AcknowledgeCompleteStatus"><wsdl:input wsaw:Action="http://tempuri.org/IPaymentService/AcknowledgeCompleteStatus"
+        message="tns:IPaymentService_AcknowledgeCompleteStatus_InputMessage"/><wsdl:output
+        wsaw:Action="http://tempuri.org/IPaymentService/AcknowledgeCompleteStatusResponse"
+        message="tns:IPaymentService_AcknowledgeCompleteStatus_OutputMessage"/></wsdl:operation><wsdl:operation
+        name="GetRefund"><wsdl:input wsaw:Action="http://tempuri.org/IPaymentService/GetRefund"
+        message="tns:IPaymentService_GetRefund_InputMessage"/><wsdl:output wsaw:Action="http://tempuri.org/IPaymentService/GetRefundResponse"
+        message="tns:IPaymentService_GetRefund_OutputMessage"/></wsdl:operation><wsdl:operation
+        name="CaptureTransaction"><wsdl:input wsaw:Action="http://tempuri.org/IPaymentService/CaptureTransaction"
+        message="tns:IPaymentService_CaptureTransaction_InputMessage"/><wsdl:output
+        wsaw:Action="http://tempuri.org/IPaymentService/CaptureTransactionResponse"
+        message="tns:IPaymentService_CaptureTransaction_OutputMessage"/></wsdl:operation><wsdl:operation
+        name="TransactionInformationInitialize"><wsdl:input wsaw:Action="http://tempuri.org/IPaymentService/TransactionInformationInitialize"
+        message="tns:IPaymentService_TransactionInformationInitialize_InputMessage"/><wsdl:output
+        wsaw:Action="http://tempuri.org/IPaymentService/TransactionInformationInitializeResponse"
+        message="tns:IPaymentService_TransactionInformationInitialize_OutputMessage"/></wsdl:operation></wsdl:portType><wsdl:binding
+        name="BasicHttpBinding_IPaymentService" type="tns:IPaymentService"><wsp:PolicyReference
+        URI="#BasicHttpBinding_IPaymentService_policy"/><soap:binding transport="http://schemas.xmlsoap.org/soap/http"/><wsdl:operation
+        name="GetToken"><soap:operation soapAction="http://tempuri.org/IPaymentService/GetToken"
+        style="document"/><wsdl:input><soap:body use="literal"/></wsdl:input><wsdl:output><soap:body
+        use="literal"/></wsdl:output></wsdl:operation><wsdl:operation name="OrderInitialize"><soap:operation
+        soapAction="http://tempuri.org/IPaymentService/OrderInitialize" style="document"/><wsdl:input><soap:body
+        use="literal"/></wsdl:input><wsdl:output><soap:body use="literal"/></wsdl:output></wsdl:operation><wsdl:operation
+        name="ItemsInitialize"><soap:operation soapAction="http://tempuri.org/IPaymentService/ItemsInitialize"
+        style="document"/><wsdl:input><soap:body use="literal"/></wsdl:input><wsdl:output><soap:body
+        use="literal"/></wsdl:output></wsdl:operation><wsdl:operation name="TaxesInitialize"><soap:operation
+        soapAction="http://tempuri.org/IPaymentService/TaxesInitialize" style="document"/><wsdl:input><soap:body
+        use="literal"/></wsdl:input><wsdl:output><soap:body use="literal"/></wsdl:output></wsdl:operation><wsdl:operation
+        name="ParameterVariablesInitialize"><soap:operation soapAction="http://tempuri.org/IPaymentService/ParameterVariablesInitialize"
+        style="document"/><wsdl:input><soap:body use="literal"/></wsdl:input><wsdl:output><soap:body
+        use="literal"/></wsdl:output></wsdl:operation><wsdl:operation name="AcknowledgeComplete"><soap:operation
+        soapAction="http://tempuri.org/IPaymentService/AcknowledgeComplete" style="document"/><wsdl:input><soap:body
+        use="literal"/></wsdl:input><wsdl:output><soap:body use="literal"/></wsdl:output></wsdl:operation><wsdl:operation
+        name="AcknowledgeCompleteStatus"><soap:operation soapAction="http://tempuri.org/IPaymentService/AcknowledgeCompleteStatus"
+        style="document"/><wsdl:input><soap:body use="literal"/></wsdl:input><wsdl:output><soap:body
+        use="literal"/></wsdl:output></wsdl:operation><wsdl:operation name="GetRefund"><soap:operation
+        soapAction="http://tempuri.org/IPaymentService/GetRefund" style="document"/><wsdl:input><soap:body
+        use="literal"/></wsdl:input><wsdl:output><soap:body use="literal"/></wsdl:output></wsdl:operation><wsdl:operation
+        name="CaptureTransaction"><soap:operation soapAction="http://tempuri.org/IPaymentService/CaptureTransaction"
+        style="document"/><wsdl:input><soap:body use="literal"/></wsdl:input><wsdl:output><soap:body
+        use="literal"/></wsdl:output></wsdl:operation><wsdl:operation name="TransactionInformationInitialize"><soap:operation
+        soapAction="http://tempuri.org/IPaymentService/TransactionInformationInitialize"
+        style="document"/><wsdl:input><soap:body use="literal"/></wsdl:input><wsdl:output><soap:body
+        use="literal"/></wsdl:output></wsdl:operation></wsdl:binding><wsdl:service
+        name="Broker"><wsdl:port name="BasicHttpBinding_IPaymentService" binding="tns:BasicHttpBinding_IPaymentService"><soap:address
+        location="https://qapayments.uit.yorku.ca/YpbPaymentService/Broker.svc"/></wsdl:port></wsdl:service></wsdl:definitions>
+  recorded_at: Fri, 22 Nov 2024 11:46:25 GMT
+- request:
+    method: post
+    uri: https://qapayments.uit.yorku.ca/YpbPaymentService/Broker.svc
+    body:
+      encoding: UTF-8
+      string: <?xml version="1.0" encoding="UTF-8"?><soapenv:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://tempuri.org/"
+        xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+        xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
+        xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy"
+        xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract"
+        xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing"
+        xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:tns="http://tempuri.org/"
+        xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
+        xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"><soapenv:Body><OrderInitialize></OrderInitialize></soapenv:Body></soapenv:Envelope>
+    headers:
+      Soapaction:
+      - '"http://tempuri.org/IPaymentService/OrderInitialize"'
+      Content-Type:
+      - text/xml;charset=UTF-8
+      Content-Length:
+      - '1133'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/xml; charset=utf-8
+      Server:
+      - Microsoft-IIS/10.0
+      X-Powered-By:
+      - ASP.NET
+      Date:
+      - Fri, 22 Nov 2024 11:46:25 GMT
+      Content-Length:
+      - '1115'
+    body:
+      encoding: UTF-8
+      string: <s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/"><s:Body
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><OrderInitializeResponse
+        xmlns="http://tempuri.org/"><OrderInitializeResult><RequiredInformation><Total>0</Total><ResponseMethod>POST</ResponseMethod></RequiredInformation><OrderDetails/><Items/><Taxes/><BillingInformation/><ShippingInformation><ShippingAmount>0</ShippingAmount></ShippingInformation><ConfigSettings><ShowAddresses>false</ShowAddresses><ShowOrderDetails>false</ShowOrderDetails><EmailReceipt>false</EmailReceipt><UrlSuccess/><UrlFail/><Language>enUS</Language></ConfigSettings><ParameterVariables/><RecurringInformation><UseRecurringPayment>false</UseRecurringPayment><PaymentPeriod>OneTime</PaymentPeriod><PaymentStartDate>0001-01-01T00:00:00</PaymentStartDate><ForceFirstPayment>false</ForceFirstPayment><ScheduledPaymentAmount>0</ScheduledPaymentAmount><RecurNum>0</RecurNum><RecurUnit>day</RecurUnit><RecurPeriod>0</RecurPeriod></RecurringInformation></OrderInitializeResult></OrderInitializeResponse></s:Body></s:Envelope>
+  recorded_at: Fri, 22 Nov 2024 11:46:26 GMT
+- request:
+    method: post
+    uri: https://qapayments.uit.yorku.ca/YpbPaymentService/Broker.svc
+    body:
+      encoding: UTF-8
+      string: <?xml version="1.0" encoding="UTF-8"?><soapenv:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://tempuri.org/"
+        xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+        xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
+        xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy"
+        xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract"
+        xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing"
+        xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:tns="http://tempuri.org/"
+        xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
+        xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"><soapenv:Body><ItemsInitialize><capacity>2</capacity></ItemsInitialize></soapenv:Body></soapenv:Envelope>
+    headers:
+      Soapaction:
+      - '"http://tempuri.org/IPaymentService/ItemsInitialize"'
+      Content-Type:
+      - text/xml;charset=UTF-8
+      Content-Length:
+      - '1155'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/xml; charset=utf-8
+      Server:
+      - Microsoft-IIS/10.0
+      X-Powered-By:
+      - ASP.NET
+      Date:
+      - Fri, 22 Nov 2024 11:46:25 GMT
+      Content-Length:
+      - '437'
+    body:
+      encoding: UTF-8
+      string: <s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/"><s:Body
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><ItemsInitializeResponse
+        xmlns="http://tempuri.org/"><ItemsInitializeResult><ItemInfo><Quantity>0</Quantity><Price>0</Price></ItemInfo><ItemInfo><Quantity>0</Quantity><Price>0</Price></ItemInfo></ItemsInitializeResult></ItemsInitializeResponse></s:Body></s:Envelope>
+  recorded_at: Fri, 22 Nov 2024 11:46:26 GMT
+- request:
+    method: post
+    uri: https://qapayments.uit.yorku.ca/YpbPaymentService/Broker.svc
+    body:
+      encoding: UTF-8
+      string: '<?xml version="1.0" encoding="UTF-8"?><soapenv:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://tempuri.org/"
+        xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+        xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
+        xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy"
+        xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract"
+        xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing"
+        xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:tns="http://tempuri.org/"
+        xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
+        xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"><soapenv:Body><GetToken><order><RequiredInformation><ApplicationId>YPB_APPLICATION_ID</ApplicationId><ApplicationPassword>YPB_APPLICATION_PASSWORD</ApplicationPassword><ApplicationName>YPB_APPLICATION_NAME</ApplicationName><TransPaymentType>CC-PURCHASE</TransPaymentType><ResponseMethod>POST</ResponseMethod><Total>10.0</Total></RequiredInformation><OrderDetails><OrderId>1-1732275985</OrderId><Note>Fines
+        Payment</Note></OrderDetails><Items><ItemInfo><ItemId>1</ItemId><Price>8.0</Price><Quantity>1</Quantity><ItemCode>111223223</ItemCode><Description>Some
+        Cool Book with 1 NUMBER -- ID: 1199938838383838</Description></ItemInfo><ItemInfo><ItemId>2</ItemId><Price>2.0</Price><Quantity>1</Quantity><ItemCode>221223223</ItemCode><Description>Some
+        Cool Book with 2 NUMBER -- ID: 2299938838383838</Description></ItemInfo></Items><Taxes></Taxes><BillingInformation
+        xsi:nil="true"/><ShippingInformation><ShippingAmount>0</ShippingAmount></ShippingInformation><ConfigSettings><ShowAddresses>false</ShowAddresses><ShowOrderDetails>true</ShowOrderDetails><EmailReceipt>false</EmailReceipt><UrlSuccess>http://localhost/ypb_postback?id=1</UrlSuccess><UrlFail>http://localhost/ypb_postback?id=1</UrlFail><Language>enUS</Language></ConfigSettings><ParameterVariables
+        xsi:nil="true"/><RecurringInformation><UseRecurringPayment>false</UseRecurringPayment><PaymentPeriod>OneTime</PaymentPeriod><PaymentStartDate>0001-01-01T00:00:00+00:00</PaymentStartDate><ForceFirstPayment>false</ForceFirstPayment><ScheduledPaymentAmount>0</ScheduledPaymentAmount><RecurNum>0</RecurNum><RecurUnit>day</RecurUnit><RecurPeriod>0</RecurPeriod></RecurringInformation></order></GetToken></soapenv:Body></soapenv:Envelope>'
+    headers:
+      Soapaction:
+      - '"http://tempuri.org/IPaymentService/GetToken"'
+      Content-Type:
+      - text/xml;charset=UTF-8
+      Content-Length:
+      - '2702'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/xml; charset=utf-8
+      Server:
+      - Microsoft-IIS/10.0
+      X-Powered-By:
+      - ASP.NET
+      Date:
+      - Fri, 22 Nov 2024 11:46:25 GMT
+      Content-Length:
+      - '346'
+    body:
+      encoding: UTF-8
+      string: <s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/"><s:Body
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><GetTokenResponse
+        xmlns="http://tempuri.org/"><GetTokenResult>sYMJX6GuD3NRnDh-PYcGpGFFF8TpypPpPpzUQekkPeL39JVjzCP6Jg2</GetTokenResult></GetTokenResponse></s:Body></s:Envelope>
+  recorded_at: Fri, 22 Nov 2024 11:46:26 GMT
+recorded_with: VCR 6.3.1

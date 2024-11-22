@@ -28,13 +28,11 @@ gem 'httparty'
 
 ## SOAP ACCESS ##
 gem 'savon'
-gem 'lolsoap'
 
 gem 'tzinfo-data'
 gem 'mimemagic'
 
 group :development, :test do
-  gem 'webmock'
   gem 'sinatra'
   gem 'listen'
 end
@@ -56,4 +54,6 @@ group :test do
   gem 'shoulda-matchers'
   gem 'sqlite3', '~> 1.4'
   gem 'factory_bot_rails'
+  gem 'vcr'
+  gem 'webmock'
 end
