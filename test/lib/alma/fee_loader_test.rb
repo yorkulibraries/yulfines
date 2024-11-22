@@ -114,9 +114,7 @@ class Alma::FeeLoaderTest < ActiveSupport::TestCase
     assert new_one.original_amount == FEE_SAMPLE["original_amount"]
     assert new_one.creation_time == FEE_SAMPLE["creation_time"]
     assert new_one.item_title == FEE_SAMPLE["title"]
-
   end
-
 
   should "get values out of the HASH ## HELPER METHOD" do
     assert_equal FEE_SAMPLE["status"]["value"], Alma::FeeLoader.get_val(FEE_SAMPLE, :status, :value)
@@ -126,7 +124,6 @@ class Alma::FeeLoaderTest < ActiveSupport::TestCase
     assert_equal "n/a", Alma::FeeLoader.get_val(FEE_SAMPLE, :something_else, :value)
     assert_nil Alma::FeeLoader.get_val(FEE_SAMPLE, :something_else)
   end
-
 
   should "mark all active fees as stale for user" do
     yorku_id = 101010
@@ -143,5 +140,78 @@ class Alma::FeeLoaderTest < ActiveSupport::TestCase
     Alma::FeeLoader.mark_all_active_fees_as_stale local_user
 
     assert_equal 0, local_user.alma_fees.size
+  end
+
+  should "get test user from Alma" do
+    if Settings.alma.test_user_primary_id
+      VCR.use_cassette('get_test_user_from_alma') do
+        alma_test_user = Alma::User.find Settings.alma.test_user_primary_id
+        assert_equal Settings.alma.test_user_primary_id, alma_test_user.primary_id
+      end
+    end
+  end
+
+  should "get test user fees from Alma" do
+    alma_test_user = nil
+
+    if Settings.alma.test_user_primary_id
+      VCR.use_cassette('get_test_user_from_alma') do
+        alma_test_user = Alma::User.find Settings.alma.test_user_primary_id
+        assert_equal Settings.alma.test_user_primary_id, alma_test_user.primary_id
+      end
+      
+      VCR.use_cassette('get_test_user_fees_from_alma') do
+        fees = alma_test_user.fines.response["fee"] if alma_test_user
+        assert_equal 4, fees.size
+      end
+    end
+  end
+
+  should "parse REAL Alma json fees into Alma::Fee objects" do
+    if Settings.alma.test_user_primary_id
+      fee_count_before = Alma::Fee.count
+
+      alma_test_user = nil
+
+      VCR.use_cassette('get_test_user_from_alma') do
+        alma_test_user = Alma::User.find Settings.alma.test_user_primary_id if Settings.alma.test_user_primary_id
+        assert_equal Settings.alma.test_user_primary_id, alma_test_user.primary_id
+      end
+
+      alma_test_user_fees = nil
+      VCR.use_cassette('get_test_user_fees_from_alma') do
+        alma_test_user_fees = alma_test_user.fines.response["fee"] if alma_test_user
+        assert_equal 4, alma_test_user_fees.size
+      end
+
+      univ_id = User.get_univ_id_from_alma_user(alma_test_user)
+      local_user = create :user, yorku_id: univ_id, username: alma_test_user.primary_id
+      alma_test_user_fees.each do |f|
+        fee = Alma::FeeLoader.parse_alma_fee f, local_user
+        assert fee.save
+
+        assert_equal fee.yorku_id, local_user.yorku_id
+        assert_equal fee.user_primary_id, local_user.username
+
+        assert_equal fee.fee_id, f["id"]
+        assert_equal fee.fee_type, f["type"]["value"]
+        assert_equal fee.fee_description, f["type"]["desc"]
+        assert_equal fee.fee_status, f["status"]["value"]
+        assert_equal fee.user_primary_id, f["user_primary_id"]["value"]
+        assert_equal fee.balance, f["balance"]
+        assert_equal fee.remaining_vat_amount, f["remaining_vat_amount"]
+        assert_equal fee.original_amount, f["original_amount"]
+        assert_equal fee.original_vat_amount, f["original_vat_amount"]
+        assert_equal fee.creation_time, Time.zone.parse(f["creation_time"])
+        assert_equal fee.status_time, Time.zone.parse(f["status_time"])
+        assert_equal fee.owner_id, f["owner"]["value"]
+        assert_equal fee.owner_description, f["owner"]["desc"]
+        assert_equal fee.item_title, f["title"]
+        assert_equal fee.item_barcode, f["barcode"]["value"]
+      end
+
+      fee_count_after = Alma::Fee.count
+      assert_equal fee_count_after, fee_count_before + alma_test_user_fees.size
+    end
   end
 end

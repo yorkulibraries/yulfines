@@ -1,0 +1,52 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api-na.hosted.exlibrisgroup.com/almaws/v1/users/ALMA_TEST_USER_PRIMARY_ID?expand=fees,requests,loans
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Authorization:
+      - apikey ALMA_API_KEY
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Request-Id:
+      - GiVRbgErHt
+      P3p:
+      - CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"
+      Vary:
+      - Accept-encoding
+      - accept-encoding
+      X-Exl-Api-Remaining:
+      - '399960'
+      Content-Type:
+      - application/json;charset=UTF-8
+      Date:
+      - Fri, 22 Nov 2024 16:45:20 GMT
+      Server:
+      - Layer7-API-Gateway
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: ASCII-8BIT
+      string: '{"gender":{"value":"","desc":""},"password":"","status":{"value":"ACTIVE","desc":"Active"},"requests":{"value":0,"link":"https://api-na.hosted.exlibrisgroup.com/almaws/v1/users/ALMA_TEST_USER_PRIMARY_ID/requests"},"loans":{"value":0,"link":"https://api-na.hosted.exlibrisgroup.com/almaws/v1/users/ALMA_TEST_USER_PRIMARY_ID/loans"},"fees":{"value":0.07,"link":"https://api-na.hosted.exlibrisgroup.com/almaws/v1/users/ALMA_TEST_USER_PRIMARY_ID/fees"},"record_type":{"value":"PUBLIC","desc":"Public"},"primary_id":"ALMA_TEST_USER_PRIMARY_ID","first_name":"YULFINES","middle_name":"","last_name":"TEST","full_name":"YULFINES
+        TEST","created_by":"FILTERED_TEXT_1","created_date":"2024-11-11Z","last_modified_by":"FILTERED_TEXT_0","last_modified_date":"2024-11-22Z","user_title":{"value":"","desc":""},"job_category":{"value":"","desc":""},"job_description":"","user_group":{"value":"RSPARTNER","desc":"Resource
+        Sharing Partner"},"campus_code":{"desc":""},"web_site_url":"","cataloger_level":{"value":"00","desc":"[00]
+        Short term"},"preferred_language":{"value":"en","desc":"English"},"expiry_date":"2025-11-30Z","account_type":{"value":"INTERNAL","desc":"Internal"},"external_id":"","force_password_change":"false","status_date":"2024-11-11Z","contact_info":{"address":[],"email":[],"phone":[]},"user_identifier":[{"value":"ALMA_TEST_USER_UNIV_ID","status":"ACTIVE","id_type":{"value":"UNIV_ID","desc":"University
+        ID"},"segment_type":"Internal"}],"user_role":[{"status":{"value":"ACTIVE","desc":"Active"},"scope":{"value":"01OCUL_YOR","desc":"York
+        University"},"role_type":{"value":"200","desc":"Patron"},"parameter":[]}],"user_block":[],"user_note":[{"note_type":{"value":"POPUP","desc":"General"},"note_text":"Profile
+        name: Patron, Profile ID: 13110570000231","user_viewable":false,"popup_note":false,"created_by":"FILTERED_TEXT_0","created_date":"2024-11-11T09:55:22.906Z","segment_type":"Internal"}],"user_statistic":[],"pref_first_name":"","pref_middle_name":"","pref_last_name":"","pref_name_suffix":""}'
+  recorded_at: Fri, 22 Nov 2024 16:45:21 GMT
+recorded_with: VCR 6.3.1

@@ -1,0 +1,59 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api-ca.hosted.exlibrisgroup.com/almaws/v1/users/ALMA_TEST_USER_PRIMARY_ID/fees
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Authorization:
+      - apikey ALMA_API_KEY
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Request-Id:
+      - uGYgIAktGB
+      P3p:
+      - CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"
+      Vary:
+      - Accept-encoding
+      - accept-encoding
+      X-Exl-Api-Remaining:
+      - '398212'
+      Content-Type:
+      - application/json;charset=UTF-8
+      Date:
+      - Fri, 22 Nov 2024 16:45:20 GMT
+      Server:
+      - Layer7-API-Gateway
+      Transfer-Encoding:
+      - chunked
+      Set-Cookie:
+      - UqZBpD3n3lavfhsguB66oX+EAOkS=v1GKp2gw__qfH; Expires=Mon, 20-Nov-2034 16:45:21
+        GMT; Path=/
+    body:
+      encoding: ASCII-8BIT
+      string: '{"fee":[{"id":"21819664910005164","type":{"value":"SERVICEFEE","desc":"Service
+        fee"},"status":{"value":"ACTIVE","desc":"Active"},"user_primary_id":{"value":"ALMA_TEST_USER_PRIMARY_ID","link":"https://api-ca.hosted.exlibrisgroup.com/almaws/v1/users/ALMA_TEST_USER_PRIMARY_ID"},"balance":0.01,"remaining_vat_amount":0.0,"original_amount":0.01,"original_vat_amount":0.0,"creation_time":"2024-11-19T18:43:55.236Z","status_time":"2024-11-19T18:43:55.236Z","comment":"FILTERED_TEXT_2''s
+        testing fee. Will remove when testing is complete.","owner":{"value":"YORK-LAW","desc":"Osgoode
+        Hall Law School Library"},"title":"GROUP STUDY ROOM KEY # 1011J","barcode":{"value":"39007054145727","link":"https://api-ca.hosted.exlibrisgroup.com/almaws/v1/items?item_barcode=39007054145727"},"link":"https://api-ca.hosted.exlibrisgroup.com/almaws/v1/users/ALMA_TEST_USER_PRIMARY_ID/fees/21819664910005164"},{"id":"21831696010005164","type":{"value":"SERVICEFEE","desc":"Service
+        fee"},"status":{"value":"ACTIVE","desc":"Active"},"user_primary_id":{"value":"ALMA_TEST_USER_PRIMARY_ID","link":"https://api-ca.hosted.exlibrisgroup.com/almaws/v1/users/ALMA_TEST_USER_PRIMARY_ID"},"balance":0.02,"remaining_vat_amount":0.0,"original_amount":0.02,"original_vat_amount":0.0,"creation_time":"2024-11-20T19:54:56.166Z","status_time":"2024-11-20T19:54:56.166Z","owner":{"value":"YORK-LAW","desc":"Osgoode
+        Hall Law School Library"},"title":"Steve Jobs / Walter Isaacson.","barcode":{"value":"39007051545028","link":"https://api-ca.hosted.exlibrisgroup.com/almaws/v1/items?item_barcode=39007051545028"},"link":"https://api-ca.hosted.exlibrisgroup.com/almaws/v1/users/ALMA_TEST_USER_PRIMARY_ID/fees/21831696010005164"},{"id":"21831693380005164","type":{"value":"CUSTOMER_DEFINED_01","desc":"AFN
+        Fine Payment"},"status":{"value":"ACTIVE","desc":"Active"},"user_primary_id":{"value":"ALMA_TEST_USER_PRIMARY_ID","link":"https://api-ca.hosted.exlibrisgroup.com/almaws/v1/users/ALMA_TEST_USER_PRIMARY_ID"},"balance":0.02,"remaining_vat_amount":0.0,"original_amount":0.02,"original_vat_amount":0.0,"creation_time":"2024-11-20T19:54:44.763Z","status_time":"2024-11-20T19:54:44.763Z","owner":{"value":"SCOTT","desc":"Scott
+        Library"},"title":"Steve Jobs / Walter Isaacson.","barcode":{"value":"39007051545028","link":"https://api-ca.hosted.exlibrisgroup.com/almaws/v1/items?item_barcode=39007051545028"},"link":"https://api-ca.hosted.exlibrisgroup.com/almaws/v1/users/ALMA_TEST_USER_PRIMARY_ID/fees/21831693380005164"},{"id":"21831692710005164","type":{"value":"CUSTOMER_DEFINED_01","desc":"AFN
+        Fine Payment"},"status":{"value":"ACTIVE","desc":"Active"},"user_primary_id":{"value":"ALMA_TEST_USER_PRIMARY_ID","link":"https://api-ca.hosted.exlibrisgroup.com/almaws/v1/users/ALMA_TEST_USER_PRIMARY_ID"},"balance":0.02,"remaining_vat_amount":0.0,"original_amount":0.02,"original_vat_amount":0.0,"creation_time":"2024-11-20T19:54:18.560Z","status_time":"2024-11-20T19:54:18.560Z","owner":{"value":"SCOTT","desc":"Scott
+        Library"},"title":"The art of happiness : a handbook for living / the Dalai
+        Lama and Howard C. Cutler.","barcode":{"value":"39007046065900","link":"https://api-ca.hosted.exlibrisgroup.com/almaws/v1/items?item_barcode=39007046065900"},"link":"https://api-ca.hosted.exlibrisgroup.com/almaws/v1/users/ALMA_TEST_USER_PRIMARY_ID/fees/21831692710005164"}],"total_record_count":4,"total_sum":0.07,"currency":"CAD"}'
+  recorded_at: Fri, 22 Nov 2024 16:45:21 GMT
+recorded_with: VCR 6.3.1
