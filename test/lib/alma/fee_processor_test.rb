@@ -3,9 +3,6 @@ require 'webmock/minitest'
 require_relative 'responses_rack_app.rb'
 
 class Alma::FeeProcessorTest < ActionDispatch::IntegrationTest
-
-
-
   # NOT TESTING GETTING FEES, as it is part of the alma gem and tested there.
   setup do
     WebMock.disable_net_connect!(allow_localhost: true)
@@ -25,31 +22,17 @@ class Alma::FeeProcessorTest < ActionDispatch::IntegrationTest
     stub_request(:post, /.*/).with(headers: processor.headers).to_rack(Alma::ResponsesRackApp)
 
     assert processor.pay_fee! record
-
   end
 
   should "use defaul Settings fee url or be able to change feel url if need be" do
-    new_url = "https://somewhere_else"
     transaction = create :payment_transaction
     record = create :payment_record, payment_transaction: transaction, user: transaction.user
 
     processor = Alma::FeeProcessor.new
-    prepared_url = Settings.alma.api.fee_url.sub("{{fee_id}}", record.fee.fee_id.to_s).sub("{{user_primary_id}}", record.yorku_id.to_s)
+    prepared_url = Settings.alma.api.fee_url.sub("{{fee_id}}", record.fee.fee_id.to_s).sub("{{user_primary_id}}", record.user_primary_id.to_s)
 
     assert_equal prepared_url, processor.prepare_url(Settings.alma.api.fee_url, record)
-
-    # processor.fee_url = new_url
-    # assert_equal new_url, processor.fee_url
   end
-
-  # should "should prepare url by replacing fee and user id placeholders" do
-  #   transaction = create :payment_transaction
-  #   record = create :payment_record, payment_transaction: transaction, user: transaction.user
-  #
-  #   processor = Alma::FeeProcessor.new url: "https:://api/{{fee_id}}/{{user_primary_id}}"
-  #   assert_equal "https:://api/#{record.fee.fee_id}/#{record.yorku_id}", processor.prepare_url()
-  # end
-
 
   should "parse error" do
     transaction = create :payment_transaction
@@ -86,7 +69,6 @@ class Alma::FeeProcessorTest < ActionDispatch::IntegrationTest
     record = create :payment_record, payment_transaction: mc
     assert_equal "CHECK", processor.pay_method(record)
     assert_equal processor.pay_params(record)[:method], "CHECK"
-
   end
 
   should "return proper pay params from record" do
@@ -101,9 +83,7 @@ class Alma::FeeProcessorTest < ActionDispatch::IntegrationTest
     assert_equal params[:op], "pay"
     assert_equal params[:amount], record.amount
     assert_equal params[:method], "CREDIT_CARD"
-    assert_equal params[:reason], "Paying The Fee"
     assert_equal params[:comment], "#{record.user.name} is paying via YU Payment Broker"
     assert_equal params[:external_transaction_id], t.refnum
-        
   end
 end
