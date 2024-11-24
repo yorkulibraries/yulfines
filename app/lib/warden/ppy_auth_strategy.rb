@@ -2,6 +2,10 @@ require 'digest'
 require 'devise/strategies/authenticatable'
 
 class Warden::PpyAuthStrategy < Devise::Strategies::Authenticatable
+  LOGIN = ['/ppy_login']
+  LOGOUT = 'https://passportyork.yorku.ca/ppylogin/ppylogout'
+  CYIN = 'HTTP_PYORK_CYIN'
+
   def valid?
     Warden::PpyAuthStrategy.py_authenticated(request)
   end
@@ -9,7 +13,7 @@ class Warden::PpyAuthStrategy < Devise::Strategies::Authenticatable
   def authenticate!
     Rails.logger.debug "start PpyAuthStrategy.authenticate"
 
-    resource = User.find_by_username user_id
+    resource = User.find_by_yorku_id user_id
 
     if Warden::PpyAuthStrategy.py_authenticated(request)
       alma_user = Warden::PpyAuthStrategy.find_alma_user_matching_py_cyin(request)
@@ -64,15 +68,13 @@ class Warden::PpyAuthStrategy < Devise::Strategies::Authenticatable
   end
 
   def self.py_authenticated(req)
-    return false unless Settings.app.auth.py_authenticated_paths.include?(req.path)
-    header = Settings.app.auth.cas_header
-    req.headers[header] != nil && req.headers[header].strip != ''
+    return false unless LOGIN.include?(req.path)
+    req.headers[CYIN] != nil && req.headers[CYIN].strip != ''
   end
 
   def self.py_authenticated_user_id(req)
     return nil unless Warden::PpyAuthStrategy.py_authenticated(req)
-    header = Settings.app.auth.cas_header
-    req.headers[header].strip
+    req.headers[CYIN].strip
   end
 
   def self.find_alma_user_matching_py_cyin(req)
@@ -98,10 +100,10 @@ class Warden::PpyAuthStrategy < Devise::Strategies::Authenticatable
   end
 
   def self.py_logout_url
-    Settings.app.auth.py_logout_url
+    LOGOUT
   end
 
   def self.remove_py_header_if_not_valid(req)
-    req.headers[Settings.app.auth.cas_header] = nil unless Warden::PpyAuthStrategy.py_authenticated(req)
+    req.headers[CYIN] = nil unless Warden::PpyAuthStrategy.py_authenticated(req)
   end
 end
