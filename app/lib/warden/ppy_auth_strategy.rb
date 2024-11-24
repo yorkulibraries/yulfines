@@ -19,6 +19,19 @@ class Warden::PpyAuthStrategy < Devise::Strategies::Authenticatable
       alma_user = Warden::PpyAuthStrategy.find_alma_user_matching_py_cyin(request)
 
       if alma_user.nil?
+        Rails.logger.debug "fail PpyAuthStrategy.authenticate no matching user in Alma for #{user_id}"
+        fail!(:invalid)
+        return validate(resource) { false }
+      end
+
+      if alma_user.expiry_date.to_date < Date.current
+        Rails.logger.debug "fail PpyAuthStrategy.authenticate user expiry in Alma (#{alma_user.expiry_date}) for #{user_id}"
+        fail!(:invalid)
+        return validate(resource) { false }
+      end
+
+      if alma_user.status['value'] != 'ACTIVE'
+        Rails.logger.debug "fail PpyAuthStrategy.authenticate user status in Alma (#{alma_user.status}) for #{user_id}"
         fail!(:invalid)
         return validate(resource) { false }
       end

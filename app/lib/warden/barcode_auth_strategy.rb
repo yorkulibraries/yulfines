@@ -14,6 +14,24 @@ class Warden::BarcodeAuthStrategy < Devise::Strategies::Authenticatable
     if Alma::User.authenticate(user_id: user_id, password: password)
       alma_user = Alma::User.find user_id
 
+      if alma_user.nil?
+        Rails.logger.debug "fail BarcodeAuthStrategy.authenticate no matching user in Alma for #{user_id}"
+        fail!(:invalid)
+        return validate(resource) { false }
+      end
+
+      if alma_user.expiry_date.to_date < Date.current + 1
+        Rails.logger.debug "fail BarcodeAuthStrategy.authenticate user expiry in Alma (#{alma_user.expiry_date}) for #{user_id}"
+        fail!(:invalid)
+        return validate(resource) { false }
+      end
+
+      if alma_user.status['value'] != 'ACTIVE'
+        Rails.logger.debug "fail BarcodeAuthStrategy.authenticate user status in Alma (#{alma_user.status}) for #{user_id}"
+        fail!(:invalid)
+        return validate(resource) { false }
+      end
+
       univ_id = User.get_univ_id_from_alma_user(alma_user)
 
       local_user_by_univ_id = User.find_by_yorku_id univ_id if univ_id
