@@ -24,7 +24,7 @@ class Warden::PpyAuthStrategy < Devise::Strategies::Authenticatable
         return validate(resource) { false }
       end
 
-      if alma_user.expiry_date.to_date < Date.current
+      if alma_user.expiry_date.to_date <= Date.current
         Rails.logger.debug "fail PpyAuthStrategy.authenticate user expiry in Alma (#{alma_user.expiry_date}) for #{user_id}"
         fail!(:invalid)
         return validate(resource) { false }
