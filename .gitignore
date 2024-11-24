@@ -48,3 +48,4 @@ config/app_settings.yml
 
 .DS_Store
 *.sql
+*.sql.gz

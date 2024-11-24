@@ -21,8 +21,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_20_101610) do
     t.float "remaining_vat_amount"
     t.float "original_amount"
     t.float "original_vat_amount"
-    t.datetime "creation_time", precision: nil
-    t.datetime "status_time", precision: nil
+    t.datetime "creation_time"
+    t.datetime "status_time"
     t.string "owner_id"
     t.string "owner_description"
     t.text "item_title"
@@ -45,8 +45,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_20_101610) do
     t.text "payment_token"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "alma_fines_paid_at", precision: nil
-    t.datetime "alma_fines_rejected_at", precision: nil
+    t.datetime "alma_fines_paid_at"
+    t.datetime "alma_fines_rejected_at"
     t.string "alma_fines_rejected_error_reason"
     t.string "alma_fines_rejected_error_code"
     t.string "alma_fines_rejected_error_tracking_id"
@@ -76,9 +76,9 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_20_101610) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "yporderid"
-    t.datetime "alma_fines_paid_at", precision: nil
-    t.datetime "ypb_transaction_approved_at", precision: nil
-    t.datetime "ypb_transaction_declined_at", precision: nil
+    t.datetime "alma_fines_paid_at"
+    t.datetime "ypb_transaction_approved_at"
+    t.datetime "ypb_transaction_declined_at"
     t.string "library_id"
     t.string "user_primary_id"
   end
@@ -88,7 +88,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_20_101610) do
     t.string "alma_fee_id"
     t.integer "transaction_id"
     t.string "ypb_transaction_id"
-    t.datetime "logged_at", precision: nil
+    t.datetime "logged_at"
     t.string "process_name"
     t.text "message"
     t.text "additional_changes"
@@ -112,11 +112,11 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_20_101610) do
     t.string "encrypted_password", default: "", null: false
     t.string "username"
     t.integer "sign_in_count", default: 0, null: false
-    t.datetime "current_sign_in_at", precision: nil
-    t.datetime "last_sign_in_at", precision: nil
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
-    t.datetime "became_admin_at", precision: nil
+    t.datetime "became_admin_at"
     t.integer "failed_attempts", default: 0, null: false
     t.datetime "locked_at"
     t.index ["yorku_id"], name: "index_users_on_yorku_id", unique: true
