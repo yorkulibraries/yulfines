@@ -57,12 +57,14 @@ class Warden::PpyAuthStrategy < Devise::Strategies::Authenticatable
         Rails.logger.debug "random generated password #{random}"
         local_user = User.create! username: alma_user.primary_id, password: random,
                       yorku_id: univ_id, email: email,
-                      first_name: alma_user.first_name, last_name: alma_user.last_name
+                      first_name: alma_user.first_name, last_name: alma_user.last_name,
+                      auth_method: self.class.name
       else
         Rails.logger.debug "Updating username=#{alma_user.primary_id} yorku_id=#{univ_id} email=#{email}"
         local_user.username = alma_user.primary_id
         local_user.yorku_id = univ_id
         local_user.email = email
+        local_user.auth_method = self.class.name
         local_user.save
       end
 

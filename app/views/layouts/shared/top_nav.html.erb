@@ -19,7 +19,7 @@
         </li>
         <% end %>
         <li class="nav-item">
-          <%= link_to 'Logout', destroy_user_session_path, class: "nav-link" %>
+          <%= link_to 'Logout', current_user.auth_method == 'Warden::PpyAuthStrategy' ? ppy_logout_path : destroy_user_session_path, class: "nav-link" %>
         </li>
       </ul>
       <% end %>

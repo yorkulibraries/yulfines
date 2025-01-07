@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_11_20_101610) do
+ActiveRecord::Schema[7.0].define(version: 2025_01_07_110450) do
   create_table "alma_fees", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "fee_id"
     t.string "fee_type"
@@ -119,6 +119,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_20_101610) do
     t.datetime "became_admin_at"
     t.integer "failed_attempts", default: 0, null: false
     t.datetime "locked_at"
+    t.string "auth_method"
     t.index ["yorku_id"], name: "index_users_on_yorku_id", unique: true
   end
 
