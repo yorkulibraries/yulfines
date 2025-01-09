@@ -1,8 +1,10 @@
 // Configure your import map in config/importmap.rb. Read more: https://github.com/rails/importmap-rails
-
 import "bootstrap";
 import "jquery";
 import "datepicker";
+
+import Rails from '@rails/ujs';
+Rails.start();
 
 $(document).ready(function () {
   $('.datepicker').datepicker();
