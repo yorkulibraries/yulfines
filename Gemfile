@@ -7,12 +7,12 @@ gem 'puma'
 ## DATABASES ##
 gem 'mysql2'
 
-## JAVASCRIPT AND JSON
-gem "importmap-rails"
-
-## CSS ##
+## JAVASCRIPT/CSS ##
 gem 'bootstrap'
 gem "sassc-rails"
+gem 'sprockets-rails'
+gem 'jquery-rails'
+gem 'jquery-ui-rails'
 
 ## TOOLS AND UTILITIES
 gem 'simple_form'

@@ -13,11 +13,9 @@
  *= require_tree .
  *= require_self
 */
+
 @import "_theme_variables";
 @import "bootstrap";
-
-@import "_navbar";
-@import "_login";
 
 body {
   background: #fffefe;

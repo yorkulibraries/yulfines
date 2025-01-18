@@ -14,11 +14,11 @@
     </div>
     <div class="col">
       <%= f.input :from, required: false, 
-      input_html: { value: @from, class: 'form-control mb-3 datepicker', "data-date-format": "yyyy-mm-dd" } %>
+      input_html: { value: @from, class: 'form-control mb-3 datepicker'} %>
     </div>
     <div class="col">
       <%= f.input :to, required: false, 
-      input_html: { value: @to, class: 'form-control mb-3 datepicker', "data-date-format": "yyyy-mm-dd" } %>
+      input_html: { value: @to, class: 'form-control mb-3 datepicker'} %>
     </div>
   </div>
   <%= f.submit "Generate", class: "btn btn-primary" %>

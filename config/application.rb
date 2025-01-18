@@ -24,5 +24,10 @@ module YulFines
 
     # Using sucker punch to proccess logs and emails later
     config.active_job.queue_adapter = :sucker_punch
+
+    # set delivery method to :smtp, :sendmail or :test
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.smtp_settings = { address: ENV['SMTP_HOST'], port: ENV['SMTP_PORT'] }
+    config.action_mailer.default_url_options = { host: ENV['HOST'] }
   end
 end
