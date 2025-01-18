@@ -9,13 +9,13 @@
           </div>
           <div class="text-muted text-truncate"><%= record.fee.item_title %></div>
         </div>
-        <div class="col-3 col-md-auto">
+        <div class="col-4 col-md-auto">
           <div class="h4 text-muted">
             <span class="visually-hidden">Balance:</span> 
             <%= number_to_currency record.fee.balance %>
           </div>
         </div>
-        <div class="col-4 col-md-auto">
+        <div class="col-8 col-md-auto">
           <input type="checkbox" name="records[payment_record[<%= record.fee_id %>]]"
                 checked="checked" id="records_payment_record_<%= record.fee_id %>">
           <label class="text-muted" for="records_payment_record_<%= record.fee_id %>">Pay this item</label>
