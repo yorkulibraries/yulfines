@@ -30,8 +30,10 @@ class Alma::FeeLoader
     fee_ids = []
     json_fees.each do |fee|
       alma_fee = parse_alma_fee(fee, local_user)
-      fee_ids << alma_fee.fee_id
-      update_existing_or_create_new(alma_fee, local_user)
+      if alma_fee.balance > 0
+        fee_ids << alma_fee.fee_id
+        update_existing_or_create_new(alma_fee, local_user)
+      end
     end
   end
 
